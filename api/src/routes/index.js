@@ -7,6 +7,7 @@ const UserMiddlewares = require('../middlewares/User.js')
 // Ejemplo: const authRouter = require('./auth.js');
 
 
+
 const router = Router();
 router.use('/product' , ProductsMiddlewares)
 router.use('/user' , UserMiddlewares)
