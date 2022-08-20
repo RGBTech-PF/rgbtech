@@ -1,25 +1,28 @@
 const { Router } = require('express');
-const { User } = require('../db');
+const { User } = require('../db.js');
 const bcrypt  = require('bcrypt')
+const { cloudinary } =require('../Utils/cloudinary.js')
 
 const router = Router();
 router.post("/", async (req, res) => {
-    let { user,password, mail,profilePhoto } = req.body;
-    console.log(req.body)
-
-    if (!user || !password || !mail ) return res.status(404).send("Falta enviar datos obligatorios")
-    password = await bcrypt.hash(password, 10);
+    
     try {
-        let userCreate = await User.create({
+        let { user,password, mail ,profilePhoto} = req.body;
+        password = await bcrypt.hash(password, 10);
+        const uploadedResponse = await cloudinary.uploader.
+        upload(profilePhoto,{
+            upload_preset:'RGBtech'})
+        await User.create({
             user,
             password,
             mail,
-            profilePhoto,
+            profilePhoto:uploadedResponse.secure_url,
             isAdmin:false,
         })
-        return res.send("Usuario creado con exito")
+
+        return res.send("User created successfully")
     } catch (error) {
-        return res.status(404).send("Error en alguno de los datos provistos")
+        return res.status(400).send("Error in any of the data provided")
     }
 });
 

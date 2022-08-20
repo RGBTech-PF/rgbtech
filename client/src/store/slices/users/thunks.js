@@ -12,7 +12,7 @@ export const getUsers = () => {
 export const postUser = (userCreated) => {
 	return async () => { 
 		try {
-			const user = await axios.post('user', userCreated);
+			const user = await axios.post('users', userCreated);
 			return user;
 		} catch (e) {
 			console.error(e)
