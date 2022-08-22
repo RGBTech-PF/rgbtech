@@ -7,7 +7,6 @@ const router = Router();
 router.get("/", setQueryConditions, setPagination, async(req,res)=>{
   try {
     const {count, nextPage, limit, offset, queryConditions, paginationPages} = req.body
-    console.log(req.body)
     const products = await Product.findAll({...queryConditions, limit, offset})
     const response = {
       count,
@@ -17,7 +16,6 @@ router.get("/", setQueryConditions, setPagination, async(req,res)=>{
     }
     res.status(200).send(response)
   } catch (error) {
-    console.error(error)
     res.status(500).send(error)
   }
 })

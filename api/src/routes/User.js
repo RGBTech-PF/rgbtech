@@ -1,27 +1,81 @@
-const { Router } = require('express');
+const { Router, application } = require('express');
 const { User } = require('../db');
 const bcrypt  = require('bcrypt')
 const jwt = require("jsonwebtoken")
 const router = Router();
-router.post("/", async (req, res) => {
-    let { user,password, mail,profilePhoto } = req.body;
-    console.log(req.body)
+const nodemailer = require('nodemailer')
+const _ = require('lodash')
 
-    if (!user || !password || !mail ) return res.status(404).send("Falta enviar datos obligatorios")
-    password = await bcrypt.hash(password, 10);
-    try {
-        let userCreate = await User.create({
+
+function checkSingup (req, res, next) {
+    const {
+        user,
+        password,
+        mail,
+        profilePhoto
+    } = req.body
+    if(user && password && mail){
+        req.body.newUser = {
             user,
-            password,
             mail,
             profilePhoto,
-            isAdmin:false,
+            isAdmin: false
+        }
+        return next()
+    } else {
+        res.status(404).send('Faltan datos obligatorios')
+    }
+}
+
+router.post("/register", checkSingup,  async (req, res) => {
+    let {password, newUser} = req.body;
+    try {
+        password = await bcrypt.hash(password, 10);
+        const user = await User.create({
+            ...newUser,
+            password
+        })
+        const emailToken = jwt.sign(
+            {
+                user: _.pick(user, 'id')
+            },
+            'hello',
+            {
+                expiresIn: '1d'
+            }
+        )
+        const url = `${req.protocol}://${req.get('host')}/users/confirmation/${emailToken}`
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'rgbtechPF@gmail.com',
+                pass: 'qqilqandbimpiaxu'
+            }
+        })
+        await transporter.sendMail({
+            from: "rgbtech@tech.com",
+            to: newUser.mail,
+            subject: "Confirmation",
+            html: `Click this link to confirm your email <a>${url}</a>`
         })
         return res.send("Usuario creado con exito")
     } catch (error) {
-        return res.status(404).send("Error en alguno de los datos provistos")
+        console.error(error)
+        return res.status(404).send("Algo salió mal, intente de nuevo")
     }
 });
+
+router.get('/confirmation/:token', async(req, res) => {
+    try {
+        console.log(req.params.token)
+        const prueba = jwt.verify(req.params.token, 'hello')
+        console.log(prueba)
+        res.send(prueba)
+    } catch (error) {
+        console.log(error)
+        res.json(error)
+    }
+})
 
 
 router.post("/login", async (req, res) => {
