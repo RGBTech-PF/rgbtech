@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getProducts, getDetailsProductById, searchName, getProductsFilters, getTags, getBrands } from "./productSlice";
+import { getProducts, getDetailsProductById, searchName, getProductsFilters, getTags, getBrands, limpiarFiltros } from "./productSlice";
 
 export const searchNameAction = (input) => {
 	return async (dispatch) => {
@@ -42,6 +42,8 @@ export const getAllProducts = (num, search) => {
 	};
 };
 
+
+
 export const getProductById = (id) => {
 	return async (dispatch) => {
 		try {
@@ -73,6 +75,16 @@ export const getMarcas = () => {
 			dispatch(getBrands(brand.data));
 			console.log(brand);
 		} catch (error) {
+			console.error(e);
+		}
+	};
+};
+
+export const limpiarProductos = () => {
+	return (dispatch) => {
+		try {
+			dispatch(limpiarFiltros());
+		} catch (e) {
 			console.error(e);
 		}
 	};

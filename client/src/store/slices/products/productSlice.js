@@ -43,10 +43,14 @@ const productSlice = createSlice({
 		getTags: (state, action) => {
 			state.tags = action.payload;
 		},
+		limpiarFiltros: (state) => {
+			state.products = [];
+			state.response = {}
+		},
 	},
 });
 
-export const { getProducts, getDetailsProductById, clearDetails, searchName, getProductsFilters, getBrands, getTags} =
+export const { getProducts, getDetailsProductById, clearDetails, searchName, getProductsFilters, getBrands, getTags, limpiarFiltros} =
 	productSlice.actions;
 
 export default productSlice.reducer;

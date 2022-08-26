@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllProducts, limpiarProductos } from '../store/slices/products/thunks'
 
 export default function Filters() {
 
     
     const { tags } = useSelector((state) => state.products)
     const { brands } = useSelector((state) => state.products)
+    const dispatch = useDispatch()
+    
 
     const [state, setState] = useState(
         {
@@ -125,6 +128,8 @@ export default function Filters() {
         } else{
           string = ''
         }
+        dispatch(limpiarProductos())
+        dispatch(getAllProducts(1, string))
         // setState({
         //     brand: '',
         //     tag: '',
@@ -148,7 +153,7 @@ export default function Filters() {
             type="radio" 
             name='brands'
             onClick={handleClickBrand} 
-            value={item.name}/>
+            value={item.id}/>
             <label className="form-check-label inline-block text-gray-800">
             {item.name}
           </label>
@@ -175,8 +180,7 @@ export default function Filters() {
       </div>
       <div className="relative pt-1">
   <h2 className="font-bold">Price</h2>
-
-  <label>Price-min</label>
+  <label>{state.price}</label>
   <input
     type="range"
     id="vol" 
