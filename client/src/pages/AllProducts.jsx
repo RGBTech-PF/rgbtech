@@ -7,19 +7,21 @@ import { useDispatch, useSelector } from "react-redux";
 import  useProducts  from "../components/useProducts"
 import Header from "../components/Header/Header.jsx";
 import { useLocation } from "react-router-dom";
-import { getAllProducts } from "../store/slices/products/thunks";
+import { getAllProducts, getEtiquetas, getMarcas } from "../store/slices/products/thunks";
+import Filters from "../components/Filters";
 
 
 
 function AllProducts() {
 
 	// const { search } =  useLocation();
-	// const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
 
-	// useEffect(() => {
-	// 	dispatch(getAllProducts(null, search))
-	// }, [])
+	useEffect(() => {
+		dispatch(getEtiquetas())
+		dispatch(getMarcas())
+	}, [])
 
 
 	// const dispatch = useDispatch();
@@ -56,15 +58,18 @@ function AllProducts() {
 	return (
 		<div>
 			<Header/>
-			<h1>
+			{/* <h1>
 			All our products here
-			</h1>
+			</h1> */}
+			<div className="">
+				<Filters/>
+			</div>
 			{products &&
 				products.map((elem, i) => {
 					if(products.length === i+1){
 						return (
 							<div key={i} ref={lastProduct} className="flex p-6 font-mono">
-								<div className="flex rounded-xl justify-center shadow-2xl bg-pink-600 w-48 h-[230px] relative z-10 w-full before:h-full ">
+								<div className="flex rounded-xl justify-center shadow-2xl bg-pink-600 w-48 h-[230px] relative z-10  before:h-full ">
 									<img
 										src={elem.img}
 										alt=""
@@ -143,7 +148,7 @@ function AllProducts() {
 						// </div>
 					return (
 						
-						<div key={i} className="flex p-12 font-mono ">
+						<div key={i} className=" flex p-12 font-mono ">
 								<div className="flex rounded-xl justify-center shadow-2xl bg-pink-600 w-48 h-[230px] relative z-10 w-full before:h-full ">
 									<img
 										src={elem.img}

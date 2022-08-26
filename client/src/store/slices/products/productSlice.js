@@ -5,7 +5,11 @@ const initialState = {
 	filters: [],
 	productDetails: {},
 	response: {},
-	productsName: []
+	productsName: [],
+	tags: [],
+	brands: [],
+
+
 };
 
 const productSlice = createSlice({
@@ -33,10 +37,16 @@ const productSlice = createSlice({
 		getProductsFilters: (state, action) => {
 			state.filters = action.payload.data;
 		},
+		getBrands: (state, action) => {
+			state.brands = action.payload;
+		},
+		getTags: (state, action) => {
+			state.tags = action.payload;
+		},
 	},
 });
 
-export const { getProducts, getDetailsProductById, clearDetails, searchName, getProductsFilters} =
+export const { getProducts, getDetailsProductById, clearDetails, searchName, getProductsFilters, getBrands, getTags} =
 	productSlice.actions;
 
 export default productSlice.reducer;

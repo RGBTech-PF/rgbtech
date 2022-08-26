@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getProducts, getDetailsProductById, searchName, getProductsFilters } from "./productSlice";
+import { getProducts, getDetailsProductById, searchName, getProductsFilters, getTags, getBrands } from "./productSlice";
 
 export const searchNameAction = (input) => {
 	return async (dispatch) => {
@@ -48,6 +48,31 @@ export const getProductById = (id) => {
 			const product = await axios.get(`products/${id}`);
 			dispatch(getDetailsProductById(product.data));
 		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
+
+export const getEtiquetas = () => {
+	return async (dispatch) => {
+		try {
+			const tag =  await axios.get(`tags`);
+			dispatch(getTags(tag.data));
+			console.log(tag);
+		} catch (error) {
+			console.error(e);
+		}
+	};
+};
+
+export const getMarcas = () => {
+	return async (dispatch) => {
+		try {
+			const brand =  await axios.get(`brands`);
+			dispatch(getBrands(brand.data));
+			console.log(brand);
+		} catch (error) {
 			console.error(e);
 		}
 	};
