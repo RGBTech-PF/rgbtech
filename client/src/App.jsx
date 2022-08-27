@@ -10,6 +10,7 @@ import SearchProducts from "./pages/SeachProduct";
 import Filters from "./components/Filters"
 import Profile from "./pages/Profile";
 import ConfirmationSingup from "./pages/ConfirmationSingup"
+import AdminDashboard from "./pages/AdminDashboard"
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 					<Route path="/shoppingCart" element={<ShoppingCart />} />
 					<Route path="/productDetails/:id" element={<ProductDetails />} />
 					<Route path="/confirmation/:token" element={<ConfirmationSingup/>}/>	
+					<Route path="/dashboard" element={<AdminDashboard/>}/>	
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>
