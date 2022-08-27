@@ -18,6 +18,8 @@ const Profile = () => {
 
 	return (
 		<div>
+			
+			<h2 className="text-black">hshjhsdakjh</h2>
 			<h1>{perfil.user}</h1>
 			<button
 				type="button"

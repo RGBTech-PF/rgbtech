@@ -10,6 +10,7 @@ import SearchProducts from "./pages/SeachProduct";
 import Filters from "./components/Filters"
 import Profile from "./pages/Profile";
 import ConfirmationSingup from "./pages/ConfirmationSingup"
+import ProfilePrueba from "./components/Profile/ProfilePrueba";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 					<Route path="/createUser" element={<CreateUser />} />
 					<Route path="/filters" element={<Filters />} />
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile2" element={<ProfilePrueba/>} />
 					<Route path="/shoppingCart" element={<ShoppingCart />} />
 					<Route path="/productDetails/:id" element={<ProductDetails />} />
 					<Route path="/confirmation/:token" element={<ConfirmationSingup/>}/>	
