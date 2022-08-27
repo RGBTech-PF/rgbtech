@@ -16,7 +16,7 @@ export const searchNameAction = (input) => {
 			const products = await axios.get(`products/name-list?name=${input}`);
 			dispatch(searchName(products.data));
 		} catch (error) {
-			console.error(e);
+			console.error(error);
 		}
 	};
 };

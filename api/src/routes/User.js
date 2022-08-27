@@ -54,10 +54,10 @@ router.post(
 					isAdmin,
 				};
 				const accessToken = jwt.sign(logedUser, process.env.SECRET);
-				return res.status(200).json({
-					mssage: "usuario autenticado",
-					token: accessToken,
-				});
+				res.header("authorized", accessToken).json({
+					message : "usuario autenticado",
+					token : accessToken
+				})
 			} else return res.json({ message: "contraseña incorrecta" });
 		} catch (error) {
 			res.json({ message: error });
