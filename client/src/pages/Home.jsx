@@ -28,7 +28,6 @@ const Home = () => {
 		productAdded,
 		emailConfirmated,
 	} = useSelector((state) => state.components.notification);
-
 	const accCreated = () => {
 		toast.success("👨‍🚀 Account created successfully check your email! ✉️", {
 			position: "top-right",

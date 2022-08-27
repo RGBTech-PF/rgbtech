@@ -33,6 +33,10 @@ const guestShoppingCartSlice = createSlice({
 		emptyCart: (state) => {
 			state.cart = [];
 		},
+		cartUser: (state,action) => {
+			state.cart = [];
+			state.cart.push(action.payload)
+		},
 	},
 });
 
@@ -42,6 +46,7 @@ export const {
 	delUnitFromCart,
 	emptyCart,
 	delProduct,
+	cartUser,
 } = guestShoppingCartSlice.actions;
 
 export default guestShoppingCartSlice.reducer;

@@ -9,6 +9,7 @@ const initialState = {
 	productosFilt: [],
 	tags: [],
 	brands: [],
+	favorito:[],
 };
 
 const productSlice = createSlice({
@@ -57,6 +58,18 @@ const productSlice = createSlice({
 			state.products = [];
 			state.response = {};
 		},
+		addFavorite: (state, action) => {
+			state.favorito.push({
+				...action.payload,
+				amount: 1,
+			});
+		},
+		delProductfav: (state, action) => {
+			// const productFinded = state.favorito.find((p) => p.id === action.payload);
+			// state.favorito.findIndex(p => p == productFinded)
+			// console.log(state.favorito.IndexOf(productFinded))
+			state.favorito.splice(action.payload, 1);
+		},
 	},
 });
 
@@ -70,6 +83,8 @@ export const {
 	getBrands,
 	getTags,
 	limpiarFiltros,
+	addFavorite,
+	delProductfav,
 } = productSlice.actions;
 
 export default productSlice.reducer;

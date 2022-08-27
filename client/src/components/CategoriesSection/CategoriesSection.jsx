@@ -1,29 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "../Product.jsx";
-import css from "./CategoriesSection.module.css";
+import {hasJWT} from "../../store/thunks.js"
 import {
 	getProductsBestSeller,
 	getProductDiscount,
 	getProductFreeShep,
 } from "../../store/slices/products/thunks.js";
+import { useEffect } from "react";
+import { setCartShop } from "../../store/slices/users/thunks.js";
 
 const CategoriesCarousel = () => {
 	const { products } = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 	const { productosFilt } = useSelector((state) => state.products);
-	// const [filtrados, setFiltrados] = useState()
-	// const [section, setSection] = useState({
-	// 	activeSection: "null",
-	// });
-
-	// const toggleActive = (i) => {
-	// 	setSection({
-	// 		...section,
-	// 		activeSection: section.objects[i],
-	// 	});
-	// };
-
+	const { cart } = useSelector((state) => state.guestShoppingCart);
 	const HandleClickBestSeller = () => {
 		dispatch(getProductsBestSeller());
 	};
@@ -34,13 +25,19 @@ const CategoriesCarousel = () => {
 		dispatch(getProductFreeShep());
 	};
 
-	// const toggleActiveStyle = (i) => {
-	// 	if (section.objects[i] === section.activeSection) {
-	// 		return `text-pink-100 text-lg font-medium text-white p-2 rounded-xl hover:cursor-pointer ${css.active}`;
-	// 	} else {
-	// 		return `text-white text-lg font-medium p-2 rounded-xl hover:cursor-pointer ${css.inactive}`;
-	// 	}
-	// };
+	useEffect(() => {
+	
+		if(hasJWT()){
+			return () => {
+				if(cart.length!== 0){
+					const productsId = cart.map(p=> p.id)
+					dispatch(setCartShop(productsId))
+				}else{
+					const productsId= [""]
+					dispatch(setCartShop(productsId))
+				}
+			}}
+		}, [])
 	return (
 		<div className="bg-gray-200 rounded-3xl mb-10">
 			<div className="flex flex-col pt-4">

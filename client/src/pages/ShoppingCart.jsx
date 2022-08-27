@@ -9,35 +9,28 @@ import {
 	delProduct,
 	emptyCart,
 } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
-import {
-	setproductRemoved,
-	setCartCleaned,
-} from "../store/slices/components/componentSlice";
+import { setproductRemoved } from "../store/slices/components/componentSlice";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
-import { hasJWT } from "../store/thunks.js";
-import { setShoppingHistory, setCartShop } from "../store/slices/users/thunks";
+import {hasJWT} from "../store/thunks.js"
+import { setShoppingHistory,setCartShop } from "../store/slices/users/thunks";
 import { useEffect } from "react";
+import jwt from "jwt-decode";
 
 const ShoppingCart = () => {
 	const dispatch = useDispatch();
-	const { productRemoved, cartCleaned } = useSelector(
+	const { productRemoved } = useSelector(
 		(state) => state.components.notification
 	);
 	const { cart } = useSelector((state) => state.guestShoppingCart);
-
-	window.sessionStorage.setItem("carrito", JSON.stringify([...cart]));
-	const sessionStorageCart = JSON.parse(
-		window.sessionStorage.getItem("carrito")
-	);
-
-	const shoppingCart = !sessionStorageCart.length ? cart : sessionStorageCart;
-
-	console.log(sessionStorageCart);
-
-	const pricesCart = shoppingCart?.map((p) => p.price * p.amount);
+	const pricesCart = cart?.map((p) => p.price * p.amount);
 	const totalPrice = pricesCart?.reduce((prev, act) => prev + act, 0);
-
+	
+	const token = window.localStorage.getItem("token");
+	const perfil = jwt(token);
+	console.log(perfil.cartShop,"cartshop")
+		
+	
 	const addUnits = (id) => {
 		dispatch(addUnitToCart(id));
 	};
@@ -48,11 +41,11 @@ const ShoppingCart = () => {
 
 	const removeProduct = (id) => {
 		dispatch(delProduct(id));
-		dispatch(setproductRemoved(true));
+		dispatch(setproductRemoved());
 	};
 
 	const productRemovedFunction = () => {
-		toast.success("Product removed successfully! 🛒", {
+		toast.success("🛒 Product removed successfully!", {
 			position: "bottom-right",
 			autoClose: 2000,
 			hideProgressBar: false,
@@ -61,46 +54,33 @@ const ShoppingCart = () => {
 			draggable: true,
 			progress: undefined,
 		});
-		dispatch(setproductRemoved(false));
+		dispatch(setproductRemoved());
 	};
-
-	const cartCleanedFunction = () => {
-		toast.success("Cart cleaned successfully! 🛒", {
-			position: "bottom-right",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		});
-		dispatch(setCartCleaned(false));
-	};
-
-	const HandleClickBuy = () => {
-		const productsId = cart.map((p) => ({ id: p.id, date: Date() }));
-		console.log(productsId);
-		dispatch(setShoppingHistory(productsId));
-	};
-
+	
+	const HandleClickBuy = ()=>{
+		const productsId= cart.map(p=> ({id:p.id,date:Date()}))
+		console.log(productsId)
+		dispatch(setShoppingHistory(productsId))
+	}
+	
 	useEffect(() => {
-		if (hasJWT()) {
-			return () => {
-				if (cart.length !== 0) {
-					const productsId = cart.map((p) => p.id);
-					dispatch(setCartShop(productsId));
-				} else {
-					const productsId = [""];
-					dispatch(setCartShop(productsId));
-				}
-			};
-		}
-	}, []);
+	
+	if(hasJWT()){
+        return () => {
+			if(cart.length!== 0){
+				const productsId = cart.map(p=> p)
+				
+				dispatch(setCartShop(productsId))
+			}else{
+				const productsId= [""]
+				dispatch(setCartShop(productsId))
+			}
+        }}
+    }, [])
 
 	return (
 		<div>
 			{productRemoved && productRemovedFunction()}
-			{cartCleaned && cartCleanedFunction()}
 			<Header />
 			<div className="flex flex-col mb-4 items-center justify-center gap-2">
 				<h1 className="flex gap-2 text-4xl">
@@ -115,7 +95,19 @@ const ShoppingCart = () => {
 				<section className="flex flex-row justify-around items-center">
 					<div className="mt-4">
 						{/* RENDER de cartas de productos */}
-						{cart.map((p, i) => (
+						{ hasJWT()? perfil.cartShop.map((p, i) => (
+							<ShoppingCard
+								key={p.id}
+								id={i}
+								name={p.name}
+								img={p.img}
+								totalProductPrice={Math.round(p.price * p.amount)}
+								units={p.amount}
+								addUnits={() => addUnits(p.id)}
+								subUnits={() => subUnits(p.id)}
+								delProduct={() => removeProduct(i)}
+							/>
+						)):cart.map((p, i) => (
 							<ShoppingCard
 								key={p.id}
 								id={i}
@@ -137,7 +129,6 @@ const ShoppingCart = () => {
 							className="flex gap-1 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
 							onClick={() => {
 								dispatch(emptyCart());
-								dispatch(setCartCleaned(true));
 							}}
 						>
 							<BsFillTrashFill /> Clear Cart
@@ -147,16 +138,15 @@ const ShoppingCart = () => {
 							className="flex gap-2 px-6 py-2.5 bg-pink-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-pink-700 hover:shadow-lg focus:bg-pink-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-800 active:shadow-lg transition duration-150 ease-in-out"
 							onClick={() => {
 								HandleClickBuy();
-							}}
-						>
+							}}>
 							<FaMoneyCheckAlt /> Buy Now!
 						</button>
 						<h2 className="flex flex-col justify-center items-center bg-slate-100 rounded-lg p-3">
-							🛒 Total Price:
-							<span className="text-green-500 underline">
-								${Math.round(totalPrice)}
-							</span>
-						</h2>
+                            🛒 Total Price:
+                            <span className="text-green-500 underline">
+                                ${Math.round(totalPrice)}
+                            </span>
+                        </h2>
 					</div>
 				)}
 			</div>

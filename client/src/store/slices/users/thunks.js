@@ -12,7 +12,7 @@ export const AuthUserLogin = (user) => {
 			setAuthToken(token);
 		} catch (e) {
 			console.log("estoy entrando al error de Auth");
-			dispatch(setErrorLogin(true));
+			dispatch(setErrorLogin());
 			console.error(e);
 		}
 	};
@@ -36,19 +36,20 @@ export const postUser = (userCreated) => {
 	};
 };
 
-export const confirmationEmail = (user) => {
+export const confirmationEmail =(user) => {
 	return async () => {
 		try {
-			await axios.put(`users/confirmation/${user.id}`);
+			await axios.put(`users/confirmation/${user.id}`,  )
 		} catch (error) {
-			console.log(error);
+		  console.log(error);	
 		}
-	};
-};
+	}
+}
 
 export const setShoppingHistory = (shoppings) => {
 	const token = window.localStorage.getItem("token");
 	const perfil = jwt(token);
+	console.log(shoppings)
 	return async () => {
 		try {
 			await axios.put(`users/shoppingHistory/${perfil.id}`, shoppings);
@@ -58,12 +59,14 @@ export const setShoppingHistory = (shoppings) => {
 	};
 };
 
+
 export const setCartShop = (cartShop) => {
 	const token = window.localStorage.getItem("token");
 	const perfil = jwt(token);
+	console.log(cartShop,"cartshop thunk")
 	return async () => {
 		try {
-			console.log(perfil.id);
+			
 			await axios.put(`users/setCart/${perfil.id}`, cartShop);
 		} catch (e) {
 			console.error(e);

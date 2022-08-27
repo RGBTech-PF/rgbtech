@@ -9,7 +9,7 @@ const imagnaryProducts = [
 	 logo,
     "https://cdn.shopify.com/s/files/1/2227/7667/products/CA-9011204-AP-Gallery-VOID-RGB-ELITE-USB-WHITE-01_large.png?v=1581667224",
     "https://res.cloudinary.com/ddroxn7iv/image/upload/v1661042263/RGBtech/ImageProduct/SK622_Wireless_pojnja.png",
-    "https://res.cloudinary.com/ddroxn7iv/image/upload/v1661131098/RGBtech/ImageProduct/C8_a72eqr.png",
+    "https://res.cloudinary.com/ddroxn7iv/image/upload/v1661399855/RGBtech/ImageProduct/C8_aebd3c.png",
 	"https://th.bing.com/th/id/R.d960b4953015ded2ff60230a1dfc4d1c?rik=JvUe4hCiXK1qow&pid=ImgRaw&r=0",
 	"https://th.bing.com/th/id/R.2d00452fc652930250bbfdd346a7402c?rik=nluTqm16LanhkQ&pid=ImgRaw&r=0",
 ];

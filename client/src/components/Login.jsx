@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BsGoogle } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import jwt from "jwt-decode";
+import { useDispatch ,useSelector} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-dibujo-2.png";
 import { AuthUserLogin } from "../store/slices/users/thunks";
@@ -9,12 +10,14 @@ import {
 	setLogin,
 	setWelcomeUser,
 } from "../store/slices/components/componentSlice";
-
+import { cartUser} from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import { hasJWT } from "../store/thunks.js";
+import { getProductById} from "../store/slices/products/thunks"
 
 const Login = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { cart } = useSelector((state) => state.guestShoppingCart);
 
 	const [input, setInput] = useState({
 		user: "",
@@ -28,7 +31,7 @@ const Login = () => {
 		});
 	};
 
-	const handleLoginSubmit = (e) => {
+	const handleLoginSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(AuthUserLogin(input));
 
@@ -40,6 +43,8 @@ const Login = () => {
 			dispatch(setLogin(false));
 			dispatch(setWelcomeUser(true));
 		}
+	
+
 	};
 	return (
 		<div>
