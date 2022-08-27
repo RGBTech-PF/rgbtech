@@ -68,10 +68,10 @@ router.post(
 router.put("/shoppingHistory/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const {shopping} = req.body;
+		
 		await User.update(
 			{
-				shoppingHistory: shoppingHistory.push(shopping),
+				shoppingHistory: shoppingHistory.push(req.body),
 			},
 			{
 				where: {
@@ -128,10 +128,12 @@ router.put("/confirmation/:id", async (req, res, next) => {
 router.put("/setCart/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const {cartShop} =req.body;
+		 req.body
+		
+		console.log(req.body,"Cartshop back")
 		await User.update(
 			{
-				cartShop:cartShop
+				cartShop:req.body
 			},
 			{
 				where: {
