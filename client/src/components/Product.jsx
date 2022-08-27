@@ -1,18 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { TbHeartPlus } from "react-icons/tb";
 import { GiShoppingCart } from "react-icons/gi";
 import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setProductAddedTrue } from "../store/slices/components/componentSlice";
+import { setProductAdded } from "../store/slices/components/componentSlice";
 
 function Product({ id, name, price, img }) {
 	const { cart } = useSelector((state) => state.guestShoppingCart);
-	const cartIDS = cart.map((p) => p.id);
 	const dispatch = useDispatch();
 
 	const handleAddCart = () => {
-		if (cartIDS.includes(id)) return;
+		if (Boolean(cart.find((p) => p.id === id))) return;
 		else {
 			dispatch(
 				addProduct({
@@ -22,8 +20,7 @@ function Product({ id, name, price, img }) {
 					img,
 				})
 			);
-			cartIDS.push(id);
-			dispatch(setProductAddedTrue());
+			dispatch(setProductAdded(true));
 		}
 	};
 	return (
@@ -41,7 +38,6 @@ function Product({ id, name, price, img }) {
 					<p className="text-gray-700 text-base mb-4">${price}</p>
 
 					<h1 className="p-2 cursor-pointer w-2 hover:scale-105">🖤</h1>
-					{/* <TbHeartPlus className="bg-red-200 rounded-2xl py-0.5 p-1 w-8 h-8 hover:scale-105 " /> */}
 
 					<GiShoppingCart
 						className="bg-white rounded-3xl py-1 px-1 w-10 h-7 hover:scale-105 cursor-pointer"

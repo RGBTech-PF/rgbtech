@@ -11,22 +11,23 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { hasJWT } from "../../store/thunks";
 import {
-	setLoginTrue,
-	setLoginFalse,
+	setLogin,
+	// setLoginTrue,
+	// setLoginFalse,
 } from "../../store/slices/components/componentSlice";
 
 const UserSection = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { login } = useSelector((state) => state.components.modal);
 	const { cart } = useSelector((state) => state.guestShoppingCart);
 	const verifiedUser = hasJWT();
 	console.log("verifiedUser en Componente UserSection", verifiedUser);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	return (
 		<div className="flex items-center gap-2">
 			{login && (
-				<Modal functionModal={setLoginFalse}>
+				<Modal functionModal={() => dispatch(setLogin(false))}>
 					<Login />
 				</Modal>
 			)}
@@ -47,15 +48,20 @@ const UserSection = () => {
 				) : (
 					<AiOutlineUser
 						className="hover:bg-red-500 hover:scale-110 ease-in duration-300"
-						onClick={() => dispatch(setLoginTrue())}
+						onClick={() => dispatch(setLogin(true))}
 					/>
 				)}
 
-				<AiOutlineHeart className="hover:bg-red-500 hover:scale-110 ease-in duration-300" />
+				<AiOutlineHeart
+					className="hover:bg-red-500 hover:scale-110 ease-in duration-300"
+					onClick={() => {
+						navigate("/favorites");
+					}}
+				/>
 
 				<div>
 					{cart.length > 0 && (
-						<span className="flex absolute top-8 right-5 bg-teal-500 p-1 items-center rounded-full text-white text-sm h-5">
+						<span className="flex absolute top-2 right-0 bg-teal-500 p-1 items-center rounded-full text-white text-sm h-5">
 							{cart.length}
 						</span>
 					)}

@@ -7,10 +7,11 @@ import CreateUser from "./pages/CreateUser";
 import AllProducts from "./pages/AllProducts";
 import ShoppingCart from "./pages/ShoppingCart";
 import SearchProducts from "./pages/SeachProduct";
-import Filters from "./components/Filters"
+import Filters from "./components/Filters";
 import Profile from "./pages/Profile";
 import ConfirmationSingup from "./pages/ConfirmationSingup"
-import AdminDashboard from "./pages/AdminDashboard"
+import Favorites from "./pages/Favorites";
+
 
 function App() {
 	return (
@@ -23,10 +24,10 @@ function App() {
 					<Route path="/createUser" element={<CreateUser />} />
 					<Route path="/filters" element={<Filters />} />
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/favorites" element={<Favorites />} />
 					<Route path="/shoppingCart" element={<ShoppingCart />} />
 					<Route path="/productDetails/:id" element={<ProductDetails />} />
 					<Route path="/confirmation/:token" element={<ConfirmationSingup/>}/>	
-					<Route path="/dashboard" element={<AdminDashboard/>}/>	
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>

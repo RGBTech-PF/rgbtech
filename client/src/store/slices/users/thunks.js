@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setErrorLoginTrue } from "../components/componentSlice";
+import { setErrorLogin } from "../components/componentSlice";
 import jwt from "jwt-decode";
 
 export const AuthUserLogin = (user) => {
@@ -12,7 +12,7 @@ export const AuthUserLogin = (user) => {
 			setAuthToken(token);
 		} catch (e) {
 			console.log("estoy entrando al error de Auth");
-			dispatch(setErrorLoginTrue());
+			dispatch(setErrorLogin(true));
 			console.error(e);
 		}
 	};
@@ -36,15 +36,15 @@ export const postUser = (userCreated) => {
 	};
 };
 
-export const confirmationEmail =(user) => {
+export const confirmationEmail = (user) => {
 	return async () => {
 		try {
-			await axios.put(`users/confirmation/${user.id}`,  )
+			await axios.put(`users/confirmation/${user.id}`);
 		} catch (error) {
-		  console.log(error);	
+			console.log(error);
 		}
-	}
-}
+	};
+};
 
 export const setShoppingHistory = (shoppings) => {
 	const token = window.localStorage.getItem("token");
@@ -58,13 +58,12 @@ export const setShoppingHistory = (shoppings) => {
 	};
 };
 
-
 export const setCartShop = (cartShop) => {
 	const token = window.localStorage.getItem("token");
 	const perfil = jwt(token);
 	return async () => {
 		try {
-			console.log(perfil.id)
+			console.log(perfil.id);
 			await axios.put(`users/setCart/${perfil.id}`, cartShop);
 		} catch (e) {
 			console.error(e);

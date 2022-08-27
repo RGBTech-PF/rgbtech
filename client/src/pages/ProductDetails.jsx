@@ -12,16 +12,50 @@ import Header from "../components/Header/Header";
 import CircleButton from "../components/Buttons/CircleButton";
 import SquareButton from "../components/Buttons/SquareButton";
 import { clearDetails } from "../store/slices/products/productSlice";
+import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
+import { setProductAdded } from "../store/slices/components/componentSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const ProductDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const { cart } = useSelector((state) => state.guestShoppingCart);
+	const { productAdded } = useSelector(
+		(state) => state.components.notification
+	);
 	const { productDetails } = useSelector((state) => state.products);
 	const product = productDetails;
 
+	const handleAddCart = () => {
+		if (Boolean(cart.find((p) => p.id === id))) return;
+		else {
+			dispatch(
+				addProduct({
+					id: product.id,
+					img: product.img,
+					name: product.name,
+					price: product.price,
+				})
+			);
+			dispatch(setProductAdded(true));
+		}
+	};
+
+	const productAddedFunction = () => {
+		toast.success("✅ Product added successfully!", {
+			position: "bottom-right",
+			autoClose: 2000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+		dispatch(setProductAdded(false));
+	};
+
 	useEffect(() => {
 		dispatch(getProductById(id));
-		console.log(id)
 		return () => {
 			dispatch(clearDetails());
 		};
@@ -29,6 +63,7 @@ const ProductDetails = () => {
 
 	return (
 		<div className="text-white">
+			{productAdded && productAddedFunction()}
 			<Header />
 			{!Object.keys(productDetails).length ? (
 				<Spinner />
@@ -54,7 +89,10 @@ const ProductDetails = () => {
 									Add to Favorites:
 									<AiOutlineHeart />
 								</p>
-								<CircleButton className="flex gap-2 items-center active:bg-pink-800 focus:bg-pink-700 hover:bg-pink-700 bg-pink-600">
+								<CircleButton
+									className="flex gap-2 items-center active:bg-pink-800 focus:bg-pink-700 hover:bg-pink-700 bg-pink-600"
+									onClick={handleAddCart}
+								>
 									<MdOutlineShoppingCart />
 									Agregar al Carrito
 								</CircleButton>
@@ -81,6 +119,17 @@ const ProductDetails = () => {
 					</div>
 				</div>
 			)}
+			<ToastContainer
+				position="top-right"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 		</div>
 	);
 };

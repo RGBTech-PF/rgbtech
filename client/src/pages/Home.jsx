@@ -8,23 +8,29 @@ import CategoriesCarousel from "../components/CategoriesSection/CategoriesSectio
 import Footer from "../components/Footer.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import {
-	setAccCreatedFalse,
-	setWelcomeUserFalse,
-	setErrorLoginFalse,
-	setLogoutFalse,
-	setProductAddedFalse,
-	setemailConfirmatedFalse,
+	setAccCreated,
+	setWelcomeUser,
+	setErrorLogin,
+	setLogout,
+	setProductAdded,
+	setEmailConfirmated,
 } from "../store/slices/components/componentSlice";
 import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
 	const dispatch = useDispatch();
 	const { products } = useSelector((state) => state.products);
-	const { accountCreated, welcomeUser, errorLogin, logout, productAdded,emailConfirmated } =
-		useSelector((state) => state.components.notification);
+	const {
+		accountCreated,
+		welcomeUser,
+		errorLogin,
+		logout,
+		productAdded,
+		emailConfirmated,
+	} = useSelector((state) => state.components.notification);
 
 	const accCreated = () => {
-		toast.success("👨‍🚀 Account created successfully check your email ✉️!", {
+		toast.success("👨‍🚀 Account created successfully check your email! ✉️", {
 			position: "top-right",
 			autoClose: 5000,
 			hideProgressBar: false,
@@ -33,11 +39,11 @@ const Home = () => {
 			draggable: true,
 			progress: undefined,
 		});
-		dispatch(setAccCreatedFalse());
+		dispatch(setAccCreated(false));
 	};
 
 	const welcomeUserFunction = () => {
-		toast("🏠 Welcome User to RGBTech!", {
+		toast("Welcome User to RGBTech! 🏠", {
 			position: "top-right",
 			autoClose: 4000,
 			hideProgressBar: false,
@@ -46,11 +52,11 @@ const Home = () => {
 			draggable: true,
 			progress: undefined,
 		});
-		dispatch(setWelcomeUserFalse());
+		dispatch(setWelcomeUser(false));
 	};
 
 	const errLogin = () => {
-		toast.error("❌ There are errors in the data", {
+		toast.error("There are errors in the data ❌", {
 			position: "top-right",
 			autoClose: 5000,
 			hideProgressBar: false,
@@ -59,11 +65,11 @@ const Home = () => {
 			draggable: true,
 			progress: undefined,
 		});
-		dispatch(setErrorLoginFalse());
+		dispatch(setErrorLogin(false));
 	};
 
 	const logoutFunction = () => {
-		toast.success("🤗See you soon user!", {
+		toast.success("See you soon user! 🤗", {
 			position: "top-right",
 			autoClose: 4000,
 			hideProgressBar: false,
@@ -72,11 +78,11 @@ const Home = () => {
 			draggable: true,
 			progress: undefined,
 		});
-		dispatch(setLogoutFalse());
+		dispatch(setLogout(false));
 	};
 
 	const productAddedFunction = () => {
-		toast.success("✅ Product added successfully!", {
+		toast.success("Product added successfully! ✅", {
 			position: "bottom-right",
 			autoClose: 2000,
 			hideProgressBar: false,
@@ -85,11 +91,11 @@ const Home = () => {
 			draggable: true,
 			progress: undefined,
 		});
-		dispatch(setProductAddedFalse());
+		dispatch(setProductAdded(false));
 	};
 
-	const emailConfirmatedFunction =()=>{
-		toast.success("✅ email confirmed successfully!", {
+	const emailConfirmatedFunction = () => {
+		toast.success("Email confirmed successfully! ✅", {
 			position: "top-right",
 			autoClose: 3000,
 			hideProgressBar: false,
@@ -98,8 +104,8 @@ const Home = () => {
 			draggable: true,
 			progress: undefined,
 		});
-		dispatch(setemailConfirmatedFalse());
-	}
+		dispatch(setEmailConfirmated(false));
+	};
 
 	useEffect(() => {
 		if (products.length) return;
@@ -107,7 +113,7 @@ const Home = () => {
 	}, []);
 
 	return (
-		<div className="min-h-screen grid">
+		<div className="min-h-screen">
 			{accountCreated && accCreated()}
 			{welcomeUser && welcomeUserFunction()}
 			{errorLogin && errLogin()}
