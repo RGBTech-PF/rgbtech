@@ -15,6 +15,35 @@ import { clearDetails } from "../store/slices/products/productSlice";
 import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import { setProductAdded } from "../store/slices/components/componentSlice";
 import { ToastContainer, toast } from "react-toastify";
+import Comment from "../components/Comment";
+
+const testComments = [
+	{
+		score: 4.3,
+		profilePhoto: 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg',
+		user: 'Pablo',
+		comment: 'tienen que mejorar'
+	},
+	{
+		score: 3.4,
+		profilePhoto: 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg',
+		user:  'Carlos',
+		comment: 'Muy bonito me parecio todo',
+	},
+	{
+		score: 5,
+		profilePhoto: 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg',
+		user: 'Luis',
+		comment: 'Que buen pf'
+	},
+	{
+		score: 1,
+		profilePhoto: 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg',
+		user: 'Marciana',
+		comment: 'Inolvidable'
+	}
+]
+
 
 const ProductDetails = () => {
 	const { id } = useParams();
@@ -114,6 +143,12 @@ const ProductDetails = () => {
 								<hr />
 								<h2 className="text-2xl font-bold mb-4">Description:</h2>
 								<p>{productDetails.description}</p>
+							</div>
+							<div>
+								{testComments?.map (comment => {
+									//productDetails.comments(id, comment, rating, user, profilePhoto)
+									return <Comment rating={comment.rating} profilePhoto={comment.profilePhoto} user={comment.user} text={comment.comment}/>
+								})}
 							</div>
 						</div>
 					</div>
