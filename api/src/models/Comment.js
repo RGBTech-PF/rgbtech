@@ -10,16 +10,19 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
       comment: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
       },
       rating: {
-        type: DataTypes.STRING,
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       user: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         allowNull: false,
+      },
+      profilePhoto: {
+        type : DataTypes.STRING
       }
     }, {
         timestamps: false

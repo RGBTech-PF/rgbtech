@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { User } = require("../db");
+const { User, Comment } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {
@@ -84,6 +84,26 @@ router.get("/profile/:id", validateToken, async (req, res) => {
 		res.send(error)
 	}
 
+});
+
+router.post("/addComment", async (req, res) => {
+	try {
+		const { comment, rating, user, profilePhoto, product } = req.body;
+		console.log(product)
+		if (!comment || !rating || !user || !profilePhoto) {
+			res.send("informacion insuficiente para agregar un comentario")
+		}
+		const newComment = await Comment.create({
+			comment,
+			rating,
+			user,
+			profilePhoto
+		})
+		await newComment.addProduct(product)
+		res.send("Comentario agregado correctamente")
+	} catch (error) {
+		res.send(error)
+	}
 });
 
 router.put("/shoppingHistory/:id", async (req, res, next) => {
