@@ -16,6 +16,8 @@ import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartS
 import { setProductAdded } from "../store/slices/components/componentSlice";
 import { ToastContainer, toast } from "react-toastify";
 import Comment from "../components/Comment";
+import { useState } from "react";
+import {hasJWT} from "../store/thunks/"
 
 const testComments = [
 	{
@@ -49,6 +51,8 @@ const ProductDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const { cart } = useSelector((state) => state.guestShoppingCart);
+	const [comment, setComment] = useState('')
+	const [rating, setRating] = useState('')
 	const { productAdded } = useSelector(
 		(state) => state.components.notification
 	);
@@ -90,6 +94,17 @@ const ProductDetails = () => {
 		};
 	}, [id]);
 
+
+	const postComment = (e) => {
+		e.preventDefault()
+		useDispatch(postComment({
+			//user.photo
+			//user.id
+			//id producto
+			//rating
+			//photo
+		}))
+	}
 	return (
 		<div className="text-white">
 			{productAdded && productAddedFunction()}
@@ -145,6 +160,31 @@ const ProductDetails = () => {
 								<p>{productDetails.description}</p>
 							</div>
 							<div>
+								{
+									hasJWT()
+									?<form onSubmit={postComment}>
+									<label>
+										Puntaje
+										<input type='number' min={0} max={5} value={rating} onChange={e => setRating(e.target.value)}/>
+									</label>
+									<label>
+										Deja tu review
+										<textarea
+											type='text'
+											value={comment}
+											name='description'
+											required
+											placeholder='Ej: Tu opinión...'
+											onChange={e => setComment(e.target.value)}
+											rows='5'
+											cols='50'
+              			></textarea>
+									</label>
+									<input type='submit'/>
+								</form>
+									: null
+								}
+								
 								{testComments?.map (comment => {
 									//productDetails.comments(id, comment, rating, user, profilePhoto)
 									return <Comment rating={comment.rating} profilePhoto={comment.profilePhoto} user={comment.user} text={comment.comment}/>
