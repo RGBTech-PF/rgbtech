@@ -10,14 +10,15 @@ import {
 	setLogin,
 	setWelcomeUser,
 } from "../store/slices/components/componentSlice";
-import { cartUser} from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
+import { addUserProducts} from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import { hasJWT } from "../store/thunks.js";
-import { getProductById} from "../store/slices/products/thunks"
+import { getUserCartById} from "../store/slices/users/thunks"
 
 const Login = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { cart } = useSelector((state) => state.guestShoppingCart);
+	// const { userCart } = useSelector((state) => state.users);
 
 	const [input, setInput] = useState({
 		user: "",
@@ -38,10 +39,17 @@ const Login = () => {
 		const userVerified = hasJWT();
 		console.log("userVerified", userVerified);
 
+
 		if (userVerified) {
 			setInput({ user: "", password: "" });
 			dispatch(setLogin(false));
 			dispatch(setWelcomeUser(true));
+		// 	if(hasJWT()){
+		// 	const tok = window.localStorage.getItem("token");
+		// 	const perfil = jwt(tok);
+		//    let cartShop =  getUserCartById(perfil.id)
+		//    console.log(cartShop)
+		//    dispatch(addUserProducts( cartShop))}
 		}
 	
 

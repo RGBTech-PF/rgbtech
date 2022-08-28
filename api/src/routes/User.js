@@ -128,7 +128,6 @@ router.put("/confirmation/:id", async (req, res, next) => {
 router.put("/setCart/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		 req.body
 		
 		console.log(req.body,"Cartshop back")
 		await User.update(
@@ -144,6 +143,18 @@ router.put("/setCart/:id", async (req, res, next) => {
 		res.send("User Confirmations");
 	} catch (error) {
 		next(error);
+	}
+});
+
+router.get("userCart/:id", async (req, res) => {
+	try {
+		const { id } = req.params;
+		let uuser = await User.findByPk(id);
+		let carshop = uuser.cartShop
+		console.log(carshop)
+		return res.status(201).json(carshop);
+	} catch (error) {
+		res.send("No se encontro el Product del  Id");
 	}
 });
 

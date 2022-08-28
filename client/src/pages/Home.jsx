@@ -7,6 +7,8 @@ import Header from "../components/Header/Header.jsx";
 import CategoriesCarousel from "../components/CategoriesSection/CategoriesSection.jsx";
 import Footer from "../components/Footer.jsx";
 import { ToastContainer, toast } from "react-toastify";
+import { setCartShop } from "../store/slices/users/thunks";
+import {hasJWT} from "../store/thunks"
 import {
 	setAccCreated,
 	setWelcomeUser,
@@ -19,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
 	const dispatch = useDispatch();
+	const { cart } = useSelector((state) => state.guestShoppingCart);
 	const { products } = useSelector((state) => state.products);
 	const {
 		accountCreated,
@@ -110,6 +113,20 @@ const Home = () => {
 		if (products.length) return;
 		dispatch(getAllProducts(1));
 	}, []);
+
+	useEffect(() => {
+		if(hasJWT()){
+			return () => {
+				if(cart.length!== 0){
+					const productsId = cart.map(p=> p)
+					
+					dispatch(setCartShop(productsId))
+				}else{
+					const productsId= [""]
+					dispatch(setCartShop(productsId))
+				}
+			}}
+		}, [])
 
 	return (
 		<div className="min-h-screen">

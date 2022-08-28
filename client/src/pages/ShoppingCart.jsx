@@ -12,10 +12,11 @@ import {
 import { setproductRemoved } from "../store/slices/components/componentSlice";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
-import {hasJWT} from "../store/thunks.js"
+import {hasJWT} from "../store/thunks"
 import { setShoppingHistory,setCartShop } from "../store/slices/users/thunks";
 import { useEffect } from "react";
 import jwt from "jwt-decode";
+import { getUserCartById} from "../store/slices/users/thunks"
 
 const ShoppingCart = () => {
 	const dispatch = useDispatch();
@@ -23,12 +24,14 @@ const ShoppingCart = () => {
 		(state) => state.components.notification
 	);
 	const { cart } = useSelector((state) => state.guestShoppingCart);
+	// const {userCart } = useSelector((state) => state.users);
 	const pricesCart = cart?.map((p) => p.price * p.amount);
 	const totalPrice = pricesCart?.reduce((prev, act) => prev + act, 0);
 	
 	const token = window.localStorage.getItem("token");
 	const perfil = jwt(token);
-	console.log(perfil.cartShop,"cartshop")
+	const productCart = perfil.cartShop
+	console.log(perfil,"cartshop")
 		
 	
 	const addUnits = (id) => {
@@ -62,9 +65,14 @@ const ShoppingCart = () => {
 		console.log(productsId)
 		dispatch(setShoppingHistory(productsId))
 	}
+	//  useEffect(()=>{
+	//   getUserCartById(perfil.id)
+	// 	if(userCart.length !== 0){
+	// 		console.log(userCart,"infooo")
+	// 	}
+	// } )
 	
 	useEffect(() => {
-	
 	if(hasJWT()){
         return () => {
 			if(cart.length!== 0){
@@ -95,19 +103,7 @@ const ShoppingCart = () => {
 				<section className="flex flex-row justify-around items-center">
 					<div className="mt-4">
 						{/* RENDER de cartas de productos */}
-						{ hasJWT()? perfil.cartShop.map((p, i) => (
-							<ShoppingCard
-								key={p.id}
-								id={i}
-								name={p.name}
-								img={p.img}
-								totalProductPrice={Math.round(p.price * p.amount)}
-								units={p.amount}
-								addUnits={() => addUnits(p.id)}
-								subUnits={() => subUnits(p.id)}
-								delProduct={() => removeProduct(i)}
-							/>
-						)):cart.map((p, i) => (
+						{cart.map((p, i) => (
 							<ShoppingCard
 								key={p.id}
 								id={i}

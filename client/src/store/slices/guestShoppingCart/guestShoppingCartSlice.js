@@ -8,11 +8,16 @@ const guestShoppingCartSlice = createSlice({
 	name: "shoppingCart",
 	initialState,
 	reducers: {
+		
 		addProduct: (state, action) => {
 			state.cart.push({
 				...action.payload,
 				amount: 1,
 			});
+		},
+		addUserProducts: (state, action) => {
+			state.cart = [];
+			state.cart = action.payload
 		},
 
 		addUnitToCart: (state, action) => {
@@ -33,10 +38,10 @@ const guestShoppingCartSlice = createSlice({
 		emptyCart: (state) => {
 			state.cart = [];
 		},
-		cartUser: (state,action) => {
-			state.cart = [];
-			state.cart.push(action.payload)
-		},
+		// cartUser: (state,action) => {
+		// 	state.cart = [];
+		// 	state.cart.push(action.payload)
+		// },
 	},
 });
 
@@ -46,7 +51,8 @@ export const {
 	delUnitFromCart,
 	emptyCart,
 	delProduct,
-	cartUser,
+	cartUser, 
+	addUserProducts,
 } = guestShoppingCartSlice.actions;
 
 export default guestShoppingCartSlice.reducer;

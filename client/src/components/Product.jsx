@@ -6,7 +6,7 @@ import { addFavorite, delProductfav } from '../store/slices/products/productSlic
 import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductAdded } from "../store/slices/components/componentSlice";
-import { setCartShop } from "../store/slices/users/thunks";
+
 
 function Product({ id, name, price, img }) {
 	const { cart } = useSelector((state) => state.guestShoppingCart);
@@ -30,9 +30,9 @@ function Product({ id, name, price, img }) {
 			dispatch(setProductAdded());
 		}
 		
-			const productss = cart.map(p=> p)
-			dispatch(setCartShop(productss))
-			console.log(cart,"cartttt")
+			// const productss = cart.map(p=> p)
+			// dispatch(setCartShop(productss))
+			// console.log(cart,"cartttt")
 		
 	};
 	const handleAddCartFav = () => {
@@ -56,6 +56,8 @@ function Product({ id, name, price, img }) {
 			
 		}
 	}
+
+	
 	return (
 		<div className="flex flex-wrap justify-center p-10">
 			<div className="flex flex-wrap justify-center rounded-lg shadow-xl max-w-sm">

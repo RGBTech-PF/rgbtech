@@ -1,6 +1,9 @@
 import axios from "axios";
 import { setErrorLogin } from "../components/componentSlice";
 import jwt from "jwt-decode";
+import {  } from "../guestShoppingCart/guestShoppingCartSlice";
+import { hasJWT } from "../../thunks";
+
 
 export const AuthUserLogin = (user) => {
 	return async (dispatch) => {
@@ -68,6 +71,17 @@ export const setCartShop = (cartShop) => {
 		try {
 			
 			await axios.put(`users/setCart/${perfil.id}`, cartShop);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
+export const getUserCartById = (id) => {
+	return async (dispatch) => {
+		try {
+			const user = await axios.get(`users/userCart/${id}`);
+			dispatch(setCartUser(user.data));
 		} catch (e) {
 			console.error(e);
 		}

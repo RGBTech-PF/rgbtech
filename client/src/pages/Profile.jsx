@@ -1,12 +1,14 @@
 import React from "react";
 import jwt from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../store/slices/components/componentSlice";
 import Header from "../components/Header/Header";
+import { setCartShop } from "../store/slices/users/thunks";
 
 const Profile = () => {
 	const token = window.localStorage.getItem("token");
+	const { cart } = useSelector((state) => state.guestShoppingCart);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const perfil = jwt(token);
@@ -16,6 +18,8 @@ const Profile = () => {
 		window.localStorage.removeItem("token");
 		navigate("/");
 		dispatch(setLogout(true));
+		const productss = cart.map(p=> p)
+		dispatch(setCartShop(productss))
 	};
 
 	return (
@@ -48,9 +52,9 @@ const Profile = () => {
 				<div className="flex flex-col font-bold">
 					<p>Shopping Cart:</p>
 					<div className="overflow-y-auto h-52">
-						{perfil.cartShop?.map((product) => (
+						{/* {perfil.cartShop?.map((product) => (
 							<p>{product}</p>
-						))}
+						))} */}
 					</div>
 				</div>
 			</div>
