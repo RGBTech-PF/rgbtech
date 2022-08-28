@@ -70,6 +70,10 @@ const productSlice = createSlice({
 			// console.log(state.favorito.IndexOf(productFinded))
 			state.favorito.splice(action.payload, 1);
 		},
+		addUserfav: (state, action) => {
+			state.favorito = [];
+			state.favorito= action.payload
+		},
 	},
 });
 
@@ -85,6 +89,7 @@ export const {
 	limpiarFiltros,
 	addFavorite,
 	delProductfav,
+	addUserfav,
 } = productSlice.actions;
 
 export default productSlice.reducer;

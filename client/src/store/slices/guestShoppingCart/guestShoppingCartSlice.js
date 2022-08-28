@@ -38,10 +38,6 @@ const guestShoppingCartSlice = createSlice({
 		emptyCart: (state) => {
 			state.cart = [];
 		},
-		// cartUser: (state,action) => {
-		// 	state.cart = [];
-		// 	state.cart.push(action.payload)
-		// },
 	},
 });
 

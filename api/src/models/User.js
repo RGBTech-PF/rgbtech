@@ -33,10 +33,10 @@ module.exports = (sequelize) => {
 				allowNull: true,
 			},
 			cartShop: {
-				type: DataTypes.ARRAY(DataTypes.STRING),
+				type: DataTypes.JSONB,
 			},
 			favorite: {
-				type: DataTypes.ARRAY(DataTypes.STRING),
+				type: DataTypes.JSONB,
 				allowNull: true,
 			},
 			isAdmin: {
@@ -44,8 +44,9 @@ module.exports = (sequelize) => {
 				defaultValue: false,
 				allowNull: false,
 			},
-			shoppingHistory: {
-				type: DataTypes.ARRAY(DataTypes.STRING),
+			shoppingHistory: { 
+				type: DataTypes.JSONB,
+				defaultValue: [],
 			},
 		},
 		{

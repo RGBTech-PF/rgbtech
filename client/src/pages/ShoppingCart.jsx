@@ -15,23 +15,18 @@ import { ToastContainer, toast } from "react-toastify";
 import {hasJWT} from "../store/thunks"
 import { setShoppingHistory,setCartShop } from "../store/slices/users/thunks";
 import { useEffect } from "react";
-import jwt from "jwt-decode";
-import { getUserCartById} from "../store/slices/users/thunks"
+
 
 const ShoppingCart = () => {
 	const dispatch = useDispatch();
+	const { favorito } = useSelector((state) => state.products);
 	const { productRemoved } = useSelector(
 		(state) => state.components.notification
 	);
 	const { cart } = useSelector((state) => state.guestShoppingCart);
-	// const {userCart } = useSelector((state) => state.users);
 	const pricesCart = cart?.map((p) => p.price * p.amount);
 	const totalPrice = pricesCart?.reduce((prev, act) => prev + act, 0);
-	
-	const token = window.localStorage.getItem("token");
-	const perfil = jwt(token);
-	const productCart = perfil.cartShop
-	console.log(perfil,"cartshop")
+	console.log(favorito,"favorito")
 		
 	
 	const addUnits = (id) => {
@@ -65,23 +60,18 @@ const ShoppingCart = () => {
 		console.log(productsId)
 		dispatch(setShoppingHistory(productsId))
 	}
-	//  useEffect(()=>{
-	//   getUserCartById(perfil.id)
-	// 	if(userCart.length !== 0){
-	// 		console.log(userCart,"infooo")
-	// 	}
-	// } )
 	
 	useEffect(() => {
 	if(hasJWT()){
         return () => {
+			
 			if(cart.length!== 0){
-				const productsId = cart.map(p=> p)
-				
-				dispatch(setCartShop(productsId))
+				const productss = cart.map(p=> p)
+				console.log(productss,"Shopping")
+				dispatch(setCartShop(productss))
 			}else{
-				const productsId= [""]
-				dispatch(setCartShop(productsId))
+				const productss= [""]
+				dispatch(setCartShop(productss))
 			}
         }}
     }, [])

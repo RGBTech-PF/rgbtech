@@ -5,21 +5,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../store/slices/components/componentSlice";
 import Header from "../components/Header/Header";
 import { setCartShop } from "../store/slices/users/thunks";
+import { emptyCart } from "../store/slices/guestShoppingCart/guestShoppingCartSlice"
 
 const Profile = () => {
 	const token = window.localStorage.getItem("token");
 	const { cart } = useSelector((state) => state.guestShoppingCart);
+	
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const perfil = jwt(token);
 	console.log("perfil info", perfil);
+	
 
 	const handleSignOut = () => {
 		window.localStorage.removeItem("token");
 		navigate("/");
 		dispatch(setLogout(true));
 		const productss = cart.map(p=> p)
+		console.log(productss,"profile")
 		dispatch(setCartShop(productss))
+		dispatch(emptyCart())
 	};
 
 	return (
@@ -37,7 +42,9 @@ const Profile = () => {
 						<button
 							type="button"
 							className="inline-block px-6 py-2.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out"
-							onClick={handleSignOut}
+							onClick={() => handleSignOut()
+								
+							}
 						>
 							Sign Out
 						</button>

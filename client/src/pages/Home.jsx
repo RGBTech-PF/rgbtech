@@ -7,7 +7,7 @@ import Header from "../components/Header/Header.jsx";
 import CategoriesCarousel from "../components/CategoriesSection/CategoriesSection.jsx";
 import Footer from "../components/Footer.jsx";
 import { ToastContainer, toast } from "react-toastify";
-import { setCartShop } from "../store/slices/users/thunks";
+import { setCartShop,setFavUser } from "../store/slices/users/thunks";
 import {hasJWT} from "../store/thunks"
 import {
 	setAccCreated,
@@ -23,6 +23,7 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const { cart } = useSelector((state) => state.guestShoppingCart);
 	const { products } = useSelector((state) => state.products);
+	const { favorito } = useSelector((state) => state.products);
 	const {
 		accountCreated,
 		welcomeUser,
@@ -113,17 +114,28 @@ const Home = () => {
 		if (products.length) return;
 		dispatch(getAllProducts(1));
 	}, []);
-
+	
 	useEffect(() => {
-		if(hasJWT()){
+		
 			return () => {
+				if(hasJWT()){
 				if(cart.length!== 0){
-					const productsId = cart.map(p=> p)
+					const productss = cart.map(p=> p)
+					console.log(productss,"Home")
 					
-					dispatch(setCartShop(productsId))
+					dispatch(setCartShop(productss))
 				}else{
-					const productsId= [""]
-					dispatch(setCartShop(productsId))
+					const productss= [""]
+					dispatch(setCartShop(productss))
+				}
+				if( favorito && favorito.length!== 0){
+					const fav = favorito.map(p=> p)
+					console.log(fav,"Home")
+					
+					dispatch(setFavUser(fav))
+				}else{
+					const fav= [""]
+					dispatch(setFavUser(fav))
 				}
 			}}
 		}, [])

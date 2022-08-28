@@ -5,6 +5,7 @@ import {  } from "../guestShoppingCart/guestShoppingCartSlice";
 import { hasJWT } from "../../thunks";
 
 
+
 export const AuthUserLogin = (user) => {
 	return async (dispatch) => {
 		try {
@@ -40,9 +41,11 @@ export const postUser = (userCreated) => {
 };
 
 export const confirmationEmail =(user) => {
+	const token = window.localStorage.getItem("token");
+const perfil = jwt(token);
 	return async () => {
 		try {
-			await axios.put(`users/confirmation/${user.id}`,  )
+			await axios.put(`users/confirmation/${perfil.id}`,  )
 		} catch (error) {
 		  console.log(error);	
 		}
@@ -51,7 +54,7 @@ export const confirmationEmail =(user) => {
 
 export const setShoppingHistory = (shoppings) => {
 	const token = window.localStorage.getItem("token");
-	const perfil = jwt(token);
+const perfil = jwt(token);
 	console.log(shoppings)
 	return async () => {
 		try {
@@ -65,8 +68,7 @@ export const setShoppingHistory = (shoppings) => {
 
 export const setCartShop = (cartShop) => {
 	const token = window.localStorage.getItem("token");
-	const perfil = jwt(token);
-	console.log(cartShop,"cartshop thunk")
+const perfil = jwt(token);
 	return async () => {
 		try {
 			
@@ -77,10 +79,23 @@ export const setCartShop = (cartShop) => {
 	};
 };
 
-export const getUserCartById = (id) => {
+export const setFavUser= (favorites) => {
+	const token = window.localStorage.getItem("token");
+	const perfil = jwt(token);
+	return async () => {
+		try {
+			
+			await axios.put(`users/favorite/${perfil.id}`, favorites);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
+export const getUserHistotyShopById = (id) => {
 	return async (dispatch) => {
 		try {
-			const user = await axios.get(`users/userCart/${id}`);
+			const user = await axios.get(`users/userShopHistory/${perfil.id}`);
 			dispatch(setCartUser(user.data));
 		} catch (e) {
 			console.error(e);

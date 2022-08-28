@@ -30,11 +30,12 @@ const CategoriesCarousel = () => {
 		if(hasJWT()){
 			return () => {
 				if(cart.length!== 0){
-					const productsId = cart.map(p=> p.id)
-					dispatch(setCartShop(productsId))
+					const productss = cart.map(p=> p)
+					console.log(productss,"Categori")
+					dispatch(setCartShop(productss))
 				}else{
-					const productsId= [""]
-					dispatch(setCartShop(productsId))
+					const productss= [""]
+					dispatch(setCartShop(productss))
 				}
 			}}
 		}, [])

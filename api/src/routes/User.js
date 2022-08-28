@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { User } = require("../db");
+const { User, Product } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {
@@ -65,34 +65,14 @@ router.post(
 	}
 );
 
-router.put("/shoppingHistory/:id", async (req, res, next) => {
+router.put("/favorite/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		
+		console.log(req.body,"favorite back")
 		await User.update(
 			{
-				shoppingHistory: shoppingHistory.push(req.body),
-			},
-			{
-				where: {
-					id: id,
-				},
-			}
-		);
-		res.send("updated shopping History");
-	} catch (error) {
-		next(error);
-	}
-});
-
-router.put("/favorite", async (req, res, next) => {
-	try {
-		//Asegurarse de vaciar esta propiedad al ejecutar esta compra
-		const { id } = req.params;
-		const { favorite } = req.body;
-		await User.update(
-			{
-				favorite: favorite,
+				favorite:req.body
 			},
 			{
 				where: {
@@ -129,7 +109,7 @@ router.put("/setCart/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		
-		console.log(req.body,"Cartshop back")
+		// console.log(req.body,"Cartshop back")
 		await User.update(
 			{
 				cartShop:req.body
@@ -146,13 +126,44 @@ router.put("/setCart/:id", async (req, res, next) => {
 	}
 });
 
-router.get("userCart/:id", async (req, res) => {
+router.put("/shoppingHistory/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		let uuser = await User.findByPk(id);
-		let carshop = uuser.cartShop
-		console.log(carshop)
-		return res.status(201).json(carshop);
+        const shopping = req.body
+		
+	const Shop =await User.findByPk(id)
+		// console.log(Shop.user.dataValues,"Shop")
+		let totalProdusct = Shop.dataValues.shoppingHistory.push(shopping)
+		console.log(Shop.dataValues.shoppingHistory,"Shoppinggg")
+		console.log(req.body,"body")
+
+		
+		await User.update(
+			{
+				shoppingHistory: totalProdusct
+			},
+			{
+				where: {
+					id: id,
+				},
+			}
+		);
+		res.send("updated shopping History");
+	} catch (error) {
+		next(error);
+	}
+});
+
+router.get("userShopHistory/:id", async (req, res) => {
+	try {
+		const { id } = req.params;
+		const Shop =	await User.findByPk(id,{
+			attributes: [['shoppingHistory']]
+		})
+		const produsctShop = await Product.findAll(Shop)
+		
+		console.log(produsctShop)
+		return res.status(201).json(produsctShop);
 	} catch (error) {
 		res.send("No se encontro el Product del  Id");
 	}

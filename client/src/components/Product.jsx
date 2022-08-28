@@ -51,7 +51,7 @@ function Product({ id, name, price, img }) {
 		}
 	};
 	const handleDeleteCartFav = () => {
-		if (favoriteId.includes(id)) {const i =favoriteId.findIndex(p=>p === id)
+		if (favoriteId.includes(id)) {const i =favoriteId.findIndex(p=>p.id === id)
 			dispatch(delProductfav(i))
 			
 		}
