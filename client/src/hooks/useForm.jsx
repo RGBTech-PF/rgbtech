@@ -44,6 +44,7 @@ export const useForm = (initalForm) => {
 				window.localStorage.setItem("token", token);
 				setAuthToken(token);
 				const user = jwt_decode(token);
+				//helo
 				dispatch(getLoggedUser(user));
 				dispatch(setLogin(false));
 				dispatch(setWelcomeUser(true));
