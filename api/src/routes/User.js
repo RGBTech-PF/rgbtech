@@ -133,7 +133,7 @@ router.put("/shoppingHistory/:id", async (req, res, next) => {
 		
 	const Shop =await User.findByPk(id)
 		// console.log(Shop.user.dataValues,"Shop")
-		let totalProdusct = Shop.dataValues.shoppingHistory.push(shopping)
+		// let totalProdusct = Shop.dataValues.shoppingHistory.push(shopping)
 		console.log(Shop.dataValues.shoppingHistory,"Shoppinggg")
 		console.log(req.body,"body")
 

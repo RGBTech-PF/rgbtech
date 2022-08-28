@@ -46,7 +46,6 @@ module.exports = (sequelize) => {
 			},
 			shoppingHistory: { 
 				type: DataTypes.JSONB,
-				defaultValue: [],
 			},
 		},
 		{
