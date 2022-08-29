@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsSuitHeart } from "react-icons/bs";
 import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { deleteProductFav,addProductsFav} from "../store/slices/products/productSlice";
 import { setProductAdded } from "../store/slices/components/componentSlice";
+import { updateFavoriteUser,deleteFavoriteUser} from "../store/slices/users/thunks"
+import { useDispatch,useSelector} from "react-redux"
 
 function Product({
 	id,
@@ -15,7 +17,10 @@ function Product({
 	freeShipping,
 }) {
 	const { cart } = useSelector((state) => state.guestShoppingCart);
+	const { favorito } = useSelector((state) => state.products);
+	const favoriteId = favorito.map((p) => p.id);
 	const dispatch = useDispatch();
+	const btnFav = false
 
 	const handleAddCart = () => {
 		if (Boolean(cart.find((p) => p.id === id))) return;
@@ -38,6 +43,37 @@ function Product({
 		let result = Math.ceil(price - discPercentage);
 		return result;
 	};
+
+	const handleAddCartFav = () => {
+		if (favoriteId.includes(id)) return;
+		else {
+			dispatch(
+				addProductsFav({
+					id,
+					name,
+					price,
+					img,
+				})
+			);
+			console.log(id,"id en product")
+			dispatch(updateFavoriteUser(id))
+			favoriteId.push(id);
+			
+		}
+		console.log(favorito)
+	};
+	const handleDeleteCartFav = () => {
+		if (favoriteId.includes(id)) {const i =favoriteId.findIndex(p=>p === id)
+			console.log(i,"ada")
+			dispatch(deleteProductFav(i))
+			let favDelete =	favorito.map(p => p.id)
+			favDelete = favDelete.filter(p => p !== id)
+			dispatch(deleteFavoriteUser(favDelete))
+		}
+	
+		
+		
+	}
 
 	return (
 		<div className="flex flex-wrap justify-center p-6">
@@ -78,9 +114,9 @@ function Product({
 						>
 							Add to cart
 						</button>
-						<button className="text-red cursor-pointer hover:scale-110 text-xl font-semibold mr-2 px-2.5 py-0.5 ml-3">
+						{favoriteId.includes(id) ? (<button onClick={handleDeleteCartFav}>❤️</button>) : (<button onClick={handleAddCartFav} className="text-red cursor-pointer hover:scale-110 text-xl font-semibold mr-2 px-2.5 py-0.5 ml-3">
 							<BsSuitHeart size={30} />
-						</button>
+						</button>)}
 					</div>
 				</div>
 			</div>

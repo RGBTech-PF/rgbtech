@@ -33,8 +33,9 @@ export const confirmationEmail = (user) => {
 export const getUserProfile = (id) => {
     return async (dispatch) => {
         try {
+			console.log("entre al thunk")
             const response = await axios.get(`users/profile/${id}`)
-			console.log(response.data)
+			console.log(response.data,"asds")
             dispatch(getLoggedUser(response.data))
         } catch (error) {
             console.log(error)
@@ -61,6 +62,32 @@ export const setCartShop = (cartShop) => {
 		try {
 			console.log(perfil.id);
 			await axios.put(`users/setCart/${perfil.id}`, cartShop);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+export const updateFavoriteUser = (newfavorite) => {
+	const token = window.localStorage.getItem("token");
+	const perfil = jwt(token);
+	return async (dispatch) => {
+		try {
+			console.log(perfil.id);
+			await axios.put(`users/favorite/${perfil.id}`, {newfavorite:newfavorite});
+			dispatch(getUserProfile(perfil.id))
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
+export const deleteFavoriteUser = (deletefavorite) => {
+	const token = window.localStorage.getItem("token");
+	const perfil = jwt(token);
+	return async () => {
+		try {
+			console.log(deletefavorite,"id thunk")
+			await axios.put(`users/deletefavorite/${perfil.id}`, {deletefavorite: deletefavorite});
 		} catch (e) {
 			console.error(e);
 		}

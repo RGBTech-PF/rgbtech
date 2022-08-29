@@ -12,6 +12,7 @@ const {
 } = require("../middlewares/userMiddleware.js");
 const { htmlMail } = require("../Utils/EmailTemplate.js");
 const nodemailer = require("nodemailer");
+const {filtrado} = require ("../controllers/prueba")
 
 const router = Router();
 
@@ -68,17 +69,17 @@ router.get("/profile/:id", validateToken, async (req, res) => {
 		const { id } = req.params;
 
 		const user = await User.findByPk( id )
-		console.log(user,"User encontrado")
+		console.log(user.dataValues,"User encontrado")
 		if (!Object.keys(user).length) {
 			res.sendStatus(404)
 		}
 		const profile = {
-			user: user.user,
-			mail: user.mail,
-			profilePhoto: user.profilePhoto,
-			cartShop: user.cartShop,
-			favorite: user.favorite,
-			isAdmin: user.isAdmin,
+			user: user.dataValues.user,
+			mail: user.dataValues.mail,
+			profilePhoto: user.dataValues.profilePhoto,
+			cartShop: user.dataValues.cartShop,
+			favorite: user.dataValues.favorite,
+			isAdmin: user.dataValues.isAdmin,
 		}
 		res.json(profile)
 	} catch (error) {
@@ -91,6 +92,7 @@ router.put("/shoppingHistory/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const { shopping } = req.body;
+		 
 		await User.update(
 			{
 				shoppingHistory: shoppingHistory.push(shopping),
@@ -107,14 +109,47 @@ router.put("/shoppingHistory/:id", async (req, res, next) => {
 	}
 });
 
-router.put("/favorite", async (req, res, next) => {
+router.put("/favorite/:id", async (req, res, next) => {
 	try {
 		//Asegurarse de vaciar esta propiedad al ejecutar esta compra
 		const { id } = req.params;
-		const { favorite } = req.body;
+		console.log(id,"id user")
+		const { newfavorite } = req.body;
+		console.log(req.body,"body")
+		console.log(newfavorite,"favortis¿")
+		const user = await User.findByPk(id) 
+		let fav = user.favorite
+		console.log(fav,"fav")
+		if(fav){fav = [fav,newfavorite].flat()}
+		else{fav = newfavorite}
+		
+		console.log(fav,"fav");
+
 		await User.update(
 			{
-				favorite: favorite,
+				favorite: fav
+			},
+			{
+				where: {
+					id: id,
+				},
+			}
+		);
+		res.send("Favoritos de usuario actualizado");
+	} catch (error) {
+		next(error);
+	}
+});
+router.put("/deletefavorite/:id", async (req, res, next) => {
+	try {
+		//Asegurarse de vaciar esta propiedad al ejecutar esta compra
+		const { id } = req.params;
+		const { deletefavorite } = req.body;
+		console.log(req.body,"body delete");
+		console.log(deletefavorite,"favorite delete")
+		await User.update(
+			{
+				favorite: deletefavorite
 			},
 			{
 				where: {
@@ -150,10 +185,11 @@ router.put("/confirmation/:id", async (req, res, next) => {
 router.put("/setCart/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const { cartShop } = req.body;
+		console.log(req.body,"Set cart Back")
+	
 		await User.update(
 			{
-				cartShop: cartShop,
+				cartShop: req.body
 			},
 			{
 				where: {

@@ -9,6 +9,7 @@ const initialState = {
 	productosFilt: [],
 	tags: [],
 	brands: [],
+	favorito:[],
 };
 
 const productSlice = createSlice({
@@ -57,6 +58,14 @@ const productSlice = createSlice({
 			state.products = [];
 			state.response = {};
 		},
+		addProductsFav: (state, action) => {
+			state.favorito.push({
+				...action.payload,
+			});
+		},
+		deleteProductFav: (state, action) => {
+			state.favorito.splice(action.payload, 1);
+		},
 	},
 });
 
@@ -70,6 +79,8 @@ export const {
 	getBrands,
 	getTags,
 	limpiarFiltros,
+	deleteProductFav,
+	addProductsFav,
 } = productSlice.actions;
 
 export default productSlice.reducer;

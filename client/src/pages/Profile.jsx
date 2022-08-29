@@ -1,13 +1,15 @@
 import React from "react";
 import jwt from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { setLogout } from "../store/slices/components/componentSlice";
 import Header from "../components/Header/Header";
 import defaultImage from "../assets/defaultImage.png";
 import { clearUser } from "../store/slices/users/userSlice";
+import {setCartShop} from "../store/slices/users/thunks"
 
 const Profile = () => {
+	const { cart } = useSelector((state) => state.guestShoppingCart);
 	const token = window.localStorage.getItem("token");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -18,6 +20,9 @@ const Profile = () => {
 		window.localStorage.removeItem("token");
 		dispatch(setLogout(true));
 		dispatch(clearUser());
+		console.log(cart,"profile cart")
+		let cartshop = Object.assign({}, cart)
+		dispatch(setCartShop(cartshop))
 		navigate("/");
 	};
 

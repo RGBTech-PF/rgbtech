@@ -33,10 +33,10 @@ module.exports = (sequelize) => {
 				allowNull: true,
 			},
 			cartShop: {
-				type: DataTypes.ARRAY(DataTypes.STRING),
+				type: DataTypes.JSONB,
 			},
 			favorite: {
-				type: DataTypes.ARRAY(DataTypes.STRING),
+				type: DataTypes.JSONB,
 				allowNull: true,
 			},
 			isAdmin: {
