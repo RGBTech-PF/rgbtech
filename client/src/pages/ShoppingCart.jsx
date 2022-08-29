@@ -24,8 +24,11 @@ const ShoppingCart = () => {
 	const { productRemoved, cartCleaned } = useSelector(
 		(state) => state.components.notification
 	);
-	const { cart } = useSelector((state) => state.guestShoppingCart);
 
+
+	const { cart } = useSelector((state) => state.guestShoppingCart);
+  const {cartShop} = useSelector((state)=> state.user)
+	
 	window.sessionStorage.setItem("carrito", JSON.stringify([...cart]));
 	const sessionStorageCart = JSON.parse(
 		window.sessionStorage.getItem("carrito")
@@ -84,17 +87,17 @@ const ShoppingCart = () => {
 	};
 
 	useEffect(() => {
-		if (hasJWT()) {
-			return () => {
-				if (cart.length !== 0) {
-					const productsId = cart.map((p) => p.id);
-					dispatch(setCartShop(productsId));
-				} else {
-					const productsId = [""];
-					dispatch(setCartShop(productsId));
-				}
-			};
-		}
+		// if (hasJWT()) {
+		// 	return () => {
+		// 		if (cart.length !== 0) {
+		// 			const productsId = cart.map((p) => p.id);
+		// 			dispatch(setCartShop(productsId));
+		// 		} else {
+		// 			const productsId = [""];
+		// 			dispatch(setCartShop(productsId));
+		// 		}
+		// 	};
+		// }
 	}, []);
 
 	return (
@@ -115,8 +118,10 @@ const ShoppingCart = () => {
 				<section className="flex flex-row justify-around items-center">
 					<div className="mt-4">
 						{/* RENDER de cartas de productos */}
-						{cart.map((p, i) => (
-							<ShoppingCard
+						{
+							hasJWT()
+							? cartShop.map((p, i) => {
+								<ShoppingCard
 								key={p.id}
 								id={i}
 								name={p.name}
@@ -126,8 +131,22 @@ const ShoppingCart = () => {
 								addUnits={() => addUnits(p.id)}
 								subUnits={() => subUnits(p.id)}
 								delProduct={() => removeProduct(i)}
-							/>
-						))}
+								/>
+							})
+							:cart.map((p, i) => (
+								<ShoppingCard
+									key={p.id}
+									id={i}
+									name={p.name}
+									img={p.img}
+									totalProductPrice={Math.round(p.price * p.amount)}
+									units={p.amount}
+									addUnits={() => addUnits(p.id)}
+									subUnits={() => subUnits(p.id)}
+									delProduct={() => removeProduct(i)}
+								/>
+							))
+						}
 					</div>
 				</section>
 				{cart.length > 0 && (

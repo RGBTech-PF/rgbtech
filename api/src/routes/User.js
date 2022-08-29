@@ -45,7 +45,6 @@ router.post(
 	async (req, res) => {
 		try {
 			const { findedUser, logged } = req.body;
-			console.log("logged", logged);
 			if (logged) {
 				const { id, user, mail, profilePhoto, cartShop, favorite, isAdmin } =
 					findedUser;
@@ -69,7 +68,6 @@ router.get("/profile/:id", validateToken, async (req, res) => {
 		const { id } = req.params;
 
 		const user = await User.findByPk( id )
-		console.log(user.dataValues,"User encontrado")
 		if (!Object.keys(user).length) {
 			res.sendStatus(404)
 		}
@@ -87,12 +85,22 @@ router.get("/profile/:id", validateToken, async (req, res) => {
 	}
 
 });
+router.put("/setCart/:id", validateToken, async(req, res)=>{
+	try {
+		console.log('entro al body')
+		const {id} = req.params
+		const user = await User.findByPk(id)
+		user.cartShop = [...user.cartShop, ...req.params] 
+		res.sendStatus(201)
+	} catch (error) {
+		res.send(error)
+	}
+})
 
 router.put("/shoppingHistory/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const { shopping } = req.body;
-		 
 		await User.update(
 			{
 				shoppingHistory: shoppingHistory.push(shopping),
@@ -185,11 +193,10 @@ router.put("/confirmation/:id", async (req, res, next) => {
 router.put("/setCart/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		console.log(req.body,"Set cart Back")
-	
+		const { cartShop } = req.body;
 		await User.update(
 			{
-				cartShop: req.body
+				cartShop: cartShop,
 			},
 			{
 				where: {

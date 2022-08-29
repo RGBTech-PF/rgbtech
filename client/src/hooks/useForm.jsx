@@ -9,7 +9,7 @@ import {
 	setLogin,
 	setWelcomeUser,
 } from "../store/slices/components/componentSlice";
-import { getUserProfile } from "../store/slices/users/thunks"
+import { getUserProfile, setCartShop } from "../store/slices/users/thunks"
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthToken } from "../store/slices/users/thunks";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useForm = (initalForm) => {
 	const { cart } = useSelector((state) => state.guestShoppingCart);
+	const cartsId = cart.map((product) => product.id)
 	const { favorito } = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -50,15 +51,12 @@ export const useForm = (initalForm) => {
 				setAuthToken(token);
 				const user = jwt_decode(token);
 				console.log(user, "form user")
+				if(cart.length) {
+					dispatch(setCartShop(user.id, cartsId))
+					// dispatch(clearCart())
+				}
 				dispatch(getUserProfile(user.id));
-				// let prod = user.cartShop
-				// console.log(prod, "user.carshop")
-				// let prodArray = Object.keys(prod)
-				// console.log(prodArray,"array de user")
-				// dispatch(addProduct(prodArray))
-				// console.log(cart,"cart estado")
-				// let cartshop = Object.assign({}, cart)
-				// dispatch(setCartShop(cartshop))
+				// setCartShop(cart)
 				dispatch(setLogin(false));
 				dispatch(setWelcomeUser(true));
 				setForm(initalForm);

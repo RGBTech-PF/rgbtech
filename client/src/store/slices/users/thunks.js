@@ -35,7 +35,6 @@ export const getUserProfile = (id) => {
         try {
 			console.log("entre al thunk")
             const response = await axios.get(`users/profile/${id}`)
-			console.log(response.data,"asds")
             dispatch(getLoggedUser(response.data))
         } catch (error) {
             console.log(error)
@@ -55,39 +54,12 @@ export const setShoppingHistory = (shoppings) => {
 	};
 };
 
-export const setCartShop = (cartShop) => {
-	const token = window.localStorage.getItem("token");
-	const perfil = jwt(token);
+export const setCartShop = (id, cartShop) => {
+	// const token = window.localStorage.getItem("token");
+	// const perfil = jwt(token);
 	return async () => {
 		try {
-			console.log(perfil.id);
-			await axios.put(`users/setCart/${perfil.id}`, cartShop);
-		} catch (e) {
-			console.error(e);
-		}
-	};
-};
-export const updateFavoriteUser = (newfavorite) => {
-	const token = window.localStorage.getItem("token");
-	const perfil = jwt(token);
-	return async (dispatch) => {
-		try {
-			console.log(perfil.id);
-			await axios.put(`users/favorite/${perfil.id}`, {newfavorite:newfavorite});
-			dispatch(getUserProfile(perfil.id))
-		} catch (e) {
-			console.error(e);
-		}
-	};
-};
-
-export const deleteFavoriteUser = (deletefavorite) => {
-	const token = window.localStorage.getItem("token");
-	const perfil = jwt(token);
-	return async () => {
-		try {
-			console.log(deletefavorite,"id thunk")
-			await axios.put(`users/deletefavorite/${perfil.id}`, {deletefavorite: deletefavorite});
+			await axios.put(`users/setCart/${id}`, cartShop);
 		} catch (e) {
 			console.error(e);
 		}
