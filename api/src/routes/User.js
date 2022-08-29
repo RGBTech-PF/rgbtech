@@ -102,9 +102,7 @@ router.put("/shoppingHistory/:id", async (req, res, next) => {
 		const { shoppings } = req.body;
 		const user = await User.findByPk(id) 
 		let history = user.shoppingHistory
-		console.log(history,"fav")
-		if(history){history = history,shoppings
-		console.log(history)}
+		if(history){history = history,shoppings}
 		else{history = shoppings}
 
 		await User.update(
@@ -123,26 +121,29 @@ router.put("/shoppingHistory/:id", async (req, res, next) => {
 	}
 });
 
-router.put("/favorite", async (req, res, next) => {
-	try {
-		//Asegurarse de vaciar esta propiedad al ejecutar esta compra
-		const { id } = req.params;
-		const { favorite } = req.body;
-		await User.update(
-			{
-				favorite: favorite,
-			},
-			{
-				where: {
-					id: id,
-				},
-			}
-		);
-		res.send("Favoritos de usuario actualizado");
-	} catch (error) {
-		next(error);
-	}
-});
+
+
+
+// router.put("/favorite", async (req, res, next) => {
+// 	try {
+// 		//Asegurarse de vaciar esta propiedad al ejecutar esta compra
+// 		const { id } = req.params;
+// 		const { favorite } = req.body;
+// 		await User.update(
+// 			{
+// 				favorite: favorite,
+// 			},
+// 			{
+// 				where: {
+// 					id: id,
+// 				},
+// 			}
+// 		);
+// 		res.send("Favoritos de usuario actualizado");
+// 	} catch (error) {
+// 		next(error);
+// 	}
+// });
 
 router.put("/favorite/:id", async (req, res, next) => {
 	try {

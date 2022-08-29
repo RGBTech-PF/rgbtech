@@ -16,7 +16,7 @@ export const searchNameAction = (input) => {
 			const products = await axios.get(`products/name-list?name=${input}`);
 			dispatch(searchName(products.data));
 		} catch (error) {
-			console.error(e);
+			console.log(error);
 		}
 	};
 };
@@ -133,6 +133,19 @@ export const limpiarProductos = () => {
 	return (dispatch) => {
 		try {
 			dispatch(limpiarFiltros());
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
+export const updateStock = (productStock) => {
+	return async () => {
+		try {
+			console.log(productStock,"ajecutando")
+			let {id} = productStock
+			console.log(id)
+		   await	axios.put(`products/updateStock/${id}`, productStock);
 		} catch (e) {
 			console.error(e);
 		}

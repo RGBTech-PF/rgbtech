@@ -46,8 +46,8 @@ export const setShoppingHistory = (shoppings) => {
 	const token = window.localStorage.getItem("token");
 	const perfil = jwt(token);
 	return async () => {
-		try {
-			await axios.put(`users/shoppingHistory/${perfil.id}`, shoppings);
+		try { 
+			await axios.put(`users/shoppingHistory/${perfil.id}`, {shoppings:shoppings});
 		} catch (e) {
 			console.error(e);
 		}
@@ -136,6 +136,8 @@ export const clearCartShop = () => {
 		}
 	};
 };
+
+
 
 
 
