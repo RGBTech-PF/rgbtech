@@ -126,7 +126,7 @@ router.put("/favorite/:id", async (req, res, next) => {
 		console.log(req.body,"body")
 		console.log(newfavorite,"favortis¿")
 		const user = await User.findByPk(id) 
-		let fav = user.favorite
+		let fav = user.favorite;
 		console.log(fav,"fav")
 		if(fav){fav = [fav,newfavorite].flat()}
 		else{fav = newfavorite}
