@@ -9,7 +9,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import SearchProducts from "./pages/SeachProduct";
 import Filters from "./components/Filters";
 import Profile from "./pages/Profile";
-import ConfirmationSingup from "./pages/ConfirmationSingup"
+// import ConfirmationSingup from "./pages/ConfirmationSingup"
 import Favorites from "./pages/Favorites";
 
 
@@ -27,7 +27,7 @@ function App() {
 					<Route path="/favorites" element={<Favorites />} />
 					<Route path="/shoppingCart" element={<ShoppingCart />} />
 					<Route path="/productDetails/:id" element={<ProductDetails />} />
-					<Route path="/confirmation/:token" element={<ConfirmationSingup/>}/>	
+					{/* <Route path="/confirmation/:token" element={<ConfirmationSingup/>}/>	 */}
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>

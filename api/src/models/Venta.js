@@ -15,10 +15,14 @@ module.exports = (sequelize) => {
         type:DataTypes.FLOAT,
         allowNull:false
       },
-    Date: {
+    date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
-      }
+      },
+    amount : {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },{
     timestamps: false
   })}

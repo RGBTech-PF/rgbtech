@@ -10,8 +10,6 @@ const {
 	checkLoginBody,
 	checkUserRegistration,
 } = require("../middlewares/userMiddleware.js");
-const {htmlMail} = require('../Utils/EmailTemplate.js')
-const nodemailer = require('nodemailer')
 
 
 const router = Router();
