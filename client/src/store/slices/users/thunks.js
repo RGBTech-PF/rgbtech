@@ -136,6 +136,18 @@ export const clearCartShop = () => {
 		}
 	};
 };
+export const updateLastVisited= (lastvisited) => {
+	const token = window.localStorage.getItem("token");
+	const perfil = jwt(token);
+	return async (dispatch) => {
+		try {
+			await axios.put(`users/updateLastVisited/${perfil.id}`,  {lastvisited:lastvisited });
+			dispatch(getUserProfile(perfil.id));
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
 
 
 

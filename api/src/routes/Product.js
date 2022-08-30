@@ -226,4 +226,17 @@ router.put("/updateStock/:id", async (req, res) => {
     }
 })
 
+router.get("/cartShop", async (req, res) => {
+	try {
+		const { cartShop } = req.body
+		console.log(cartShop)
+		const products = await Product.findAll({
+			where: { id: cartShop },
+			attributes: { exclude: ['specifications', 'sales'] }
+		})
+		res.send(products)
+	} catch (error) {
+		res.sendStatus(500)
+	}});
+
 module.exports = router;

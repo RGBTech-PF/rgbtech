@@ -53,6 +53,7 @@ export const useForm = (initalForm) => {
 					// dispatch(clearCart())
 				}
 				dispatch(getUserProfile(user.id));
+				console.log(user.favorite,"user.favorite")
 				if(user.favorite){
 				dispatch(setFavorite(user.favorite))}	
 				dispatch(setLogin(false));

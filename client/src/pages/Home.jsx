@@ -12,6 +12,8 @@ import "react-toastify/dist/ReactToastify.css";
 const Home = () => {
 	const dispatch = useDispatch();
 	const { products } = useSelector((state) => state.products);
+	const { favorito } = useSelector((state) => state.products);
+	console.log(favorito,"favorit")
 
 	useEffect(() => {
 		if (products.length) return;
