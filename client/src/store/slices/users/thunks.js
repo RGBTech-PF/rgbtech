@@ -46,8 +46,8 @@ export const setShoppingHistory = (shoppings) => {
 	const token = window.localStorage.getItem("token");
 	const perfil = jwt(token);
 	return async () => {
-		try {
-			await axios.put(`users/shoppingHistory/${perfil.id}`, shoppings);
+		try { 
+			await axios.put(`users/shoppingHistory/${perfil.id}`, {shoppings:shoppings});
 		} catch (e) {
 			console.error(e);
 		}
@@ -130,6 +130,19 @@ export const clearCartShop = () => {
 	return async (dispatch) => {
 		try {
 			await axios.put(`users/clearCart/${perfil.id}`,  {clearCart: [] });
+			dispatch(getUserProfile(perfil.id));
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
+export const updateLastVisited= (lastvisited) => {
+	const token = window.localStorage.getItem("token");
+	const perfil = jwt(token);
+	return async (dispatch) => {
+		try {
+			await axios.put(`users/updateLastVisited/${perfil.id}`,  {lastvisited:lastvisited });
 			dispatch(getUserProfile(perfil.id));
 		} catch (e) {
 			console.error(e);

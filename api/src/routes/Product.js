@@ -204,4 +204,39 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
+router.get("/cartShop", async (req, res) => {
+	try {
+		const { cartShop } = req.body
+		console.log(cartShop)
+		const products = await Product.findAll({
+			where: { id: cartShop },
+			attributes: { exclude: ['specifications', 'sales'] }
+		})
+		res.send(products)
+	} catch (error) {
+		res.sendStatus(500)
+	}});
+
+	router.put("/updateStock/:id", async (req, res) => {
+		try {
+			 const {id}= req.params
+			const {amount} = req.body
+			console.log(id,"idss")
+			console.log(req.body,"bodyyy")
+			console.log("amount")
+	
+			const products = await Product.findByPk(id)
+			let newStock =(products.stock - amount )
+			console.log(products)
+			Product.update({
+				stock: newStock
+			},{
+				where:{id:id}
+			})
+			res.status(203).send("stock actualizado luego de la compra")
+		} catch(error) {
+			res.sendStatus(500)
+		}
+	})
+
 module.exports = router;

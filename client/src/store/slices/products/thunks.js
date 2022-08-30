@@ -147,3 +147,15 @@ export const limpiarProductos = () => {
 		}
 	};
 };
+export const updateStock = (productStock) => {
+	return async () => {
+		try {
+			console.log(productStock,"ajecutando")
+			let {id} = productStock
+			console.log(id)
+		   await	axios.put(`products/updateStock/${id}`, productStock);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};

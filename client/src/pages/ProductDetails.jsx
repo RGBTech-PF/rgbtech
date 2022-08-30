@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Comment from "../components/Comment";
 import { useState } from "react";
 import {hasJWT} from "../store/thunks/"
+import { updateLastVisited } from "../store/slices/users/thunks"
 
 const testComments = [
     {
@@ -49,7 +50,8 @@ const testComments = [
 const ProductDetails = () => {
 	const { id } = useParams();
     const dispatch = useDispatch();
-    const { cart } = useSelector((state) => state.guestShoppingCart);
+    const {user} = useSelector((state) => state.user )
+	const { cart } = useSelector((state) => state.guestShoppingCart);
     const [comment, setComment] = useState('')
     const [rating, setRating] = useState('')
     const { productAdded } = useSelector(
@@ -87,6 +89,14 @@ const ProductDetails = () => {
     };
 
     useEffect(() => {
+		// if(hasJWT()){
+		// let lastV = user.user.lastVisited
+		// console.log(lastV)
+		// if(lastV && lastV.length >14){
+		// 	lastV.pop();
+		// 	lastV.unshift(id)
+		// }else{lastV.unshift(id)}
+		// dispatch(updateLastVisited(lastV))}
         dispatch(getProductById(id));
         return () => {
             dispatch(clearDetails());

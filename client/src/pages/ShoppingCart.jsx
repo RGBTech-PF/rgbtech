@@ -17,6 +17,7 @@ import { FaMoneyCheckAlt } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import { hasJWT } from "../store/thunks.js";
 import { setShoppingHistory, deleteProductCart,clearCartShop } from "../store/slices/users/thunks";
+import { updateStock } from "../store/slices/products/thunks"
 import { useEffect } from "react";
 
 const ShoppingCart = () => {
@@ -80,9 +81,17 @@ const ShoppingCart = () => {
 	};
 
 	const HandleClickBuy = () => {
-		const productsId = cart.map((p) => ({ id: p.id, date: Date() }));
-		console.log(productsId);
-		dispatch(setShoppingHistory(productsId));
+		let products = cart.map((p) => ( p ));
+		products = [products,{date: Date() }]
+	   console.log(products);
+	   let productId = cart.map((p) =>({id:p.id , amount:p.amount}));
+	   console.log(productId)
+	   // let productAmount = cart.map((p) =>p.amount);
+	   // const productStock= { productAmount:productAmount, productId:productId}
+	   for (let i = 0; i < productId.length; i++) {
+		   dispatch(updateStock(productId[i]))
+	   }
+	   dispatch(setShoppingHistory(products));
 	};
 
 	useEffect(() => {
