@@ -8,7 +8,6 @@ import { MdFavorite} from 'react-icons/md';
 const Favorites = () => {
 	const { favorito } = useSelector((state) => state.products);
 
-	
 
 	return (
 		<div>

@@ -18,6 +18,7 @@ const UserSection = () => {
 	const { login } = useSelector((state) => state.components.modal);
 	const { cart } = useSelector((state) => state.guestShoppingCart);
 	const { user } = useSelector((state) => state.user);
+	const { favorito } = useSelector((state) => state.products);
 	return (
 		<div className="flex items-center gap-2">
 			{login && (
@@ -49,13 +50,22 @@ const UserSection = () => {
 						onClick={() => dispatch(setLogin(true))}
 					/>
 				)}
+				<div>
+				{favorito.length > 0 && (
+						<span className="flex absolute top-2 right-0 bg-teal-500 p-1 items-center rounded-full text-white text-sm h-5">
+							{favorito.length}
+						</span>
+					)}
                 {hasJWT()?
 				<AiOutlineHeart
-					className="hover:bg-red-500 hover:scale-110 ease-in duration-300"
+				className={`hover:bg-red-500 ${
+					favorito.length === 0 && "hover:scale-110 ease-in duration-300"
+				}`}
 					onClick={() => {
 						navigate("/favorites");
 					}}
 				/>: null}
+				</div>
 
 				<div>
 					{cart.length > 0 && (

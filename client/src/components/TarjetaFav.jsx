@@ -29,11 +29,10 @@ const FavoriteCard = ({
 						className="px-4 h-8 rounded font-semibold border border-blue-400 hover:scale-95 text-slate-900"
 						type="button"
 						>
-						Add to card
+						Add to cart
 						</button>
-                        <button className="ml-12"><GiTechnoHeart/></button>
+                        <button className="ml-12 scale-110 mr-2 px-2.5 py-0.5 ml-3"><GiTechnoHeart/></button>
                     </div>
-                    
 				</div>
 			</div>
 		</div>
