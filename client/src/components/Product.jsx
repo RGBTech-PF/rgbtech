@@ -57,7 +57,12 @@ function Product({
 				})
 			);
 			console.log(id,"id en product")
-			dispatch(updateFavoriteUser(id))
+			dispatch(updateFavoriteUser({
+				id,
+				name,
+				price,
+				img,
+			}))
 			favoriteId.push(id);
 			
 		}

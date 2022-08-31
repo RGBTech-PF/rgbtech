@@ -28,8 +28,6 @@ const ShoppingCart = () => {
 
 	const { cart } = useSelector((state) => state.guestShoppingCart);
 	const { user } = useSelector((state) => state.user);
-	console.log(user.cartShop,"carttttt")
-
 	window.sessionStorage.setItem("carrito", JSON.stringify([...cart]));
 	const sessionStorageCart = JSON.parse(
 		window.sessionStorage.getItem("carrito")
