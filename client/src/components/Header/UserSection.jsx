@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../../store/slices/components/componentSlice";
 import defaultImage from "../../assets/defaultImage.png";
-
+import { hasJWT } from "../../store/thunks";
 const UserSection = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -49,13 +49,13 @@ const UserSection = () => {
 						onClick={() => dispatch(setLogin(true))}
 					/>
 				)}
-
+                {hasJWT()?
 				<AiOutlineHeart
 					className="hover:bg-red-500 hover:scale-110 ease-in duration-300"
 					onClick={() => {
 						navigate("/favorites");
 					}}
-				/>
+				/>: null}
 
 				<div>
 					{cart.length > 0 && (

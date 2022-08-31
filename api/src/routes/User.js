@@ -47,7 +47,9 @@ router.post(
 				const { id, user, mail, profilePhoto, cartShop, favorite, isAdmin } =
 					findedUser;
 				const logedUser = {
-					id
+					id,
+					cartShop,
+					favorite,
 				};
 				const accessToken = jwt.sign(logedUser, process.env.SECRET);
 				return res.status(200).json({

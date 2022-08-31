@@ -27,7 +27,8 @@ const ShoppingCart = () => {
 	);
 
 	const { cart } = useSelector((state) => state.guestShoppingCart);
-	
+	const { user } = useSelector((state) => state.user);
+	console.log(user.cartShop,"carttttt")
 
 	window.sessionStorage.setItem("carrito", JSON.stringify([...cart]));
 	const sessionStorageCart = JSON.parse(
@@ -81,18 +82,18 @@ const ShoppingCart = () => {
 	};
 
 	const HandleClickBuy = () => {
-		let products = cart.map((p) => ( p ));
+		if(hasJWT()){
+		let products = cart.map((p) => ( p ,Date()));
 		products = [products,{date: Date() }]
 	   console.log(products);
 	   let productId = cart.map((p) =>({id:p.id , amount:p.amount}));
 	   console.log(productId)
 	   // let productAmount = cart.map((p) =>p.amount);
 	   // const productStock= { productAmount:productAmount, productId:productId}
-	   for (let i = 0; i < productId.length; i++) {
-		   dispatch(updateStock(productId[i]))
-	   }
-	   dispatch(setShoppingHistory(products));
-	};
+	   for (let i = 0; i < productId.length; i++) {dispatch(updateStock(productId[i]))}
+	   dispatch(setShoppingHistory(products))
+	   dispatch(emptyCart())
+	}}
 
 	useEffect(() => {
 		// if (hasJWT()) {

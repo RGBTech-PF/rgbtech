@@ -11,6 +11,7 @@ import { RiHistoryLine } from "react-icons/ri";
 import defaultImage from "../../assets/defaultImage.png";
 import ShoppingHistory from "./ShoppingHistory";
 import { clearFavorite }from "../../store/slices/products/productSlice"
+import { emptyCart } from "../../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import LastVisited from "./LastVisited";
 import ModifyProfile from "./ModifyProfile";
 
@@ -25,6 +26,7 @@ const Profile = () => {
 		dispatch(setLogout(true));
 		dispatch(clearUser());
 		dispatch(clearFavorite())
+		dispatch(emptyCart())
 		navigate("/");
 	};
 

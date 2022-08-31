@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteProductFav,addProductsFav} from "../store/slices/products/productSlice";
 import { setProductAdded } from "../store/slices/components/componentSlice";
 import { updateFavoriteUser,deleteFavoriteUser,updateProductCart} from "../store/slices/users/thunks"
+import { hasJWT } from "../store/thunks";
 function Product({
 	id,
 	name,
@@ -33,7 +34,7 @@ function Product({
 			);
 			dispatch(setProductAdded(true));
 		}
-		 dispatch(updateProductCart([id]))
+		 dispatch(updateProductCart({id,name,price,img}))
 	};
 
 	const discountFunction = (price, discount) => {
@@ -71,7 +72,7 @@ function Product({
 		}
 	
 		
-		
+	
 	}
 
 	return (
@@ -113,9 +114,10 @@ function Product({
 						>
 							Add to cart
 						</button>
-						{ favoriteId && favoriteId.includes(id) ? (<button onClick={handleDeleteCartFav}>❤️</button>) : (<button onClick={handleAddCartFav} className="text-red cursor-pointer hover:scale-110 text-xl font-semibold mr-2 px-2.5 py-0.5 ml-3">
+						{ hasJWT()? favoriteId && favoriteId.includes(id) ? (<button onClick={handleDeleteCartFav}>❤️</button>) : (<button onClick={handleAddCartFav} className="text-red cursor-pointer hover:scale-110 text-xl font-semibold mr-2 px-2.5 py-0.5 ml-3">
 							<BsSuitHeart size={30} />
-						</button>)}
+						</button>) 
+						: <div></div>}
 					</div>
 				</div>
 			</div>
