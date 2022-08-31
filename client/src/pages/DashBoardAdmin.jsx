@@ -8,39 +8,23 @@ import Users from "../components/DashBoardAdmin/Users";
 //import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, BarChart, ResponsiveContainer, PieChart, Pie} from 'recharts';
 
 function DashBoardAdmin() {
-
-  const [selection, setSelection] = useState("loading")
+	const [selection, setSelection] = useState("loading");
 
 	return (
 		<div className="bg-white">
 			<HeaderAdmin />
 			<div className="w-full min-h-[90vh] grid grid-cols-12">
-				<SideNavAdmin 
-            selection={setSelection}
-        />
+				<SideNavAdmin selection={setSelection} />
 				<div className="grid grid-cols-1 xl:grid-cols-5 col-span-10 w-full">
-
-          { selection === "loading" ?
-            <h1>Select some OPTION</h1>
-            :null
-          }
-          { selection === "Dashboard" ?
-            
-            <>
-            <LeftSizeAdmin />
-            <RightSizeAdmin />
-            </>
-            : null
-          } 
-          { selection === "Users" ? 
-            <Users/>
-            :null  
-          }
-          {
-            selection === "Products" ? 
-            <ProductsAdmin/>
-            :null  
-          }
+					{selection === "loading" ? <h1>Select some OPTION</h1> : null}
+					{selection === "Dashboard" ? (
+						<>
+							<LeftSizeAdmin />
+							<RightSizeAdmin />
+						</>
+					) : null}
+					{selection === "Users" ? <Users /> : null}
+					{selection === "Products" ? <ProductsAdmin /> : null}
 				</div>
 			</div>
 		</div>

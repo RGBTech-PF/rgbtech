@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BsSuitHeart } from "react-icons/bs";
+// import { BsSuitHeart } from "react-icons/bs";
+import { GiTechnoHeart } from "react-icons/gi"
 import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProductFav,addProductsFav} from "../store/slices/products/productSlice";
@@ -87,24 +88,27 @@ function Product({
 				</Link>
 				<div className="place-content-center ml-2 px-5 pb-5">
 					<h3 className="text-black font-semibold text-xl tracking-tight mt-3">
-						{name.slice(0, 17)}...
+						{name.slice(0, 17)} ...
 					</h3>
-					<div className="flex items-center mt-2.5 mb-5">
+					<div className="flex items-center mt-3 mb-5">
 						{onDiscount ? (
-							<span className="flex text-xl font-bold text-gray-900 dark:text-white justify-between">
-								<p className="line-through text-gray-400 mr-3 text-base">
-									${price}
+							<span className="flex text-xl text-gray-900 dark:text-white justify-between">
+								<p className="line-through text-gray-400 mr-1 text-sm">
+									${price} 
 								</p>
-								<p className="text-green-500 text-lg">
-									{" "}
-									${discountFunction(price, discountPercentage)}{" "}
+								<p className="text-red-600 text-xs mr-2 border border-red-600 p-1.5 rounded-full">
+									{discountPercentage}%OFF 
+								</p>
+					
+								<p className="text-black text-3xl ml-4">
+									${discountFunction(price, discountPercentage)}
 								</p>
 							</span>
 						) : (
-							<p className="font-bold text-black text-base">${price}</p>
+							<p className="text-black text-3xl ml-4">${price}</p>
 						)}
 						{freeShipping ? (
-							<p className="text-green-500 ml-3">( Free Shipping )</p>
+							<p className="text-green-500 ml-2">( Free Shipping )</p>
 						) : null}
 					</div>
 					<div className="flex items-center justify-between">
@@ -114,10 +118,12 @@ function Product({
 						>
 							Add to cart
 						</button>
-						{ hasJWT()? favoriteId && favoriteId.includes(id) ? (<button onClick={handleDeleteCartFav}>❤️</button>) : (<button onClick={handleAddCartFav} className="text-red cursor-pointer hover:scale-110 text-xl font-semibold mr-2 px-2.5 py-0.5 ml-3">
-							<BsSuitHeart size={30} />
-						</button>) 
-						: <div></div>}
+						{  hasJWT()?favoriteId && favoriteId.includes(id) ? (<button onClick={handleDeleteCartFav} className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3">
+							<GiTechnoHeart color="blue" size={35}/>
+							</button>) 
+						: (<button onClick={handleAddCartFav} className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3">
+							<GiTechnoHeart size={25} />
+						</button>): <div></div> }
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,41 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { setProductAdded } from "../store/slices/components/componentSlice";
+import { updateProductCart} from "../store/slices/users/thunks";
+import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
 
-export default function Tarjeta({key, image, name, price, lastProduct}){
+/*
+Mejorar sBar
+componentes de lo que sea admin panel
+mejorar componentes producto allproducts
+Beneficios llamativos chat bot pasarella autocomplete comentar poductos que compre yo particularmente para sumar puntos
+logicamente carrusel last visit ofertas para perfil user mejorar explicacion 
+TODO LO QUE HICE LO QUE ME GUSTO LO QUE ME COSTO Y LO MAS IMPORTANTE ETC
+aut terc
+pas de pagos
+filt comb
+*/
+export default function Tarjeta({id, key, image, name, price, lastProduct}){
+	const { cart } = useSelector((state) => state.guestShoppingCart);
+	const dispatch = useDispatch();
+
+	const handleAddCart = () => {
+		if (Boolean(cart.find((p) => p.id === id))) return;
+		else {
+			dispatch(
+				addProduct({
+					id,
+					name,
+					price,
+					image,
+				})
+			);
+			dispatch(setProductAdded(true));
+		}
+		 dispatch(updateProductCart([id]))
+	};
+
+
     return (
         <div ref={lastProduct || null} key={key} className="flex bg-white p-10 font-mono border-b-2">
 								<div className="flex rounded justify-center shadow-2xl bg-pink-600 h-60 relative z-10 w-30 before:h-full ">
@@ -32,7 +67,8 @@ export default function Tarjeta({key, image, name, price, lastProduct}){
 											</button>
 											<button
 												className="px-6 h-12 rounded font-semibold border border-blue-400 hover:scale-95 text-slate-900"
-												type="button"
+
+												onClick={handleAddCart}
 											>
 												Add to cart
 											</button>

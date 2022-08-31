@@ -29,13 +29,13 @@ export default function SearchBar2() {
 			borderRadius: 10,
 			border: "3px solid #FF69B4",
 		}),
-		option: (styles, { isSelected }) => {
+		option: (styles, { isSelected, isFocused }) => {
 			/*(More parameters for option style function) data, isDisabled, isFocused, */
 			return {
 				...styles,
 				borderRadius: 5,
 				backgroundColor: isSelected ? "#FF1493" : "white",
-				color: isSelected ? "white" : "black",
+				color: isSelected ? "white" : "black" && isFocused ? "#008080" : "black",
 				cursor: "pointer",
 				padding: 10,
 				margin: 3,
