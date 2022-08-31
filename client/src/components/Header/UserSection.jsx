@@ -51,11 +51,11 @@ const UserSection = () => {
 					/>
 				)}
 				<div>
-				{favorito.length > 0 && (
+				{/* {favorito.length > 0 && (
 						<span className="flex absolute top-2 right-0 bg-teal-500 p-1 items-center rounded-full text-white text-sm h-5">
 							{favorito.length}
 						</span>
-					)}
+					)} */}
                 {hasJWT()?
 				<AiOutlineHeart
 				className={`hover:bg-red-500 ${

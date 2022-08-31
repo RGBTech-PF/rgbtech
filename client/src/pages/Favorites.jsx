@@ -25,9 +25,10 @@ const Favorites = () => {
 					</div>
 					<div>
 					{
-						favorito?.map(item => {
+						favorito?.map((item,i) => {
 							return(
 								<FavoriteCard
+								key={i}
 								name= {item.name}
 								img={item.img}
 								price= {item.price}
