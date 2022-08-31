@@ -23,9 +23,6 @@ module.exports = (sequelize) => {
       type: DataTypes.JSONB,
       allowNull: false
     },
-    sales: {
-      type: DataTypes.INTEGER,
-    },
     img:{
       type: DataTypes.STRING
     },

@@ -20,21 +20,25 @@ const imagnaryProducts = [
 	"https://th.bing.com/th/id/R.f565036a6316a52feb89bb17fc5c1dae?rik=cls3GeO9zLGo8w&pid=ImgRaw&r=0",
 ];
 
+
+
 function Carousel() {
 	return (
 		<div className="flex w-[100%] place-items-center mb-5">
 			<Swiper
 				slidesPerView={1}
-				spaceBetween={10}
+				spaceBetween={30}
 				loop={true}
+				navigation={true}
 				pagination={{
 					clickable: true,
+					type: "bullets",
 				}}
 				autoplay={{
 							delay: 4000,
 							disableOnInteraction: false,
 						}}
-				navigation={true}
+					
 				modules={[Autoplay, Pagination, Navigation]}
 				
 			>

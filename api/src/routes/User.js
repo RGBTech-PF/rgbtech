@@ -26,7 +26,6 @@ router.post(
 				...newUser,
 				password: hashedPassword,
 			});
-
 			await sendConfirmationEmail({ id: user.id, mail: user.mail });
 			return res.status(201).send("User created successfully");
 		} catch (error) {

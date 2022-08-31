@@ -47,17 +47,17 @@ Comment.belongsToMany(Product, {through: "productComment"})
 /* 
   modelo ventas.
 */
-// Sale.belongsTo(Brand, {through: "saleBrand"})
-// Brand.belongsToMany(Sale, {through: "saleBrand"})
+Sale.belongsTo(Brand, {through: "saleBrand"})
+Brand.belongsToMany(Sale, {through: "saleBrand"})
 
-// Sale.belongsToMany(Tag, {through: "saleTags"})
-// Tag.belongsToMany(Sale, {through: "saleTags"})
+Sale.belongsTo(User, {through: "saleUser"})
+User.belongsToMany(Sale, {through: "saleUser"})
 
-// Sale.belongsToMany(Product, {through: "saleProduct"})
-// Product.belongsToMany(Sale, {through: "saleProduct"})
+Sale.belongsToMany(Tag, {through: "saleTags"})
+Tag.belongsToMany(Sale, {through: "saleTags"})
 
-// Sale.belongsTo(User, {through: "saleUser"})
-// User.belongsToMany(Sale, {through: "saleUser"});
+Sale.belongsToMany(Product, {through: "saleProduct"})
+Product.belongsToMany(Sale, {through: "saleProduct"})
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

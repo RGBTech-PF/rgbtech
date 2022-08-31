@@ -22,12 +22,14 @@ const { conn } = require('./src/db.js');
 const createAllProducts = require('./src/Utils/createProducts.js')
 const addBrands = require('./src/Utils/createBrands.js')
 const addTags = require('./src/Utils/createTags.js')
+const createUsers = require('./src/Utils/createUsers.js')
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   addTags()
   addBrands()
   createAllProducts();
+  createUsers();
   server.listen(3003, () => {
     console.log('%s listening at 3003'); // eslint-disable-line no-console
   });

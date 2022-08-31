@@ -76,13 +76,12 @@ module.exports = {
 			});
 
 			if (findedUser === null) return res.sendStatus(404);
-
+			console.log(findedUser, 'encontré el usuario')
 			if (!bcrypt.compareSync(password, findedUser.password)) {
 				return res.sendStatus(403);
 			}
 
 			req.body.logged = true;
-			console.log("findedUser linea 84", Boolean(findedUser));
 
 			if (!findedUser?.userVerificate) {
 				return res.sendStatus(401);

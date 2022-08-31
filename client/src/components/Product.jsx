@@ -82,7 +82,7 @@ function Product({
 	}
 
 	return (
-		<div className="flex flex-wrap justify-center p-6">
+		<div className="flex flex-wrap justify-center p-6 mb-5">
 			<div className="shadow-xl w-96 bg-white rounded-md">
 				<Link to={`/productDetails/${id}`}>
 					<img
@@ -94,15 +94,15 @@ function Product({
 				<div className="place-content-center ml-2 px-5 pb-5">
 					<h3 className="text-black font-semibold text-xl tracking-tight mt-3">
 						{name.slice(0, 17)} ...
+								<p className="text-red-600 text-lg mt-2 p-1.5 rounded-full">
+									 {discountPercentage}% OFF 
+								</p>
 					</h3>
 					<div className="flex items-center mt-3 mb-5">
 						{onDiscount ? (
 							<span className="flex text-xl text-gray-900 dark:text-white justify-between">
-								<p className="line-through text-gray-400 mr-1 text-sm">
+								<p className="line-through text-gray-400 mr-1 text-2xl">
 									${price} 
-								</p>
-								<p className="text-red-600 text-xs mr-2 border border-red-600 p-1.5 rounded-full">
-									{discountPercentage}%OFF 
 								</p>
 					
 								<p className="text-black text-3xl ml-4">
@@ -124,7 +124,7 @@ function Product({
 							Add to cart
 						</button>
 						{  hasJWT()?favoriteId && favoriteId.includes(id) ? (<button onClick={handleDeleteCartFav} className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3">
-							<GiTechnoHeart color="blue" size={35}/>
+							<GiTechnoHeart color="#1E90FF" size={35}/>
 							</button>) 
 						: (<button onClick={handleAddCartFav} className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3">
 							<GiTechnoHeart size={25} />
