@@ -16,7 +16,7 @@ import {
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import { hasJWT } from "../store/thunks.js";
-import { setShoppingHistory, deleteProductCart,clearCartShop } from "../store/slices/users/thunks";
+import { setShoppingHistory, deleteProductCart,clearCartShop, setUserPoint } from "../store/slices/users/thunks";
 import { useEffect } from "react";
 
 const ShoppingCart = () => {
@@ -83,6 +83,8 @@ const ShoppingCart = () => {
 		const productsId = cart.map((p) => ({ id: p.id, date: Date() }));
 		console.log(productsId);
 		dispatch(setShoppingHistory(productsId));
+		const point = {'RGBpoint':1449}
+		dispatch(setUserPoint(point))
 	};
 
 	useEffect(() => {

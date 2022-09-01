@@ -14,6 +14,19 @@ const { htmlMail } = require("../Utils/EmailTemplate.js");
 
 const router = Router();
 
+router.get("/", async(req, res)=>{
+    const allUser = await User.findAll();
+    const infoUser = allUser.map((p) => {
+        return {
+            id: p.id,
+            user: p.user,
+            mail: p.mail,
+			RGBpoint: p.RGBpoint
+        };
+    });
+    res.send(infoUser);
+})
+
 router.post(
 	"/register",
 	checkSingupBody,
@@ -192,6 +205,29 @@ router.put("/deletefavorite/:id", async (req, res, next) => {
 	} catch (error) {
 		next(error);
 	}
+});
+
+router.put("/puntuacion/:id", async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        let userr =  await User.findByPk(id)
+		console.log(req.body)
+		valor = req.body.RGBpoint
+        const newpuntuacion = userr.RGBpoint + valor
+        await User.update(
+            {
+                RGBpoint:newpuntuacion
+            },
+            {
+                where: {
+                    id: id,
+                },
+            }
+        );
+        res.send("User Confirmations");
+    } catch (error) {
+        next(error);
+    }
 });
 
 router.put("/newproductcart/:id", async (req, res, next) => {

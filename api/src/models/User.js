@@ -39,6 +39,10 @@ module.exports = (sequelize) => {
 				type: DataTypes.JSONB,
 				allowNull: true,
 			},
+			RGBpoint: {
+				type: DataTypes.INTEGER,
+				defaultValue: 0
+			},
 			isAdmin: {
 				type: DataTypes.BOOLEAN,
 				defaultValue: false,

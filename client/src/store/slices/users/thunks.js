@@ -54,6 +54,18 @@ export const setShoppingHistory = (shoppings) => {
 	};
 };
 
+export const setUserPoint = (RGBpoint) => {
+    const token = window.localStorage.getItem("token");
+    const perfil = jwt(token);
+    return async () => {
+        try {
+            await axios.put(`users/puntuacion/${perfil.id}`, RGBpoint);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+};
+
 export const setCartShop = ( cartShop) => {
 		const token = window.localStorage.getItem("token");
 		const perfil = jwt(token);
