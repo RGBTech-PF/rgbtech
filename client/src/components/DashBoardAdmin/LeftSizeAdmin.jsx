@@ -12,9 +12,7 @@ import {
 	BarChart,
 	ResponsiveContainer,
 } from "recharts";
-
-
-
+import { dashboardAction } from "../../store/slices/admin/thunk";
 
 const brands = [
 	{ marca: "razer", total: 8108, cantidad: 14 },
@@ -24,15 +22,13 @@ const brands = [
 ];
 
 function LeftSizeAdmin() {
-
 	// const [infoAdmin, setInfoAdmin] = useState()
 	// const adminInfo = useSelector(state=> state.dashboard)
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(dashboardInfo());
+		dispatch(dashboardAction());
 	}, []);
-
 
 	return (
 		<div className=" col-span-2 min-h-[90vh] border-r border-gray-300 items-start justify-start flex flex-col w-full ">
@@ -58,7 +54,6 @@ function LeftSizeAdmin() {
 					<Bar dataKey="total" fill="#87CEFA" />
 				</BarChart>
 			</ResponsiveContainer>
-      
 		</div>
 	);
 }
