@@ -210,10 +210,10 @@ router.put("/deletefavorite/:id", async (req, res, next) => {
 router.put("/puntuacion/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        let userr =  await User.findByPk(id)
+        let user =  await User.findByPk(id)
 		console.log(req.body)
 		valor = req.body.RGBpoint
-        const newpuntuacion = userr.RGBpoint + valor
+        const newpuntuacion = user.RGBpoint + valor
         await User.update(
             {
                 RGBpoint:newpuntuacion

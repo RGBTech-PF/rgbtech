@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { hasJWT } from "../store/thunks.js";
 import { setShoppingHistory, deleteProductCart,clearCartShop, setUserPoint } from "../store/slices/users/thunks";
 import { useEffect } from "react";
+import {assignPoints} from "./Rgbpoint"
 
 const ShoppingCart = () => {
 	const dispatch = useDispatch();
@@ -83,7 +84,7 @@ const ShoppingCart = () => {
 		const productsId = cart.map((p) => ({ id: p.id, date: Date() }));
 		console.log(productsId);
 		dispatch(setShoppingHistory(productsId));
-		const point = {'RGBpoint':1449}
+		const point = dispatch(assignPoints(totalPrice))
 		dispatch(setUserPoint(point))
 	};
 

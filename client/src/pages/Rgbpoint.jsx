@@ -1,4 +1,4 @@
-export const assignPoints = (RGBpoint) => {
+export const assignPoints = (totalPrice) => {
     try {
     if(totalPrice > 14 && totalPrice < 50){
         return {'RGBpoint':63}
