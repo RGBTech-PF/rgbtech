@@ -15,6 +15,7 @@ router.use("/products", productsRoute);
 router.use("/users", usersRoute);
 router.use("/brands", brandsRoute);
 router.use("/tags", tagsRoute);
+router.use("/admin", adminRoute)
 
 router.post("/create-order", create);
 router.get("/capture-order", capture);

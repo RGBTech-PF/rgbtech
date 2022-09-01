@@ -60,8 +60,8 @@ Brand.belongsToMany(Sale, { through: "saleBrand" });
 /* Sale.belongsToMany(Product, {through: "saleProduct"})
 Product.belongsToMany(Sale, {through: "saleProduct"}) */
 
-Sale.belongsToMany(Product, { through: "saleProduct" });
-Product.belongsToMany(Sale, { through: "saleProduct" });
+Sale.belongsToMany(Tag, { through: "saleProduct" });
+Tag.belongsToMany(Sale, { through: "saleProduct" });
 
 Sale.belongsTo(User, { through: "saleUser" });
 User.belongsToMany(Sale, { through: "saleUser" });
