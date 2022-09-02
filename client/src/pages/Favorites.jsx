@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Header from "../components/Header/Header";
 import FavoriteCard from "../components/TarjetaFav";
@@ -9,10 +9,11 @@ const Favorites = () => {
 	const { favorito } = useSelector((state) => state.products);
 
 
+
 	return (
 		<div>
 			<Header />
-			<div className="flex justify-around  items-center rounded-3xl text-white font-semibold">
+			<div className="flex justify-around  items-center rounded-3xl text-white ">
 				<div className="flex flex-col justify-center items-center rounded-3xl  p-4 text-xl text-black">
 					<h1 className="flex gap-2 text-4xl">
 						<MdFavorite/>

@@ -76,9 +76,6 @@ function Product({
 			favDelete = favDelete.filter(p => p !== id)
 			dispatch(deleteFavoriteUser(favDelete))
 		}
-	
-		
-	
 	}
 
 	return (
