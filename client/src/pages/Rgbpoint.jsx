@@ -190,7 +190,7 @@
     }
     else if(totalPrice > 5001 && totalPrice < 5100){
         return point ={'RGBpoint':3902}
-    }
+    }//63 x 62
     else if(totalPrice > 5101 && totalPrice < 99999999999999){
         return point ={'RGBpoint':5602}
     }
