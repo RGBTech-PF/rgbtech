@@ -6,7 +6,7 @@ import logo from "../../assets/logo-dibujo-2.png";
 import { useNavigate } from "react-router-dom";
 // import { emptyCart } from "../../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import { setShoppingHistory } from "../../store/slices/users/thunks";
-import "animate.css";
+// import "animate.css";
 
 const PaymentAcepted = () => {
 	const navigate = useNavigate();

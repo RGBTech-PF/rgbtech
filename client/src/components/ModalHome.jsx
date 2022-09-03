@@ -41,10 +41,6 @@ export default function ModalHome({ showModal, setShowModal }) {
 										<section className="mb-32 text-gray-800 text-center md:text-left">
 											<div className="block rounded-lg shadow-lg bg-white">
 												<div className="flex flex-wrap items-center">
-													{/* <div className="grow-0 shrink-0 basis-auto block lg:flex w-full lg:w-6/12 xl:w-4/12">
-          <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/126.jpg" alt="Trendy Pants and Shoes"
-            className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" />
-        </div> */}
 													<div className="grow-0 shrink-0 basis-auto w-full">
 														<div className="absolute flex justify-end right-7 mt-1">
 															<button
