@@ -8,6 +8,7 @@ import {
 	addProductsFav,
 } from "../store/slices/products/productSlice";
 import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import {
 	updateFavoriteUser,
 	deleteFavoriteUser,
@@ -96,10 +97,10 @@ export default function Tarjeta({ id, img, tags, name, price, lastProduct }) {
 							</button>
 						)}
 					</h5>
-					<div className="flex">
-					<p className="text-pink-700 text-lg mb-4 font-bold">
-						5
-					</p>
+					<div className="flex flex-row mb-2">
+						 <AiOutlineStar color="gold" size={20}/> <AiFillStar color="gold" size={20}/>
+					{/* <p className="text-black font-medium rounded-lg text-sm px-5 my-2 mr-1 text-center">
+					</p> */}
 					</div>
 					<div className="flex justify-between items-center">
 						<p className="text-gray-600 text-xl font-bold">$ {price}</p>
@@ -109,7 +110,7 @@ export default function Tarjeta({ id, img, tags, name, price, lastProduct }) {
 					<div className="pt-4">
 						<button
 							onClick={handleAddCart}
-							className="text-white bg-pink-700 hover:scale-95 shadow-xl hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+							className="text-white bg-pink-700 hover:scale-95 shadow-xl hover:bg-blue-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-blue-400 dark:focus:ring-blue-400"
 						>
 							Add to cart
 						</button>
