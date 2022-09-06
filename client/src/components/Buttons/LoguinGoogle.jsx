@@ -15,7 +15,6 @@ import axios from "axios";
 // } from "../../store/slices/admin/adminSlice";
 import { setAuthToken } from "../../store/slices/users/thunks";
 
-
 function LoguinGoogle() {
 	const navigate = useNavigate();
 	const { cart } = useSelector((state) => state.guestShoppingCart);
@@ -107,7 +106,7 @@ function LoguinGoogle() {
 		/*global google*/
 		google.accounts.id.initialize({
 			client_id:
-				"319669614492-i7e6o766ctapimibesbnj4g2c9fkvk80.apps.googleusercontent.com",
+				"319669614492-8uf24oeb7gbr3lf3nvutbcjjctgqg8l2.apps.googleusercontent.com",
 			callback: handleCallbackResponse,
 		});
 		google.accounts.id.renderButton(document.getElementById("signInDiv"), {
