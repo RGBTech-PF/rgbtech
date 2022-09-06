@@ -8,7 +8,7 @@ import "./index.css";
 import "swiper/css/bundle";
 import { ThemeProvider } from "./components/Header/ThemeProvider";
 
-axios.defaults.baseURL = "http://localhost:3003/";
+axios.defaults.baseURL = import.meta.env.VITE_API || "http://localhost:3003/";
 window.sessionStorage.setItem("carrito", JSON.stringify([]));
 
 createRoot(document.getElementById("root")).render(

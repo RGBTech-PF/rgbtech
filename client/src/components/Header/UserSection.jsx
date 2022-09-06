@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import defaultImage from "../../assets/defaultImage.png";
 import { hasJWT } from "../../store/thunks";
 import { youAreUnloggedFavorites } from "../Notifications";
-import Toogle from "./Toogle"
+import Toogle from "./Toogle";
 
 const UserSection = () => {
 	const navigate = useNavigate();
@@ -74,7 +74,7 @@ const UserSection = () => {
 
 				<div>
 					{cart?.length > 0 && (
-						<span className="flex absolute top-2 right-0 bg-teal-500 p-1 items-center rounded-full text-white text-sm h-5">
+						<span className="flex absolute top-2 right-11 bg-teal-500 p-1 items-center rounded-full text-white text-sm h-5">
 							{cart?.length}
 						</span>
 					)}
@@ -88,7 +88,7 @@ const UserSection = () => {
 					/>
 				</div>
 			</IconContext.Provider>
-			<Toogle/>
+			<Toogle />
 		</div>
 	);
 };
