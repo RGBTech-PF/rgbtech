@@ -6,13 +6,10 @@ import { getProductById } from "../store/slices/products/thunks";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { AiFillStar } from "react-icons/ai";
-import { BsCheckLg } from "react-icons/bs";
 import Spinner from "../components/Spinner";
 import Header from "../components/Header/Header";
 import CircleButton from "../components/Buttons/CircleButton";
-import SquareButton from "../components/Buttons/SquareButton";
 import { clearDetails } from "../store/slices/products/productSlice";
-import { addProduct } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import Comment from "../components/Comment";
 import { hasJWT } from "../store/thunks/";
 import jwt from "jwt-decode";
@@ -24,9 +21,11 @@ import {
 import { ToastContainer } from "react-toastify";
 import CarruselComments from "../components/CarruselComments";
 import Footer from "../components/Footer";
-import { getUserProfile, updateLastVisited, updateProductCart } from "../store/slices/users/thunks"
-
-
+import {
+	getUserProfile,
+	updateLastVisited,
+	updateProductCart,
+} from "../store/slices/users/thunks";
 
 const ProductDetails = () => {
 	const { id } = useParams();
@@ -44,17 +43,16 @@ const ProductDetails = () => {
 		perfil = jwt(token);
 	}
 	const handleAddCart = () => {
-		console.log('hola')
+		console.log("hola");
 		if (hasJWT()) {
-			const cart = user.cartShop
-			const handler = cart?.includes(id)
+			const cart = user.cartShop;
+			const handler = cart?.includes(id);
 			if (!handler) {
-				dispatch(updateProductCart([id]))
-			}else{
+				dispatch(updateProductCart([id]));
+			} else {
 				return;
 			}
-		}
-		else {
+		} else {
 			youAreUnloggedProducts();
 		}
 	};
@@ -88,7 +86,7 @@ const ProductDetails = () => {
 			// 	);
 			// 	window.localStorage.setItem("lastVisited", JSON.stringify(lastVisited));
 			// }
-			// dispatch(clearDetails());
+			dispatch(clearDetails());
 		};
 	}, [id]);
 

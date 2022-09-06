@@ -4,6 +4,8 @@ const usersRoute = require("./User.js");
 const brandsRoute = require("./Brand.js");
 const tagsRoute = require("./Tag.js");
 const adminRoute = require("./Admin.js");
+const awardsRoute = require("./awards.js")
+
 const recoverPasswordRouter = require("./recoverPassword")
 const { cancel, create, capture } = require("../controllers/paypal");
 // const dogmiddleware = require('./middlewares/dogs.js')
@@ -17,10 +19,12 @@ router.use("/users", usersRoute);
 router.use("/brands", brandsRoute);
 router.use("/tags", tagsRoute);
 router.use("/admin", adminRoute);
+router.use("/awards", awardsRoute)
 router.use("/recoverPassword", recoverPasswordRouter )
 router.post("/create-order", create);
 router.get("/capture-order", capture);
 router.get("/cancel-order", cancel);
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 

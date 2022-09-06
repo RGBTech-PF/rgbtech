@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import CardProduct from "./CardProduct";
 import jwt from "jwt-decode";
 import axios from "axios";
 
 const LastVisited = () => {
-	const [products, setProducts] = useState([])
-	const user = useSelector((state) => state.user)
+	const [products, setProducts] = useState([]);
+	const user = useSelector((state) => state.user);
+
 	useEffect(() => {
 		const token = window.localStorage.getItem("token");
 		const perfil = jwt(token);
-		axios.get(`/products/lastVisited/${perfil.id}`)
-		.then(response => {
-			console.log(response.data)
-			const respuesta = response.data
-			setProducts(respuesta)
-		})
+		axios.get(`/products/lastVisited/${perfil.id}`).then((response) => {
+			console.log(response.data);
+			const respuesta = response.data;
+			setProducts(respuesta);
+		});
 		return;
-	}, [user])
-	
-
+	}, [user]);
 
 	return (
 		<div className="flex flex-col justify-start items-center ml-14 h-screen overflow-auto mt-10">

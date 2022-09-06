@@ -24,7 +24,7 @@ const Home = () => {
 	return (
 		<div className="min-h-screen">
 			<Header />
-			<ModalHome showModal={showModal} setShowModal={setShowModal} />
+			{/* <ModalHome showModal={showModal} setShowModal={setShowModal} /> */}
 			<Carousel />
 			<CategoriesCarousel />
 			<Footer />

@@ -16,7 +16,9 @@ import PaymentAcepted from "./components/Paypal/PaymentAcepted";
 import AboutTeam from "./pages/AboutTeam";
 import ModalHome from "./components/ModalHome";
 import PaymentCanceled from "./components/Paypal/PaymentCanceled";
+import UpdateProduct from "./components/DashBoardAdmin/UpdateProduct";
 import RecoverPassword from "./pages/RecoverPassword";
+import AwardsSection from "./pages/Profile/AwardsSection";
 import RecoverPasswordForm from "./components/RecoverPasswordForm";
 function App() {
 	return (
@@ -28,6 +30,8 @@ function App() {
 					<Route path="/products" element={<AllProductsD2 />} />
 					{/* <Route path="/filtersandproducts" element={<FiltersAndAllproducts/>} /> */}
 					<Route path="/admin" element={<DashBoardAdmin />} />
+					<Route path="/admin/update" element={<UpdateProduct />} />
+					<Route path="/awards" element={<AwardsSection />} />
 					<Route path="/recoverpassword" element={<RecoverPasswordForm />} />
 					<Route path="/Search" element={<SearchProducts />} />
 					<Route path="/createUser" element={<CreateUser />} />

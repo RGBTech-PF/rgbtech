@@ -1,9 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	addProduct,
-} from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
-import {
 	deleteProductFav,
 	addProductsFav,
 } from "../store/slices/products/productSlice";

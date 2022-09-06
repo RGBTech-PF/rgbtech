@@ -45,12 +45,12 @@ const CategoriesCarousel = () => {
 	// };
 
 	return (
-		<div className="bg-gray-200 rounded-3xl mb-10">
+		<div className="bg-gray-200 dark:bg-gray-600 rounded-3xl mb-10">
 			<div className="flex flex-col pt-4">
 				<ul className="flex flex-row gap-5 mb-4 justify-center items-center text-xl">
 					<li>
 						<button
-							className="border-2 pr-2 border-r-blue-500 hover:underline decoration-pink-700 font-bold "
+							className="hover:underline decoration-pink-700 font-bold "
 							onClick={() => {
 								HandleClickDiscount();
 							}}
@@ -60,7 +60,7 @@ const CategoriesCarousel = () => {
 					</li>
 					<li>
 						<button
-							className="border-2 pr-2 border-r-blue-500 hover:underline decoration-pink-700 font-bold"
+							className="pr-2 border-r-blue-500 hover:underline decoration-pink-700 font-bold"
 							onClick={() => {
 								HandleClickFreeShep();
 							}}

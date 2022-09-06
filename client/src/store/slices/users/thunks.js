@@ -40,6 +40,17 @@ export const confirmationEmail = (user) => {
 	};
 };
 
+export const editUserProfile = (userUpdated) => {
+	return async () => {
+		try {
+			await axios.put("users/modifyUser", userUpdated);
+			console.log("me hice el PUT", userUpdated);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+};
+
 export const getUserProfile = (id) => {
 	return async (dispatch) => {
 		try {
@@ -49,7 +60,6 @@ export const getUserProfile = (id) => {
 				id = perfil.id;
 			}
 			const response = await axios.get(`users/profile/${id}`);
-			console.log("aasdasd");
 			dispatch(getLoggedUser(response.data));
 		} catch (error) {
 			console.log(error);

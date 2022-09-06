@@ -9,14 +9,20 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { RiHistoryLine } from "react-icons/ri";
 import { GrUserAdmin } from "react-icons/gr";
 import { FcApproval } from "react-icons/fc";
+import { FaAward } from "react-icons/fa";
 import defaultImage from "../../assets/defaultImage.png";
-import { logoutNotification } from "../../components/Notifications";
+import {
+	loginWithGoogleNotification,
+	logoutNotification,
+} from "../../components/Notifications";
 import { ToastContainer } from "react-toastify";
-import ShoppingHistory from  "../Profile/ShoppingHistory"
+import ShoppingHistory from "../Profile/ShoppingHistory";
 import { clearFavorite } from "../../store/slices/products/productSlice";
 import { emptyCart } from "../../store/slices/guestShoppingCart/guestShoppingCartSlice";
-import ModifyProfile from "../Profile/ModifyProfile"
-import LastVisited from "../Profile/LastVisited"
+import ModifyProfile from "../Profile/ModifyProfile";
+import LastVisited from "../Profile/LastVisited";
+import { BsCoin } from "react-icons/bs";
+import AwardsSection from "./AwardsSection";
 
 const Profile = () => {
 	const [section, setSection] = useState("shoppingHistory");
@@ -30,8 +36,8 @@ const Profile = () => {
 		window.localStorage.removeItem("user");
 		dispatch(clearUser());
 		dispatch(clearFavorite());
-		dispatch(emptyCart())
-		
+		dispatch(emptyCart());
+
 		logoutNotification();
 		navigate("/");
 	};
@@ -60,8 +66,9 @@ const Profile = () => {
 							Username: {user.user} <FcApproval />
 						</p>
 						<p className="font-semibold">Email: {user.mail}</p>
-						<p className="font-semibold">
-							RGBTech Points: <b>4000🪙</b>{" "}
+						<p className="flex items-center gap-2 font-semibold">
+							RGBTech Points: <b>{user.RGBpoint}</b>{" "}
+							<BsCoin className="bg-yellow-700 rounded-full" />{" "}
 						</p>
 						<p className="font-semibold">
 							Administrator: {user.isAdmin ? "✅" : "❌"}
@@ -81,7 +88,11 @@ const Profile = () => {
 						<button
 							type="button"
 							className="flex gap-2 justify-center items-center mt-3 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-48"
-							onClick={() => setModifyProfile(true)}
+							onClick={
+								user.LogGoogle === false
+									? () => setModifyProfile(true)
+									: () => loginWithGoogleNotification()
+							}
 						>
 							<CgProfile /> Modify profile
 						</button>
@@ -98,6 +109,13 @@ const Profile = () => {
 							onClick={() => setSection("lastVisited")}
 						>
 							<RiHistoryLine /> Last visited
+						</button>
+						<button
+							type="button"
+							className="flex gap-2 justify-center items-center px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-48"
+							onClick={() => navigate("/awards")}
+						>
+							<FaAward /> Awards
 						</button>
 						<button
 							type="button"

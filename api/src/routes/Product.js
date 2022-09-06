@@ -65,10 +65,10 @@ router.post("/", checkPost, async (req, res) => {
 	}
 });
 
-router.put("/:id", async (req, res, next) => {
-	try {
-		const { id } = req.params;
+router.put("/update", async (req, res, next) => {
+		console.log('entro')
 		const {
+			id,
 			name,
 			price,
 			description,
@@ -78,18 +78,28 @@ router.put("/:id", async (req, res, next) => {
 			onDiscount,
 			discountPercentage,
 			freeShipping,
-		} = req.body;
+		} = req.body.payload;
+		console.log(			id,
+			name,
+			price,
+			description,
+			specifications,
+			img,
+			stock,
+			onDiscount,
+			discountPercentage,
+			freeShipping,)
 		await Product.update(
 			{
-				name: name,
-				price: price,
-				description: description,
-				specifications: specifications,
-				img: img,
-				stock: stock,
-				onDiscount: onDiscount,
-				discountPercentage: discountPercentage,
-				freeShipping: freeShipping,
+				name,
+				price,
+				description,
+				specifications,
+				img,
+				stock,
+				onDiscount,
+				discountPercentage,
+				freeShipping,
 			},
 			{
 				where: {
@@ -97,10 +107,8 @@ router.put("/:id", async (req, res, next) => {
 				},
 			}
 		);
+		console.log('producto updateado')
 		res.send("updated product");
-	} catch (error) {
-		next(error);
-	}
 });
 
 router.delete("/:id", async (req, res, next) => {

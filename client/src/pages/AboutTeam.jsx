@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function AboutTeam() {
 	return (
 		<div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
-			<div className="flex my-3 text-4xl lg:text-4xl font-bold text-center text-gray-800">
+			<div className="flex my-3 text-4xl lg:text-4xl font-bold text-center dark:text-white text-gray-800">
 				<Link to="/">
 					<BiHome className="mr-4" />
 				</Link>
@@ -13,10 +13,10 @@ function AboutTeam() {
 			</div>
 			<div className="flex flex-col lg:flex-row justify-between gap-8">
 				<div className="w-full lg:w-5/12 flex flex-col justify-center">
-					<h1 className="text-2xl lg:text-3xl font-bold leading-9 text-gray-800 pb-4 rounded-md p-2">
+					<h1 className="text-2xl lg:text-3xl font-bold leading-9 dark:text-white text-gray-800 pb-4 rounded-md p-2">
 						About Us
 					</h1>
-					<p className="font-normal text-base leading-6 text-black p-1 rounded-md">
+					<p className="font-normal text-base leading-6 text-black dark:text-gray-400 p-1 rounded-md">
 						It is a long established fact that a reader will be distracted by
 						the readable content of a page when looking at its layout. The point
 						of using Lorem Ipsum.In the first place we have granted to God, and
@@ -47,8 +47,8 @@ function AboutTeam() {
 				</div> */}
 			</div>
 			<div>
-				<div className="p-8 bg-white dark:bg-gray-800 rounded-lg shadow-2xl mt-8">
-					<p className="text-center text-4xl font-bold text-gray-800 dark:text-white">
+				<div className="p-8 bg-white bg-gray-700 dark:bg-gray-700 rounded-lg shadow-2xl mt-8">
+					<p className="text-center text-4xl font-bold text-black dark:text-white">
 						Professional team
 					</p>
 					<p className="text-center mb-12 text-xl font-normal text-gray-500 dark:text-gray-200">

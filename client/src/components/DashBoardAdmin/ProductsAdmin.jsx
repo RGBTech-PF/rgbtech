@@ -5,10 +5,13 @@ import {
 	changeProductStateAction,
 } from "../../store/slices/admin/thunk";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+
+
 
 function ProductsAdmin() {
 	const { products } = useSelector((state) => state.admin);
-
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const theAlert = (id, disabled) =>
@@ -26,6 +29,7 @@ function ProductsAdmin() {
 				Swal.fire("Deleted!", "Your file has been deleted.", "success");
 			}
 		});
+
 
 	const removeProduct = (id, disabled) => {
 		theAlert(id, disabled);
@@ -138,7 +142,7 @@ function ProductsAdmin() {
 											Actions
 										</span> */}
 										<button
-											onClick={() => editProduct(element.id)}
+											 onClick={() => navigate(`/admin/update`)}
 											className="text-blue-500 font-bold hover:underline w-full h-full hover:scale-110"
 										>
 											Edit

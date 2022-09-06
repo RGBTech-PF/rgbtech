@@ -39,6 +39,19 @@ module.exports = {
 			return next();
 		}
 	},
+	uploadExistingUserPhoto: async (req, res, next) => {
+		const { profilePhoto } = req.body;
+		if (profilePhoto) {
+			const uploadedResponse = await cloudinary.uploader.upload(profilePhoto, {
+				upload_preset: "RGBtech",
+			});
+			req.body.profilePhoto = uploadedResponse.secure_url;
+			return next();
+		} else {
+			req.body.profilePhoto = "Image_Default";
+			return next();
+		}
+	},
 	sendConfirmationEmail: async (newUser) => {
 		let emailToken = jwt.sign(newUser, process.env.SECRET, { expiresIn: "1d" });
 		emailToken = emailToken.replaceAll(".", "'");
@@ -76,7 +89,7 @@ module.exports = {
 			});
 
 			if (findedUser === null) return res.sendStatus(404);
-			console.log(findedUser, 'encontré el usuario')
+			console.log(findedUser, "encontré el usuario");
 			if (!bcrypt.compareSync(password, findedUser.password)) {
 				return res.sendStatus(403);
 			}
@@ -103,7 +116,7 @@ module.exports = {
 			});
 
 			if (findedUser === null) return res.sendStatus(404);
-			console.log(findedUser, 'encontré el usuario')
+			console.log(findedUser, "encontré el usuario");
 
 			req.body.logged = true;
 
@@ -119,8 +132,8 @@ module.exports = {
 
 	validateToken: (req, res, next) => {
 		const authHeader = req.headers["authorization"];
-		const token = authHeader && authHeader.split(' ')[1]
-		if (token === null) return res.sendStatus(401)
+		const token = authHeader && authHeader.split(" ")[1];
+		if (token === null) return res.sendStatus(401);
 		else {
 			jwt.verify(token, process.env.SECRET, (err, user) => {
 				if (err) {
