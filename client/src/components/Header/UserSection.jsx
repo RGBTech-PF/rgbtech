@@ -90,7 +90,6 @@ const UserSection = () => {
 					}}
 				/>
 			</IconContext.Provider>
-			<Toogle />
 		</div>
 	);
 };
