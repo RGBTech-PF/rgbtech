@@ -10,15 +10,15 @@ const imagnaryProducts = [
 	logo,
 	"https://th.bing.com/th/id/R.44f2d5d7c7d0b1ab754fda0f41ac5e42?rik=ZV%2bo60ANzXQFEQ&pid=ImgRaw&r=0",
 	"https://storage-asset.msi.com/global/picture/image/feature/AIO/Monitor/Optix-G24C/AIO-Optix_G24C_overview.png",
-	"https://th.bing.com/th/id/R.35c1c1b691e969eef6d654698152a554?rik=B7Nd%2fbUdvdIyaQ&pid=ImgRaw&r=0",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662555612/RGBtech/ImageProduct/img_1_u2c0bb.png",
 	"https://th.bing.com/th/id/R.76424bc99afbac876aeedea611646ed2?rik=4EIIY8RoGkPEFg&pid=ImgRaw&r=0",
-	"https://th.bing.com/th/id/R.053e075f355388e9ff28e0794bb2d239?rik=ZB1hwpHkMMPg1g&pid=ImgRaw&r=0",
-	"https://th.bing.com/th/id/R.f5098e66f9669d51523abfd422c9a187?rik=GONnNmM%2b26fbeg&pid=ImgRaw&r=0",
-	"https://th.bing.com/th/id/R.bae0e7961a9a3b41f71de54dd0a4263d?rik=WDgnFptVrKWIEQ&riu=http%3a%2f%2fwww.asus.com%2fus%2fROG-Republic-Of-Gamers%2fROG-STRIX-GL502VY%2fwebsites%2fglobal%2fproducts%2fsZ9xG0iTQQoxELva%2fimg%2f08%2ffg01.png&ehk=BFvcXX%2fzJ0NQFmdPbrqWMtru7%2b4FGjyWLLZCnTLlJFo%3d&risl=&pid=ImgRaw&r=0",
-	"https://th.bing.com/th/id/R.8ec76cdd286fd8f9f4b717a442f9726e?rik=AjKMvoo4o0ChDw&pid=ImgRaw&r=0",
-	"https://th.bing.com/th/id/R.3795606de5127a32cbb246a9fc7c03c3?rik=gqOpXoAwkLiKnQ&pid=ImgRaw&r=0",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662521855/RGBtech/ImageProduct/img_4_im15ur.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662520667/RGBtech/ImageProduct/img_3_cbleko.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662555612/RGBtech/ImageProduct/img_1_u2c0bb.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662520668/RGBtech/ImageProduct/img_2_ktemmd.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662520667/RGBtech/ImageProduct/img_3_cbleko.png",
 	"https://th.bing.com/th/id/R.f565036a6316a52feb89bb17fc5c1dae?rik=cls3GeO9zLGo8w&pid=ImgRaw&r=0",
-	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662348710/RGBtech/RGBpoint/Baner_rgbPoint_yl075k.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662556899/RGBtech/RGBpoint/Baner_rgbPoint_l2vqpa.png",
 ];
 
 function Carousel() {
@@ -60,39 +60,36 @@ function Carousel() {
 					</SwiperSlide>
 					<SwiperSlide className="flex justify-center items-center">
 						<img
-							className=" ml-10 w-[1300px] h-[500px]"
+							className=" w-[1400px] h-[500px]"
 							src={imagnaryProducts[5]}
 						/>
 					</SwiperSlide>
 					<SwiperSlide className="flex justify-center items-center">
 						<img
-							className="ml-12 w-[1300px] h-[500px]"
+							className=" w-[1500px] h-[500px]"
 							src={imagnaryProducts[6]}
 						/>
 					</SwiperSlide>
 					<SwiperSlide className="flex justify-center items-center">
 						<img
-							className="ml-10 w-[1400px] h-[500px]"
+							className=" w-[1400px] h-[500px]"
 							src={imagnaryProducts[7]}
 						/>
 					</SwiperSlide>
 					<SwiperSlide className="flex justify-center items-center">
-						<img className="w-[1400px] h-[500px]" src={imagnaryProducts[8]} />
+						<img className="w-[1600px] h-[500px]" src={imagnaryProducts[8]} />
 					</SwiperSlide>
 					<SwiperSlide className="flex justify-center items-center">
 						<img className="w-[1200px] h-[500px]" src={imagnaryProducts[9]} />
 					</SwiperSlide>
 					<SwiperSlide className="flex justify-center items-center">
 						<img
-							className="ml-12 w-[1200px] h-[500px]"
+							className=" w-[1200px] h-[500px]"
 							src={imagnaryProducts[10]}
 						/>
 					</SwiperSlide>
 					<SwiperSlide className="flex justify-center items-center">
-						<img
-							className="ml-12 w-full h-[500px]"
-							src={imagnaryProducts[11]}
-						/>
+						<img className="w-full h-[500px]" src={imagnaryProducts[11]} />
 					</SwiperSlide>
 				</div>
 			</Swiper>

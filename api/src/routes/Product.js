@@ -51,10 +51,11 @@ router.get("/name-list", async (req, res) => {
 
 
 router.post("/", checkPost, async (req, res) => {
+	const {tags, brand} = req.body
 	try {
 		const newProduct = await Product.create(req.body.product);
 		await newProduct.setBrand(brand);
-		await newProduct.addTags(tag);
+		await newProduct.addTags(tags);
 		return res
 			.status(201)
 			.send({ msg: "Product created successfully", statusCode: 201 });

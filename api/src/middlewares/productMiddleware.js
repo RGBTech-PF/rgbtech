@@ -76,7 +76,6 @@ module.exports = {
 			name &&
 			price &&
 			description &&
-			specifications &&
 			stock &&
 			brand &&
 			tags
@@ -85,7 +84,7 @@ module.exports = {
 				name,
 				price,
 				description,
-				specifications,
+				specifications: specifications || "No specifications", 
 				stock,
 				tags,
 				brand,

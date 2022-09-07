@@ -5,6 +5,7 @@ import {
 	addProductsFav,
 } from "../store/slices/products/productSlice";
 import { AiOutlineHeart } from "react-icons/ai";
+import { BsStarFill } from "react-icons/bs";
 import {
 	updateFavoriteUser,
 	deleteFavoriteUser,
@@ -60,7 +61,7 @@ export default function Tarjeta({ id, img, tags, name, price, lastProduct }) {
 		<div
 			ref={lastProduct || null}
 			key={id}
-			className="flex justify-start w-[1000px] p-2 border-b-4 "
+			className="flex justify-start w-[1000px] p-2 border-b-4"
 		>
 			<div className="flex flex-col md:flex-row w-[1000px] md:max-w-6xl rounded-lg bg-white shadow-lg">
 				<img
@@ -68,7 +69,7 @@ export default function Tarjeta({ id, img, tags, name, price, lastProduct }) {
 					src={img}
 					alt=""
 				/>
-				<div className="p-6 flex flex-col justify-start">
+				<div className="p-6 flex flex-col justify-start ">
 					<h5 className="text-gray-900 text-2xl font-medium mb-2">
 						{name}
 						{FavoriteProduct?.includes(id) ? (
@@ -87,9 +88,9 @@ export default function Tarjeta({ id, img, tags, name, price, lastProduct }) {
 							</button>
 						)}
 					</h5>
-					<div className="flex">
-					<p className="text-pink-700 text-lg mb-4 font-bold">
-						5
+					<div className="flex ">
+					<p className="text-lg mb-4 font-bold">
+					<BsStarFill color="yellow" size={20}/>
 					</p>
 					</div>
 					<div className="flex justify-between items-center">

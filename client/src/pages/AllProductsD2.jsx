@@ -8,7 +8,7 @@ import { useState } from 'react'
 export default function AllProductsD2() {
   const [page, setPage] = useState(1)
   return (
-    <div>
+    <div className=''>
         <div>
             <Header/>
         </div>
@@ -16,7 +16,7 @@ export default function AllProductsD2() {
         <div className=' w-48'>
             <Filters setPage={setPage} page={page} />
         </div>
-        <div className='ml-56  absolute left-0 top-20'>
+        <div className='ml-56 absolute left-0 top-20'>
             <AllProducts setPage={setPage} page={page}/>
         </div>
         </div>

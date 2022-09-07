@@ -25,7 +25,7 @@ import { ToastContainer } from "react-toastify";
 import CarruselComments from "../components/CarruselComments";
 import Footer from "../components/Footer";
 import specialdiscount from "../assets/specialdiscount.png";
-import freeShipping from "../assets/freeShipping.png";
+import freeShipping from "../assets/freeshipping.png";
 import {
 	deleteFavoriteUser,
 	getUserProfile,
@@ -174,8 +174,25 @@ const ProductDetails = () => {
 									{productDetails.name}
 								</h1>
 
-								{/* <AiFillStar className="text-amber-400" /> */}
-								<p>${productDetails.price}</p>
+								<div>
+									{productDetails.onDiscount ? (
+										<span>
+											<p className="line-through">${productDetails.price}</p>
+											<p className="font-bold">
+												{" "}
+												$
+												{Math.round(
+													productDetails.price -
+														(productDetails.price *
+															productDetails.discountPercentage) /
+															100
+												)}
+											</p>
+										</span>
+									) : (
+										<p>${productDetails.price}</p>
+									)}{" "}
+								</div>
 								<p className="flex gap-2 items-center text-xl drop-shadow-lg shadow-black">
 									<MdOutlineShoppingCart /> Available Stock:{" "}
 									{productDetails.stock}
@@ -250,93 +267,13 @@ const ProductDetails = () => {
 							</div>
 
 							<div>
-								{hasJWT() ? (
-									<form
-										className="block p-6 rounded-lg shadow-lg bg-white w-full"
-										onSubmit={postComment}
-									>
-										<h2 className="text-black font-bold mb-4">
-											Dejanos tu review:
-										</h2>
-										<label className="text-black font-bold">
-											<input
-												className="form-control block
-										w-full
-										px-3
-										py-1.5
-										text-base
-										text-black
-										font-normal
-										bg-white bg-clip-padding
-										border border-solid border-gray-300
-										rounded
-										transition
-										ease-in-out
-										m-0
-										focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-												type="number"
-												placeholder="Puntuanos en un rating del 1 al 5..."
-												min={0}
-												max={5}
-												value={rating}
-												onChange={(e) => setRating(e.target.value)}
-											/>
-										</label>
-										<label className="text-black font-bold">
-											<textarea
-												className="
-										form-control
-										block
-										w-full
-										mt-4
-										px-3
-										py-1.5
-										text-base
-										font-normal
-										text-gray-700
-										bg-white bg-clip-padding
-										border border-solid border-gray-300
-										rounded
-										transition
-										ease-in-out
-										m-0
-										focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-												type="text"
-												value={comment}
-												name="description"
-												required
-												placeholder="Ej: Tu opiniÃ³n..."
-												onChange={(e) => setComment(e.target.value)}
-												rows="5"
-												cols="50"
-											></textarea>
-										</label>
-										<input
-											className=" w-full
-									px-6
-									py-2.5
-									bg-blue-600
-									text-white
-									font-medium
-									text-xs
-									leading-tight
-									uppercase
-									rounded
-									shadow-md
-									hover:bg-blue-700 hover:shadow-lg
-									focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-									active:bg-blue-800 active:shadow-lg
-									transition
-									duration-150
-									ease-in-out
-									mt-4"
-											type="submit"
-										/>
-									</form>
-								) : null}
 
 								<div className="max-w-6xl">
-									<CarruselComments />
+									{
+										productDetails?.comments.length
+										? <CarruselComments comments={productDetails.comments} />
+										: <p> Este producto aún no tiene comentarios</p>
+									}
 								</div>
 							</div>
 						</div>

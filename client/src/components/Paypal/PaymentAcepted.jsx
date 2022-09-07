@@ -1,12 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { paymentAcepted } from "../Paypal/index";
 import logo from "../../assets/logo-dibujo-2.png";
 import { useNavigate } from "react-router-dom";
-// import { emptyCart } from "../../store/slices/guestShoppingCart/guestShoppingCartSlice";
 import { setShoppingUserHistory } from "../../store/slices/admin/thunk";
 import jwt from "jwt-decode";
+import { clearCartShop, getUserProfile } from "../../store/slices/users/thunks";
 import "animate.css";
 
 const PaymentAcepted = () => {
@@ -15,9 +14,6 @@ const PaymentAcepted = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const buyingDate = Date().split(" ");
-	// const monthBuying = (buyingDate.getMonth() + 1).toString();
-	// console.log("monthBuying", monthBuying);
-	// const yearBuying = buyingDate.getUTCFullYear();
 
 	const paypalCart = JSON.parse(
 		window.localStorage.getItem("productsPaypal")
@@ -33,11 +29,9 @@ const PaymentAcepted = () => {
 	console.log("paypalCart", paypalCart);
 
 	useEffect(() => {
-		// const productsId = paypalCart.map((p) => ({ id: p.id, date: Date() }));
-		// dispatch(setShoppingHistory(productsId));
 		dispatch(setShoppingUserHistory(perfil.id, paypalCart));
-		// dispatch(emptyCart());
-		// dispatch(paymentAcepted());
+		dispatch(getUserProfile(perfil.id))
+		dispatch(clearCartShop());
 		return () => {
 			window.localStorage.removeItem("productsPaypal");
 		};

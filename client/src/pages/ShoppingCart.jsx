@@ -3,9 +3,11 @@ import Header from "../components/Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillTrashFill } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { TbShoppingCartDiscount } from "react-icons/tb";
+import { BsCurrencyDollar } from "react-icons/bs";
 import ShoppingCard from "../components/ShoppingCard";
 import { setBuying } from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
-import { FaMoneyCheckAlt } from "react-icons/fa";
+import { FaMoneyCheckAlt, FaShippingFast } from "react-icons/fa";
 import {
 	deleteProductCart,
 	clearCartShop,
@@ -29,8 +31,9 @@ import assignPoints from "./Rgbpoint";
 const ShoppingCart = () => {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.user);
-	const { cart, buying } = useSelector((state) => state.guestShoppingCart);
+	const { buying } = useSelector((state) => state.guestShoppingCart);
 	const [products, setProducts] = useState([]);
+	console.log("products", products);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [finalPrice, setFinalPrice] = useState(0);
 
@@ -124,7 +127,7 @@ const ShoppingCart = () => {
 	};
 
 	const HandleClickBuy = async () => {
-		if (userProfile === null || Boolean(!Object.keys(userProfile).length)) {
+		if (user === null || Boolean(!Object.keys(user).length)) {
 			return youAreUnloggedProducts();
 		}
 
@@ -140,17 +143,19 @@ const ShoppingCart = () => {
 		dispatch(setBuying(true));
 		const { data } = await checkoutPaypal(cartBuy);
 		window.localStorage.setItem("productsPaypal", JSON.stringify(products));
+		const point = assignPoints(totalPrice);
+		dispatch(setUserPoint(point));
 		window.location.href = data;
 		dispatch(setBuying(false));
-
-		const point = assignPoints(totalPrice);
-		console.log(point);
-		// let point ={}
-		// if(totalPrice > 100 && totalPrice < 200){
-		// 	 point = {'RGBpoint':63}
-
-		dispatch(setUserPoint(point));
 	};
+
+
+
+	const costShipping = (num) => {
+	let widthCost =	products.filter(el => el.freeShipping === false) 
+		 num =	Object.keys(widthCost).length
+		return num * 2
+	}
 
 	return (
 		<div>
@@ -167,7 +172,7 @@ const ShoppingCart = () => {
 				<>
 					{!products?.length ? (
 						<>
-							<div className="flex flex-col items-center justify-center gap-2">
+							<div className="flex flex-col items-center justify-center gap-2 dark:bg-gray-800">
 								<h1 className="flex gap-2 text-4xl justify-center font-bold text-gray-400 mt-10 ml-12">
 									Your <AiOutlineShoppingCart /> its empty!{" "}
 								</h1>
@@ -177,9 +182,9 @@ const ShoppingCart = () => {
 				</>
 			)}
 			{products?.length !== 0 ? (
-				<div className="flex flex-row justify-around items-start border-2 m-1">
-					<section className="flex flex-row justify-around items-center">
-						<div className="mt-4">
+				<div className="flex flex-row justify-around dark:bg-gray-600 items-start border-2 dark:border-none m-1">
+					<section className="flex flex-row justify-around items-center dark:bg-gray-600">
+						<div className="mt-4 ">
 							{products?.map((p, i) => (
 								<ShoppingCard
 									key={p.id}
@@ -192,6 +197,7 @@ const ShoppingCart = () => {
 									price={p.price}
 									onDiscount={p.onDiscount}
 									discountPercentage={p.discountPercentage}
+									freeShipping={p.freeShipping}
 									stock={p.stock}
 									addUnits={() => addUnits(p.id)}
 									subUnits={() => subUnits(p.id)}
@@ -227,13 +233,21 @@ const ShoppingCart = () => {
 								Buy Now!
 							</button>
 
-							<h2 className="flex flex-col justify-center items-center bg-slate-100 rounded-lg p-3">
-								🛒 Total Price:
-								<span className="text-green-500 underline">${totalPrice}</span>
+							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
+							<BsCurrencyDollar/> Total price:
+								<span className="text-pink-700 underline">${Math.round(totalPrice)}</span>
 							</h2>
-							<h2 className="flex flex-col justify-center items-center bg-slate-100 rounded-lg p-3">
-								🛒 For you:
-								<span className="text-green-500 underline">${finalPrice}</span>
+							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
+							<TbShoppingCartDiscount/> Total with discounts:
+								<span className="text-green-500 underline">${Math.round(finalPrice)}</span>
+							</h2>
+							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
+							<FaShippingFast/> Total width shipping
+							
+								<span className="text-blue-700 dark:text-blue-500 underline">
+									${Math.round(finalPrice) + costShipping()}
+								</span>
+									
 							</h2>
 						</div>
 					)}

@@ -9,7 +9,7 @@ function AwardsSection() {
 	const [products, setProducts] = useState([]);
 	const user = useSelector((state) => state.user);
 	
-	const theAlert = () =>
+	const theAlert = (id, points, user ) =>
 		Swal.fire({
 			title: "Are you sure?",
 			text: "You want to redeem your points?",
@@ -20,20 +20,38 @@ function AwardsSection() {
 			confirmButtonText: "Yes, I want to change my points",
 		}).then((result) => {
 			if (result.isConfirmed) {
-				Swal.fire({
-					title: "CONGRATS!",
-					imageUrl: "https://th.bing.com/th/id/R.ab7a973855cb77710e3a08b09100c9ad?rik=O1xE4Nui2z153w&pid=ImgRaw&r=0",
-					imageWidth: 300,
-					imageHeight: 200,
-					icon: 'success',
-					timer: 2000,
-					timerProgressBar: true,
-				});
+				const body = {
+					points,
+					userId: user,
+					id
+				}
+				axios.put('awards/claim-award', body )
+				.then(
+					(response) => {
+						Swal.fire({
+							title: "CONGRATS!",
+							text: "Your prize in comming!",
+							icon: 'success',
+							timer: 2000,
+							timerProgressBar: true,
+						});
+					}
+				)
+				.catch (
+					(error) => {
+						console.log(error)
+					}
+				)
+
 			}
 		});
 
-	const handleClick = (id) => {
-		theAlert(id);
+	const handleClick = (id, points) => {
+		if (user.user?.RGBpoint < points) {
+			return alert('No tienes suficientes puntos')
+		} else {
+			theAlert(id, points, user.user?.id);
+		}
 	};
 
 	
@@ -49,14 +67,14 @@ function AwardsSection() {
 	return (
 		<div>
 			<Header />
-			<div className="grid lg:grid-cols-4 justify-center p-4 bg-white dark:bg-gray-600 border-2">
+			<div className="grid lg:grid-cols-4 justify-center p-3 bg-white dark:bg-gray-600 border-2 ">
 				{products?.map((element) => (
 					<div
 						key={element.id}
-						className="max-w-xs mx-4 mb-2 rounded-lg shadow-lg bg-pink-700 p-2"
+						className="max-w-xs mx-4 mb-2 rounded-lg shadow-lg bg-white"
 					>
 						<img
-							className="w-full h-48 shadow-xl"
+							className="w-full h-48 shadow-2xl bg-pink-700 rounded-t-lg"
 							src={element.img}
 							alt="product"
 						/>
@@ -66,7 +84,7 @@ function AwardsSection() {
 							</h4>
 							<p className="leading-normal text-yellow-500 font-semibold">
 								{element.points} points
-								<button onClick={(e)=> handleClick(e)} className="ml-3 bg-blue-400 text-black rounded-md p-1 hover:font-bold hover:bg-yellow-300 hover:scale-95">
+								<button onClick={(e)=> handleClick(element.id, element.points)} className="ml-3 bg-blue-400 text-black rounded-md p-1 hover:font-bold hover:bg-yellow-300 hover:scale-95">
 									Exchange
 								</button>
 							</p>

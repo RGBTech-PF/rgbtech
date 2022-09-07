@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
     },
     specifications: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: true
     },
     img:{
       type: DataTypes.STRING

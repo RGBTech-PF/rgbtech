@@ -43,7 +43,7 @@ module.exports = {
 			);
 
 			const response = await axios.post(
-				`${PAYPAL_API_URL}/v2/checkout/orders`,
+				`${PAYPAL_API_URL}v2/checkout/orders`,
 				order,
 				{
 					headers: {

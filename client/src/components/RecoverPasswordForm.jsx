@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { sendEmail } from "../store/slices/users/thunks";
 import { emailConfirmatedPassword } from "./Notifications";
 
@@ -8,7 +9,7 @@ export default function RecoverPasswordForm() {
 	const [input, setInput] = useState({
 		email: "",
 	});
-
+	const navigate = useNavigate()
 	const dispatch = useDispatch();
 
 	const handleOnchange = (e) => {
@@ -23,6 +24,7 @@ export default function RecoverPasswordForm() {
 		console.log(input.email, "bhsdj");
 		dispatch(sendEmail({ email: input.email }));
         emailConfirmatedPassword()
+				navigate('/')
 	};
 
 	return (

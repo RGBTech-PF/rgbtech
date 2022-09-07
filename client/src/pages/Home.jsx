@@ -17,7 +17,7 @@ const Home = () => {
 
 	useEffect(() => {
 		if (products.length) return;
-		dispatch(getAllProducts(1));
+		// dispatch(getAllProducts(1));
 		setShowModal(true);
 	}, []);
 

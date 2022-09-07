@@ -13,7 +13,7 @@ import {
 export const searchNameAction = (input) => {
 	return async (dispatch) => {
 		try {
-			const products = await axios.get(`products/name-list?name=${input}`);
+			const products = await axios.get(`products/name-list`);
 			dispatch(searchName(products.data));
 		} catch (error) {
 			console.error(error);

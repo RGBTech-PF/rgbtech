@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "../../components/Modal/Modal";
 import { FcCancel } from "react-icons/fc";
-import { FaCheckCircle, FaEye } from "react-icons/fa";
-import defaultImage from "../../assets/defaultImage.png";
-import { editUserProfile } from "../../store/slices/users/thunks";
-import { userUpdatedNotifaction } from "../../components/Notifications";
-import { RiH2 } from "react-icons/ri";
+import axios from "axios";
+import { FaCheckCircle } from "react-icons/fa";
+import {
+	userUpdatedNotifaction,
+	errorNotification,
+} from "../../components/Notifications";
+import { getUserProfile } from "../../store/slices/users/thunks";
+import loadingGif from "../../assets/loading.gif";
 
 const ModifyProfile = ({ closeModal }) => {
 	const dispatch = useDispatch();
 	const user = JSON.parse(window.localStorage.getItem("user"));
-	const [showpassword, setShowPassword] = useState("password");
-	console.log("user", user);
-
-	const [previewSource, setPreviewSource] = useState(defaultImage);
+	const [previewSource, setPreviewSource] = useState(user.profilePhoto);
+	const [loading, setLoading] = useState(false);
 	const [input, setInput] = useState({
 		user: user.user,
 		mail: user.mail,
@@ -44,33 +45,59 @@ const ModifyProfile = ({ closeModal }) => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
+
 		const postFinal = {
 			id: user.id,
 			user: input.user,
 			mail: input.mail,
-			profilePhoto: previewSource,
+			profilePhoto: previewSource || null,
 		};
 
-		dispatch(editUserProfile(postFinal));
+		setLoading(true);
+		axios
+			.put("users/modifyUser", postFinal)
+			.then((response) => {
+				console.log("response", response);
+				setPreviewSource("");
+				window.localStorage.setItem(
+					"user",
+					JSON.stringify({
+						...user,
+						user: response.data.user,
+						mail: response.data.mail,
+						profilePhoto: response.data.profilePhoto,
+					})
+				);
+				setLoading(false);
+				closeModal(false);
+				userUpdatedNotifaction();
+				dispatch(getUserProfile(user.id));
+			})
+			.catch((error) => {
+				setLoading(false);
+				error.response.status === 400
+					? errorNotification("Empty fields to complete ❌")
+					: null;
 
-		setPreviewSource("");
-		closeModal(false);
-		userUpdatedNotifaction();
+				error.response.status === 401 && error.response.data.msg === "user"
+					? errorNotification("El usuario ya existe ❌")
+					: null;
+
+				error.response.status === 401 && error.response.data.msg === "mail"
+					? errorNotification("El correo ya existe ❌")
+					: null;
+			});
 	}
-
-	// const userData = JSON.parse(window.localStorage.getItem("user"));
-	// console.log("userData", userData);
 
 	return (
 		<Modal tailwindCSS={"bg-[#a156f6] bg-opacity-100"}>
 			<form
-				encType="multipart/form-data"
 				action=""
 				onSubmit={(e) => handleSubmit(e)}
 				className="flex flex-col space-y-5"
 			>
 				<div className="flex flex-col gap-3 text-white font-bold overflow-auto h-80 ">
-					<label className="font-semibold bg-" htmlFor="user">
+					<label className="font-semibold" htmlFor="user">
 						Username:
 					</label>
 					<input
@@ -81,30 +108,6 @@ const ModifyProfile = ({ closeModal }) => {
 						onChange={(e) => handleChange(e)}
 						className="ml-2 rounded-xl text-black p-1 mx-4"
 					/>
-					{/* <label className="font-semibold" htmlFor="">
-						Password:
-					</label>
-					<input
-						type={showpassword}
-						name="password"
-						className="ml-2 rounded-xl text-black p-1 mx-4"
-						value={input.password}
-						onChange={(e) => handleChange(e)}
-						required
-					/> */}
-					{/* <div className="flex justify-start items-center text-xs">
-						<input
-							type="checkbox"
-							className="rounded-xl text-black mx-2"
-							onClick={() => {
-								showpassword === "password"
-									? setShowPassword("text")
-									: setShowPassword("password");
-							}}
-						/>
-						Show password
-						<FaEye className="ml-2" />
-					</div> */}
 					<label className="font-semibold" htmlFor="">
 						Email:
 					</label>
@@ -166,9 +169,13 @@ const ModifyProfile = ({ closeModal }) => {
 					<button
 						type="submit"
 						className="flex gap-2 items-center px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out"
-						onClick={(e) => handleSubmit(e)}
 					>
-						<FaCheckCircle className="h-5 w-5" /> Accept Changes
+						{loading ? (
+							<img className="h-4 w-4" src={loadingGif} alt="loading" />
+						) : (
+							<FaCheckCircle className="h-5 w-5" />
+						)}
+						Accept Changes
 					</button>
 				</div>
 			</form>

@@ -18,8 +18,12 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       user: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         allowNull: false,
+      },
+      profilePhoto: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     }, {
         timestamps: false

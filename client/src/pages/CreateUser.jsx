@@ -1,22 +1,35 @@
 import React, { useState } from "react";
-import { postUser } from "../store/slices/users/thunks.js";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-dibujo-2.png";
 import Logo from "../components/Logo/Logo.jsx";
-import { accCreatedNotification } from "../components/Notifications.js";
-import { AiOutlineClose } from "react-icons/ai";
+import {
+	accCreatedNotification,
+	errorNotification,
+} from "../components/Notifications.js";
+import { IoHomeSharp } from "react-icons/io5";
+import loadingGif from "../assets/loading.gif";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 const createUser = () => {
-	const [previewSource, setPreviewSource] = useState("");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const [previewSource, setPreviewSource] = useState("");
+	const [loading, setLoading] = useState(false);
 	const [input, setInput] = useState({
 		user: "",
 		password: "",
 		mail: "",
 		profilePhoto: "",
 	});
+
+	function handleChange(e) {
+		setInput({
+			...input,
+			[e.target.name]: e.target.value,
+		});
+	}
 
 	const previewFile = (file) => {
 		const reader = new FileReader();
@@ -32,15 +45,9 @@ const createUser = () => {
 		previewFile(file);
 	};
 
-	function handleChange(e) {
-		setInput({
-			...input,
-			[e.target.name]: e.target.value,
-		});
-	}
-
 	function handleSubmit(e) {
 		e.preventDefault();
+
 		const postFinal = {
 			user: input.user,
 			password: input.password,
@@ -48,16 +55,34 @@ const createUser = () => {
 			profilePhoto: previewSource,
 		};
 
-		dispatch(postUser(postFinal));
-		setInput({
-			user: "",
-			password: "",
-			mail: "",
-			profilePhoto: "",
-		});
-		setPreviewSource("");
-		navigate("/");
-		accCreatedNotification();
+		setLoading(true);
+
+		axios
+			.post("users/register", postFinal)
+			.then((response) => {
+				console.log("response", response);
+				setPreviewSource("");
+				navigate("/");
+				setInput({
+					user: "",
+					password: "",
+					mail: "",
+					profilePhoto: "",
+				});
+				accCreatedNotification();
+			})
+			.catch((error) => {
+				setLoading(false);
+				error.response.status === 400
+					? errorNotification("Empty fields to complete ❌")
+					: null;
+				error.response.status === 401 && error.response.data.msg === "user"
+					? errorNotification("The user exists in db ❌")
+					: null;
+				error.response.status === 401 && error.response.data.msg === "mail"
+					? errorNotification("The email exists in db ❌")
+					: null;
+			});
 	}
 
 	return (
@@ -67,24 +92,24 @@ const createUser = () => {
 					<div className="p-4 py-6 text-white bg-blue-300 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
 						<div className="my-3 text-4xl font-bold tracking-wider text-center">
 							<img src={logo} alt="" />
-							<Logo />
+							<Link to="/">
+								<Logo />
+							</Link>
 							<p className="text-lg">Best products here!</p>
 						</div>
 					</div>
-					<div className="absolute right-80 mt-3">
+					<div className="absolute left-auto ml-4 mt-3">
 						<Link to="/">
-									<button
-										className=" rounded-full"
-										// onClick={() => closeModal()}
-										>
-										<AiOutlineClose size={30} />
-									</button>
+							<button className=" rounded-full">
+								<IoHomeSharp
+									size={30}
+									className="bg-sky-400 rounded-full text-white p-0.5 hover:scale-105 duration-200"
+								/>
+							</button>
 						</Link>
-								</div>
+					</div>
 					<div className="p-5 bg-white md:flex-1">
-						
 						<div className="flex items-stretch">
-						
 							<div>
 								<h3 className="my-4 text-2xl font-semibold text-gray-700">
 									Create Account
@@ -158,14 +183,14 @@ const createUser = () => {
 								</p>
 							</div>
 							{/*------------------------------------------PHOTO------------------------------------------------*/}
-							<div className="flex flex-col space-y-1">
+							<div className="flex flex-col justify-center space-y-1">
 								<div className="flex items-center justify-between">
 									<label className="text-sm font-semibold text-gray-500">
 										Photo
 									</label>
 								</div>
 								<label
-									className="flex space-x-2 justify-center m-0 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out hover:cursor-pointer"
+									className="flex space-x-2 justify-center items-center w-fit m-0 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out hover:cursor-pointer"
 									htmlFor="files"
 								>
 									Select file
@@ -196,20 +221,32 @@ const createUser = () => {
 								</div>
 							</div>
 							<div>
-											<button
-												type="submit"
-												className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-300 rounded-md shadow hover:bg-blue-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
-												onClick={(e) => {
-													handleSubmit(e);
-												}}
-											>
-												Sing up
-											</button>
-										</div>
+								<button
+									type="submit"
+									className="flex justify-center items-center w-full gap-2 px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-300 rounded-md shadow hover:bg-blue-500 focus:outline-none focus:ring-blue-200 focus:ring-4"
+								>
+									{loading ? (
+										<img className="h-4 w-4" src={loadingGif} alt="loading" />
+									) : null}
+									Sing up
+								</button>
+							</div>
 						</form>
 					</div>
 				</div>
 			</div>
+			<ToastContainer
+				position="top-right"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				false
+			/>
 		</div>
 	);
 };

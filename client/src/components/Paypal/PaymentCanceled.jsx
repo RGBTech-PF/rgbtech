@@ -15,7 +15,7 @@ const PaymentCanceled = () => {
 					src={logo}
 					alt="logo-rgbtech"
 				/>
-				😳 Oops, your purchase was canceled!
+				Oops, your purchase was canceled!
 			</div>
 			<button
 				type="button"

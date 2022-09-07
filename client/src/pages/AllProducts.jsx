@@ -31,6 +31,7 @@ export default function AllProducts({ setPage, page }) {
 				if (entries[0].isIntersecting) {
 					if (response.pageNumbers > page) {
 						setTimeout(() => {
+							console.log('visible')
 							setPage(page + 1);
 						}, 1000);
 					}
@@ -50,11 +51,14 @@ export default function AllProducts({ setPage, page }) {
 	}, []);
 
 	useEffect(() => {
-		console.log(page);
 		setLoading(true);
-		dispatch(getAllProducts(page, response?.nextPage));
-		setLoading(false);
-	}, [page]);
+		console.log(response?.nextPage)
+		if(!response?.nextPage) {return
+		setLoading(false)
+		}
+		else {dispatch(getAllProducts(page, response?.nextPage));
+		setLoading(false);}
+	}, [page, response]);
 
 	return (
 		<div>

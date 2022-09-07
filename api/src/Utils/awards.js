@@ -9,8 +9,8 @@ const Products = [
       width: "11.5cm"
     }
     ],
-    img: "https://http2.mlstatic.com/D_NQ_NP_854384-MLA45113663302_032021-O.webp",
-    stock: 0,
+    img: "https://images-ext-2.discordapp.net/external/zD61UM2_75NzukIrvweHIzIukjGddQztku3sxRkOc10/https/res.cloudinary.com/ddroxn7iv/image/upload/v1662473130/RGBtech/Awards/Support_supports_cell_phone_zxiwv1.png?width=427&height=427",
+    stock: 100,
   },
   {
     name: "led ring light",
@@ -22,7 +22,7 @@ const Products = [
       itIsRechargeable: "No"
     }
     ],
-    img: "https://http2.mlstatic.com/D_NQ_NP_654445-MLA43815950610_102020-O.webp",
+    img: "https://res.cloudinary.com/ddroxn7iv/image/upload/v1662473130/RGBtech/Awards/led_ring_light_e9lbhf.png",
     stock: 200,
   },
   {
@@ -37,7 +37,7 @@ const Products = [
       waterproof: "Yes"
     }
     ],
-    img: "https://http2.mlstatic.com/D_NQ_NP_745358-MLA45449928637_042021-O.webp",
+    img: "https://res.cloudinary.com/ddroxn7iv/image/upload/v1662473130/RGBtech/Awards/Headphones_in-ear_wireless_F9-5_mvq9p0.png",
     stock: 200,
   },
   {
@@ -49,7 +49,7 @@ const Products = [
    microphone: "Yes",
    washable:"Yes"}
 ],
-  img: "https://m.media-amazon.com/images/I/8130jrwWWWL._AC_UX522_.jpg",
+  img: "https://res.cloudinary.com/ddroxn7iv/image/upload/v1662488432/RGBtech/Awards/beanie_with_bluetooth_eurpjo.png",
   stock: 543,
   freeShipping: true
 },
@@ -61,7 +61,7 @@ const Products = [
    compatibleDevices: "Headphones",
    material: "Rubber Glass Polycarbonate Wood"}
 ],
-  img: "https://m.media-amazon.com/images/I/616qQCQHs2L._AC_SX425_.jpg",
+  img: "https://res.cloudinary.com/ddroxn7iv/image/upload/v1662489327/RGBtech/Awards/headphone_stand_lug1hv.png",
   stock: 342,
   freeShipping: true
 },
@@ -73,7 +73,7 @@ const Products = [
    USB: "3.0",
    dualSlot: "SD y TF + 3 hubs USB"}
 ],
-  img: "https://images-na.ssl-images-amazon.com/images/I/81GUMFyIxqL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+  img: "https://res.cloudinary.com/ddroxn7iv/image/upload/v1662473130/RGBtech/Awards/SABRENT_Hub_USB-C_3.0_imtbwz.png",
   stock: 168,
   freeShipping: true
 },
@@ -85,9 +85,31 @@ const Products = [
    LightSourceType: "LED",
    PowerSource: "Corded Electric"}
 ],
-  img: "https://cdn.shopify.com/s/files/1/0599/5262/7880/products/1_7f9002a1-0e33-494d-80b7-55cde90cf9da_700x700.jpg?v=1636148746",
+  img: "https://res.cloudinary.com/ddroxn7iv/image/upload/v1662473131/RGBtech/Awards/led_strip_lights_n7lzdd.png",
   stock: 93,
   freeShipping: true
+},
+{
+  name: "RGBtech t-shirt",
+  points: 150,
+  description: "take with you the RGBtech style",
+  specifications: [{
+    color: "withe"
+  }
+  ],
+  img: "https://res.cloudinary.com/ddroxn7iv/image/upload/v1662488445/RGBtech/Awards/rgbremera_zsox8t.png",
+  stock: 12,
+},
+{
+  name: "RGBtech t-shirt",
+  points: 150,
+  description: "take with you the RGBtech style",
+  specifications: [{
+    color: "withe"
+  }
+  ],
+  img: "https://res.cloudinary.com/ddroxn7iv/image/upload/v1662488444/RGBtech/Awards/Remera_astro_ceymen.png",
+  stock: 12,
 }
 ]
 

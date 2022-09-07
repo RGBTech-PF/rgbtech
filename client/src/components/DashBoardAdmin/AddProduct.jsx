@@ -1,27 +1,41 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { productsAction, editProductAction } from "../../store/slices/admin/thunk";
+import {
+	productsAction,
+	editProductAction,
+	tagsAndBrandsAction,
+} from "../../store/slices/admin/thunk";
 
+export default function AddPoduct() {
+	const [form, setForm] = useState({ tag: [] });
+	const { tagsAndBrands } = useSelector((state) => state.admin);
 
-export default function UpdateProduct() {
-	const [form, setForm] = useState({});
-	const [specificationsInput, setSpecificationsInput] = useState([]);
-	const { products } = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
 
-	
+	const handleChange = (event) => {
+		const { name, value } = event.target;
 
-	const handleSelect = (e) => {
-		setSpecificationsInput([]);
-		const { value } = e.target;
-		const product = products.find((element) => element.id === value);
-		setForm(product);
-		const specifications = product.specifications[0];
-		const inputs = [];
-		for (const property in specifications) {
-			inputs.push({ title: property, description: specifications[property] });
+		if (name === "tag" && form.tag?.length >= 4) {
+			return null;
+		} else if (name === "tag") {
+			if (form.tag?.includes(value)) return null;
+			setForm({
+				...form,
+				[name]: [...form?.tag, value],
+			});
 		}
-		setSpecificationsInput(inputs);
+	};
+
+	const handleDelete = (event) => {
+		const tag = form.tag.filter((tag) => {
+			console.log("TAG", tag);
+			return tag !== event.target.value;
+		});
+		return setForm({
+			...form,
+			tag,
+		});
 	};
 
 	const handleOnChange = (e) => {
@@ -33,10 +47,30 @@ export default function UpdateProduct() {
 	};
 
 	const handleOnSubmit = (e) => {
-		console.log(form);
 		e.preventDefault();
-		dispatch(editProductAction(form));
-		setForm({});
+		const tagsID = tagsAndBrands.tags
+			.filter((tag) => {
+				return form.tag.includes(tag.name);
+			})
+			.map((tag) => {
+				return tag.id;
+			});
+		const product = {
+			name: form.name,
+			price: form.price,
+			description: form.description,
+			img: form.img,
+			stock: form.stock,
+			onDiscount: form.onDiscount,
+			discountPercentage: form.discountPercentage || 0,
+			freeShipping: form.freeShipping,
+			brand: form.brand,
+			tags: tagsID,
+		};
+		axios
+			.post("/products", product)
+			.then((response) => setForm({ tag: [] }))
+			.catch((error) => console.log(error));
 	};
 
 	useEffect(() => {
@@ -45,27 +79,19 @@ export default function UpdateProduct() {
 	useEffect(() => {
 		dispatch(productsAction());
 	}, []);
+	useEffect(() => {
+		dispatch(tagsAndBrandsAction());
+	}, []);
 
 	return (
-		<div className="justify-center w-[500px]">
-			<label className="font-bold text-gray-700">Select product :</label>
-			<select className="w-full border border-gray-800 rounded-md" 
-					onChange={handleSelect} 
-					name="products"
-					>
-				{products
-					? products?.map((element) => (
-							<option value={element.id}>{element.name}</option>
-					  ))
-					: null}
-			</select>
+		<div className="justify-center w-[500px] flex text-xl">
 			<div className=" flex justify-center ">
 				<div className="flex space-y-8">
 					<div className="w-full ">
 						<form onSubmit={handleOnSubmit} className="bg-white rounded-md p-5">
 							<div>
-								<h1 className="text-gray-800 font-bold text-2xl mb-1">
-									Update product
+								<h1 className="text-gray-800 font-bold text-2xl mb-1 underline">
+									Add product
 								</h1>
 								<br />
 								<label> Name </label>
@@ -76,7 +102,7 @@ export default function UpdateProduct() {
 										name="name"
 										type="text"
 										value={form.name}
-										placeholder={form.name}
+										placeholder="Add name"
 									/>
 								</div>
 								<label> Price </label>
@@ -89,7 +115,7 @@ export default function UpdateProduct() {
 										}
 										type="number"
 										value={form.price}
-										placeholder={form.price}
+										placeholder="Add price"
 									/>
 								</div>
 								<label> Description </label>
@@ -103,17 +129,18 @@ export default function UpdateProduct() {
 										onChange={(e) =>
 											setForm({ ...form, description: e.target.value })
 										}
-										placeholder={form.description}
+										placeholder="Add description"
 									></textarea>
 								</div>
+								<label> Image </label>
 								<div className="flex items-center border-2 mb-2 py-2 px-3 rounded-2xl">
 									<input
 										className=" pl-2 w-full outline-none border-none"
 										name="img"
+										type="text"
 										value={form.img}
 										onChange={(e) => setForm({ ...form, img: e.target.value })}
-										type="text"
-										placeholder={form.img}
+										placeholder="Add image"
 									/>
 								</div>
 								<label>Stock</label>
@@ -126,15 +153,15 @@ export default function UpdateProduct() {
 										onChange={(e) =>
 											setForm({ ...form, stock: e.target.value })
 										}
-										placeholder={form.stock}
+										placeholder="Add stock"
 									/>
 								</div>
-								<label>Discount</label>
+
 								<div className="flex items-center border-2 mb-2 py-2 px-3 rounded-2xl ">
 									<select name="onDiscount" onChange={handleOnChange}>
-										<option value="placeholder">In discount?</option>
+										<option value="placeholder">On Discount?</option>
 										<option value={false}>No</option>
-										<option value={true}>Sí</option>
+										<option value={true}>Yes</option>
 									</select>
 								</div>
 								{form.onDiscount == "true" ? (
@@ -153,32 +180,44 @@ export default function UpdateProduct() {
 								) : null}
 
 								<div className="flex items-center border-2 mb-2 py-2 px-3 rounded-2xl ">
-									{/* <h1 className="ml-2 text-gray-400">Free Shipping</h1> */}
 									<select name="freeShipping" onChange={handleOnChange}>
 										<option value="placeholder">Free Shipping?</option>
 										<option value={false}>No</option>
-										<option value={true}>Sí</option>
+										<option value={true}>Yes</option>
 									</select>
 								</div>
-								{/* <label>Specifications</label>
-							<div>
-								{
-									specificationsInput?.map((specification, index) => {
-										return (
-										<div key={index} className="flex items-center border-2 mb-2 py-2 px-3 rounded-2xl ">
-											<input type='text' placeholder={specification.title} value={specification.title}></input>
-											<input type='text' placeholder={specification.description} value={specification.description}></input>
-										</div>
-										)
-									})
-								}
-							</div>
-							<input type="button" onClick={() => setSpecificationsInput([...specificationsInput, {title:'', description:''}])} />
-							 */}
+								<label> Tags </label>
+								<div className="flex items-center border-2 mb-2 py-2 px-3 rounded-2xl ">
+									<select name="tag" onChange={handleChange}>
+										{tagsAndBrands?.tags?.map((ta) => (
+											<option value={ta.name}>{ta.name} </option>
+										))}
+									</select>
+								</div>
+								<div className="grid m-3">
+									{form.tag?.map((el) => (
+										<button
+											type="button"
+											value={el}
+											onClick={handleDelete}
+											className="border-2 my-2 hover:bg-red-500 hover:text-white"
+										>
+											{el}
+										</button>
+									))}
+								</div>
+								<label> Brands </label>
+								<div className="flex items-center border-2 mb-2 py-2 px-3 rounded-2xl ">
+									<select name="brand" onChange={handleOnChange}>
+										{tagsAndBrands?.brands?.map((bra) => (
+											<option value={bra.id}>{bra.name}</option>
+										))}
+									</select>
+								</div>
 							</div>
 							<button
 								type="submit"
-								className="block w-full bg-zinc-600 mt-5 py-2 rounded-2xl hover:bg-zinc-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2"
+								className="block w-full bg-zinc-600 mt-5 py-2 rounded-2xl hover:bg-zinc-700 hover:-translate-y-1 transition-all duration-300 text-white font-semibold mb-2"
 							>
 								Updated
 							</button>

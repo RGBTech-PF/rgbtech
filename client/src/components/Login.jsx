@@ -1,10 +1,10 @@
-import React,{ useEffect ,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsGoogle } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-dibujo-2.png";
 import { AiOutlineClose } from "react-icons/ai";
 import { useForm } from "../hooks/useForm";
-import LoguinGoogle from "../components/Buttons/LoguinGoogle"
+import LoguinGoogle from "../components/Buttons/LoguinGoogle";
 
 const initialForm = {
 	user: "",
@@ -37,7 +37,6 @@ const Login = ({ closeModal }) => {
 									<p className="flex flex-col items-center justify-center mt-10 text-center">
 										<span>Don't have an account?</span>
 										<span className="text-xl hover:text-blue-500">
-											
 											<Link
 												to="/createUser"
 												style={{ textDecoration: "underline" }}
@@ -45,7 +44,6 @@ const Login = ({ closeModal }) => {
 											>
 												Get Started!
 											</Link>
-											
 										</span>
 									</p>
 								</div>
@@ -53,7 +51,7 @@ const Login = ({ closeModal }) => {
 									<button
 										className=" rounded-full"
 										onClick={() => closeModal()}
-										>
+									>
 										<AiOutlineClose size={30} />
 									</button>
 								</div>
@@ -130,7 +128,7 @@ const Login = ({ closeModal }) => {
 													href="#"
 													className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border  rounded-md group focus:outline-none"
 												>
-													<LoguinGoogle />
+													<LoguinGoogle closeModal={closeModal} />
 												</a>
 												{/* <div className="flex justify-center gap-6">
 													<button

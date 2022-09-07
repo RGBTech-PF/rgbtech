@@ -40,17 +40,6 @@ export const confirmationEmail = (user) => {
 	};
 };
 
-export const editUserProfile = (userUpdated) => {
-	return async () => {
-		try {
-			await axios.put("users/modifyUser", userUpdated);
-			console.log("me hice el PUT", userUpdated);
-		} catch (e) {
-			console.error(e);
-		}
-	};
-};
-
 export const getUserProfile = (id) => {
 	return async (dispatch) => {
 		try {
@@ -207,7 +196,7 @@ export const sendEmail = (email) => {
 	console.log(email, "action");
 	return async (dispatch) => {
 		try {
-			const response = await axios.post("/recoverPassword", email );
+			const response = await axios.post("/recoverPassword", email);
 			return response;
 		} catch (error) {
 			console.log(error);

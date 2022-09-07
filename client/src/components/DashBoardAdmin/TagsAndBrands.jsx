@@ -6,15 +6,9 @@ import {
 	changeTagStateAction,
 } from "../../store/slices/admin/thunk";
 import Swal from "sweetalert2";
-import Modal from "../Modal/Modal";
-import ModalTags from "./ModalTags";
-import ModalBrands from "./ModalBrands";
-
-
 
 function TagsAndBrands() {
 	const { tagsAndBrands } = useSelector((state) => state.admin);
-	const [edit, setEdit] = useState(false)
 	const dispatch = useDispatch();
 
 	const theAlertBrand = (id, disabled) =>
@@ -48,7 +42,6 @@ function TagsAndBrands() {
 				Swal.fire("Deleted!", "Your tag has been deleted.", "success");
 			}
 		});
-		
 
 	const removeTag = (id, disabled) => {
 		theAlertTag(id, disabled);
@@ -57,21 +50,12 @@ function TagsAndBrands() {
 		theAlertBrand(id, disabled);
 	};
 
-	
-
-
 	useEffect(() => {
 		dispatch(tagsAndBrandsAction());
 	}, []);
 
 	return (
-		<div className="border-collapse w-[500px] mx-10">
-			{edit && (
-				<Modal functionModal={() => dispatch(setEdit(false))}>
-					<ModalTags />
-				</Modal>
-			)}
-			
+		<div className="flex border-collapse w-[500px] mx-10">
 			<table className="border-collapse w-[500px]">
 				<thead>
 					<tr>
@@ -94,15 +78,6 @@ function TagsAndBrands() {
 										{element.name}
 									</td>
 									<td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-										
-										<button
-											onClick={() => setEdit(true)}
-											className="text-blue-500 font-bold hover:underline w-full h-full hover:scale-110"
-										>
-											Edit
-										</button>
-									</td>
-									<td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
 										<button
 											onClick={() => removeTag(element.id, element.disabled)}
 											className="text-blue-500 font-bold hover:underline w-full h-full hover:scale-110"
@@ -116,11 +91,6 @@ function TagsAndBrands() {
 				</tbody>
 			</table>
 			<table className="border-collapse w-[500px]">
-			{edit && (
-				<Modal functionModal={() => dispatch(setEdit(false))}>
-					<ModalBrands />
-				</Modal>
-			)}
 				<thead>
 					<tr>
 						<th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
@@ -142,19 +112,8 @@ function TagsAndBrands() {
 										{element.name}
 									</td>
 									<td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-										
 										<button
-											onClick={() => setEdit(true)}
-											className="text-blue-500 font-bold hover:underline w-full h-full hover:scale-110"
-										>
-											Edit
-										</button>
-									</td>
-									<td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-										<button
-											onClick={() =>
-												removeBrand(element.id, element.disabled)
-											}
+											onClick={() => removeBrand(element.id, element.disabled)}
 											className="text-blue-500 font-bold hover:underline w-full h-full hover:scale-110"
 										>
 											Remove

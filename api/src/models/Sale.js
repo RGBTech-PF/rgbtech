@@ -33,6 +33,11 @@ module.exports = (sequelize) => {
     year: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    commented : {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
     }
   },{
     timestamps: false

@@ -41,12 +41,12 @@ const testComments = [
     	},
     ];
 
-function CarruselComments() {
+function CarruselComments({comments}) {
 	return (
 		<div className="">
 			<Swiper
 				slidesPerView={3}
-				spaceBetween={-20}
+				spaceBetween={-22}
 				loop={true}
 				navigation={true}
 				pagination={{
@@ -59,7 +59,7 @@ function CarruselComments() {
 				modules={[Autoplay, Pagination, Navigation]}
 			>
 				<div className="">
-                {testComments.map((c, i) => (
+                {comments.map((c, i) => (
 									<SwiperSlide key={i}>
 										<Comment
 											user={c.user}
