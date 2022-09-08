@@ -18,8 +18,8 @@ module.exports = {
 					locale: "en-US",
 					landing_page: "NO_PREFERENCE", //LOGIN
 					user_action: "PAY_NOW",
-					return_url: "http://localhost:3003/capture-order",
-					cancel_url: "http://localhost:3003/cancel-order",
+					return_url: "https://rgbtech-production.up.railway.app/capture-order",
+					cancel_url: "https://rgbtech-production.up.railway.app/cancel-order",
 				},
 			};
 
@@ -75,13 +75,13 @@ module.exports = {
 				}
 			);
 			console.log("response.data", response.data);
-			res.redirect("http://localhost:5173/order-successfully");
+			res.redirect("https://rgbtech.vercel.app/order-successfully");
 			// res.json(response.data)
 		} catch (error) {
 			console.log(error, "error");
 		}
 	},
 	cancel: (req, res) => {
-		res.redirect("http://localhost:5173/order-canceled");
+		res.redirect("https://rgbtech.vercel.app/order-canceled");
 	},
 };
