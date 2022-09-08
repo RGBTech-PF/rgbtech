@@ -49,6 +49,7 @@ export const getUserProfile = (id) => {
 				id = perfil.id;
 			}
 			const response = await axios.get(`users/profile/${id}`);
+			console.log("response.data", response.data);
 			dispatch(getLoggedUser(response.data));
 		} catch (error) {
 			console.log(error);

@@ -344,7 +344,7 @@ function AboutTeam() {
 
 								<a
 									target="_blank"
-									href=""
+									href="https://www.linkedin.com/in/jairo-alvarez-993992246/"
 								>
 									<svg
 										width="30"

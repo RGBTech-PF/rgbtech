@@ -149,13 +149,11 @@ const ShoppingCart = () => {
 		dispatch(setBuying(false));
 	};
 
-
-
 	const costShipping = (num) => {
-	let widthCost =	products.filter(el => el.freeShipping === false) 
-		 num =	Object.keys(widthCost).length
-		return num * 2
-	}
+		let widthCost = products.filter((el) => el.freeShipping === false);
+		num = Object.keys(widthCost).length;
+		return num * 2;
+	};
 
 	return (
 		<div>
@@ -234,20 +232,22 @@ const ShoppingCart = () => {
 							</button>
 
 							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
-							<BsCurrencyDollar/> Total price:
-								<span className="text-pink-700 underline">${Math.round(totalPrice)}</span>
+								<BsCurrencyDollar /> Total price:
+								<span className="text-pink-700 underline">
+									${Math.round(totalPrice)}
+								</span>
 							</h2>
 							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
-							<TbShoppingCartDiscount/> Total with discounts:
-								<span className="text-green-500 underline">${Math.round(finalPrice)}</span>
+								<TbShoppingCartDiscount /> Total with discounts:
+								<span className="text-green-500 underline">
+									${Math.round(finalPrice)}
+								</span>
 							</h2>
 							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
-							<FaShippingFast/> Total width shipping
-							
+								<FaShippingFast /> Total with shipping
 								<span className="text-blue-700 dark:text-blue-500 underline">
 									${Math.round(finalPrice) + costShipping()}
 								</span>
-									
 							</h2>
 						</div>
 					)}

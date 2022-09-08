@@ -1,15 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../components/Footer.jsx";
 import Header from "../../components/Header/Header.jsx";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
+import { getUserProfile } from "../../store/slices/users/thunks.js";
 
 function AwardsSection() {
 	const [products, setProducts] = useState([]);
+	const dispatch = useDispatch();
 	const user = useSelector((state) => state.user);
-	
-	const theAlert = (id, points, user ) =>
+
+	const theAlert = (id, points, user) =>
 		Swal.fire({
 			title: "Are you sure?",
 			text: "You want to redeem your points?",
@@ -23,38 +25,33 @@ function AwardsSection() {
 				const body = {
 					points,
 					userId: user,
-					id
-				}
-				axios.put('awards/claim-award', body )
-				.then(
-					(response) => {
+					id,
+				};
+				axios
+					.put("awards/claim-award", body)
+					.then((response) => {
 						Swal.fire({
 							title: "CONGRATS!",
 							text: "Your prize in comming!",
-							icon: 'success',
+							icon: "success",
 							timer: 2000,
 							timerProgressBar: true,
 						});
-					}
-				)
-				.catch (
-					(error) => {
-						console.log(error)
-					}
-				)
-
+						dispatch(getUserProfile());
+					})
+					.catch((error) => {
+						console.log(error);
+					});
 			}
 		});
 
 	const handleClick = (id, points) => {
 		if (user.user?.RGBpoint < points) {
-			return alert('No tienes suficientes puntos')
+			return alert("No tienes suficientes puntos");
 		} else {
 			theAlert(id, points, user.user?.id);
 		}
 	};
-
-	
 
 	useEffect(() => {
 		axios.get("/awards").then((response) => {
@@ -84,7 +81,10 @@ function AwardsSection() {
 							</h4>
 							<p className="leading-normal text-yellow-500 font-semibold">
 								{element.points} points
-								<button onClick={(e)=> handleClick(element.id, element.points)} className="ml-3 bg-blue-400 text-black rounded-md p-1 hover:font-bold hover:bg-yellow-300 hover:scale-95">
+								<button
+									onClick={(e) => handleClick(element.id, element.points)}
+									className="ml-3 bg-blue-400 text-black rounded-md p-1 hover:font-bold hover:bg-yellow-300 hover:scale-95"
+								>
 									Exchange
 								</button>
 							</p>

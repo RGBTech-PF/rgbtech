@@ -1,9 +1,10 @@
 const users = [
 	{
 		user: "Jhon",
-		mail: "prueba1@gmail.com",
+		mail: "jhonsp101@gmail.com",
 		password: "contraseña",
 		userVerificate: true,
+		isAdmin: true,
 	},
 	{
 		user: "Jairo",

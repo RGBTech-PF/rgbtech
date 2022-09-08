@@ -31,7 +31,7 @@ function LeftSizeAdmin() {
 				<div className="items-start font-bold shadow-xl justify-start flex flex-col px-6 pt-8 pb-4 bg-[#87CEFA] rounded-md mt-9 w-full ">
 					<h1> The total sales : </h1>
 					<h1 className=" text-3xl text-white xl:text-5xl font-bold py-1 rounded-md">
-						${ dashboard?.totalSales }
+						${Math.round(dashboard?.totalSales)}
 					</h1>
 				</div>
 			</div>

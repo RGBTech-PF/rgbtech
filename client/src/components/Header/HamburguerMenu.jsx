@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo-dibujo-2.png";
-import { getAllProducts, limpiarProductos } from '../../store/slices/products/thunks'
-
+import {
+	getAllProducts,
+	limpiarProductos,
+} from "../../store/slices/products/thunks";
 
 function HamburguerMenu() {
 	const [open, setOpen] = useState(false);
@@ -41,10 +43,10 @@ function HamburguerMenu() {
 	};
 
 	return (
-		<div className="z-50 flex flex-row gap-5">
+		<div className="z-50 flex flex-row mb-7 gap-5 sm:absolute left-0">
 			{!open ? (
 				<button
-					className="absolute flex cursor-pointer ml-6 mt-5 "
+					className="absolute flex cursor-pointer ml-6"
 					onClick={() => setOpen(!open)}
 				>
 					<svg fill="#ff127e" viewBox="0 0 100 80" width="40" height="40">
@@ -54,28 +56,28 @@ function HamburguerMenu() {
 					</svg>
 				</button>
 			) : (
-				<div className="w-100 pt-0 h-[500px] shadow-md bg-white px-8 absolute rounded-br-[40px] shadow-l shadow-gray-400/100">
+				<div className="absolute top-0 w-100 pt-0 h-[500px] shadow-md bg-white px-8 rounded-br-[40px] shadow-l shadow-gray-400/100 dark:bg-gray-600 dark:shadow-none">
 					<button
 						className="text-[30px] text-pink-600 font-bold mt-4"
 						onClick={() => setOpen(!open)}
 					>
 						X
 					</button>
-					 <Link to="/about">
-						<h1 className="text-black text-xl pb-2 pt-6 font-bold hover:text-blue-600/100 ">
+					<Link to="/about">
+						<h1 className="dark:text-pink-600 text-pink-600 text-xl pb-2 pt-6 font-bold hover:text-blue-600/100 ">
 							About Team
 						</h1>
-					</Link> 
-					<ul className="text-black font-bold relative pr-3">
-						<h1 className="text-black text-xl pb-2 pt-6 font-bold">
+					</Link>
+					<ul className="dark:text-white text-black font-bold relative pr-3">
+						<h1 className="dark:text-white text-black text-xl pb-2 pt-6 font-bold">
 							Categories
 						</h1>
 						{tags.map((tag, i) => (
-							<li key={i} className="text-black p-2 ml-1 ">
+							<li key={i} className="dark:text-white text-black p-2 ml-1 ">
 								<Link
 									to="/products"
 									onClick={() => quickFilters(tag.tag)}
-									className="flex items-center 
+									className="flex items-center dark:text-white
 								text-black  
 								overflow-hidden 
 								text-ellipsis whitespace-nowrap 
@@ -89,11 +91,6 @@ function HamburguerMenu() {
 					</ul>
 				</div>
 			)}
-			<div>
-				<Link to="/">
-					<img className="w-20 ml-20" src={logo} alt="logo-rgbtech" />
-				</Link>
-			</div>
 			{/* <Link to="/about">
 				<button className="mt-3 bg-pink-400 rounded-full w-20 font-bold text-white hover:scale-105">
 					About Team

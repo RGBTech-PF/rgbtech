@@ -23,7 +23,6 @@ import {
 } from "../components/Notifications";
 import { ToastContainer } from "react-toastify";
 import CarruselComments from "../components/CarruselComments";
-import Footer from "../components/Footer";
 import specialdiscount from "../assets/specialdiscount.png";
 import freeShipping from "../assets/freeshipping.png";
 import {
@@ -142,18 +141,18 @@ const ProductDetails = () => {
 		};
 	}, [id]);
 
-	const postComment = (e) => {
-		e.preventDefault();
-		useDispatch(
-			postComment({
-				//user.photo
-				//user.id
-				//id producto
-				//rating
-				//photo
-			})
-		);
-	};
+	// const postComment = (e) => {
+	// 	e.preventDefault();
+	// 	useDispatch(
+	// 		postComment({
+	// 			//user.photo
+	// 			//user.id
+	// 			//id producto
+	// 			//rating
+	// 			//photo
+	// 		})
+	// 	);
+	// };
 
 	return (
 		<div className="text-white">
@@ -267,12 +266,11 @@ const ProductDetails = () => {
 							</div>
 
 							<div>
-
 								<div className="max-w-6xl">
 									{
-										productDetails?.comments.length
-										? <CarruselComments comments={productDetails.comments} />
-										: <p> Este producto aún no tiene comentarios</p>
+										// productDetails?.comments.length
+										<CarruselComments comments={productDetails.comments} />
+										//  <p> Este producto aún no tiene comentarios</p>
 									}
 								</div>
 							</div>
@@ -292,7 +290,6 @@ const ProductDetails = () => {
 				pauseOnHover
 				false
 			/>
-			<Footer />
 		</div>
 	);
 };

@@ -22,7 +22,7 @@ const Home = () => {
 	}, []);
 
 	return (
-		<div className="min-h-screen">
+		<>
 			<Header />
 			{/* <ModalHome showModal={showModal} setShowModal={setShowModal} /> */}
 			<Carousel />
@@ -40,7 +40,7 @@ const Home = () => {
 				pauseOnHover
 				false
 			/>
-		</div>
+		</>
 	);
 };
 

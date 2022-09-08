@@ -17,7 +17,7 @@ module.exports = {
 		await transporter.sendMail({
 			from: "rgbtech@tech.com",
 			to: newUser.mail,
-			subject: "Confirmation",
+			subject: "Recover password",
 			html,
 		});
   }

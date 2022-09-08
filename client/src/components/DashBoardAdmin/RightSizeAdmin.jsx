@@ -61,7 +61,7 @@ function RightSizeAdmin() {
 				<div className="bg-white shadow-xl pt-6 items-center justify-between flex flex-col w-full">
 					<span className="items-center text-black text-base justify-center flex flex-col w-full py-6">
 						<FcSalesPerformance className="text-black" size={30} />
-						<h3> Products sold </h3>
+						<h3> Sales </h3>
 						<h1 className="text-black font-bold text-xl 2xl:text-3xl">
 						{ dashboard?.sales }
 						</h1>

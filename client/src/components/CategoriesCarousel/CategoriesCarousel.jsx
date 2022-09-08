@@ -45,12 +45,12 @@ const CategoriesCarousel = () => {
 	// };
 
 	return (
-		<div className="bg-gray-200 dark:bg-gray-600 rounded-3xl mb-10">
+		<div className="bg-gray-200 dark:bg-gray-600 mb-10">
 			<div className="flex flex-col pt-4">
 				<ul className="flex flex-row gap-5 mb-4 justify-center items-center text-xl">
 					<li>
 						<button
-							className="hover:underline decoration-pink-700 font-bold "
+							className="hover:underline decoration-pink-700 font-bold dark:text-gray-300"
 							onClick={() => {
 								HandleClickDiscount();
 							}}
@@ -60,7 +60,7 @@ const CategoriesCarousel = () => {
 					</li>
 					<li>
 						<button
-							className="pr-2 border-r-blue-500 hover:underline decoration-pink-700 font-bold"
+							className="pr-2 border-r-blue-500 hover:underline decoration-pink-700 font-bold dark:text-gray-300"
 							onClick={() => {
 								HandleClickFreeShep();
 							}}
@@ -70,7 +70,7 @@ const CategoriesCarousel = () => {
 					</li>
 					<li>
 						<button
-							className="hover:underline decoration-pink-700 font-bold"
+							className="hover:underline decoration-pink-700 font-bold dark:text-gray-300 "
 							onClick={() => {
 								HandleClickFreeShep();
 							}}
@@ -83,13 +83,23 @@ const CategoriesCarousel = () => {
 					<Swiper
 						spaceBetween={30}
 						slidesPerView={3}
-						// autoplay={{
-						// 	delay: 2500,
-						// 	disableOnInteraction: false,
-						// }}
 						pagination={{ clickable: true }}
 						navigation={true}
 						modules={[Autoplay, Pagination, Navigation]}
+						breakpoints={{
+							320: {
+								slidesPerView: 1,
+								spaceBetween: 20,
+							},
+							768: {
+								slidesPerView: 2,
+								spaceBetween: 40,
+							},
+							1520: {
+								slidesPerView: 3,
+								spaceBetween: 50,
+							},
+						}}
 					>
 						{productosFilt.length !== 0
 							? productosFilt.map((product, i) => (

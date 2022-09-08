@@ -4,6 +4,11 @@ import loadingGif from "../assets/loading.gif";
 import { FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
 import { successNotification } from "./Notifications";
+import {
+	setLoadingComment,
+	setModalComment,
+} from "../store/slices/guestShoppingCart/guestShoppingCartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function TarjetaShopping({
 	id,
@@ -16,12 +21,19 @@ export default function TarjetaShopping({
 	amount,
 	commented,
 }) {
+	const dispatch = useDispatch();
 	const [input, setInput] = useState({
-		rating: 0,
+		rating: 1,
 		comment: "",
 	});
-	const [modal, setModal] = useState(false);
-	const [loading, setLoading] = useState(false);
+
+	const { loadingComment, modalComment } = useSelector(
+		(state) => state.guestShoppingCart
+	);
+
+	const setModalCommentTrue = () => {
+		dispatch(setModalComment(true));
+	};
 
 	const handleChange = (e) => {
 		setInput({
@@ -32,25 +44,26 @@ export default function TarjetaShopping({
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setLoading(true);
+		dispatch(setLoadingComment(true));
 		axios
 			.put("sales/comments", { id, post: { ...input, user, profilePhoto } })
-			.then(() => {
-				setLoading(false);
-				setModal(false);
+			.then((response) => {
+				// console.log("estoy entrando", response);
+				// dispatch(setLoadingComment(false));
+				// dispatch(setModalComment(false));
 				successNotification("The comment has been sent correctly!");
 			})
 			.catch((error) => {
-				setLoading(false);
+				// dispatch(setLoadingComment(false));
 				console.error(error);
 			});
 	};
 
 	return (
-		<dikv class="lg:flex shadow rounded-lg border border-gray-400">
-			{modal && (
+		<div class="lg:flex shadow rounded-lg border border-gray-400">
+			{modalComment && (
 				<Modal
-					closeModal={() => setModal(false)}
+					closeModalRedux={() => setModalComment(false)}
 					tailwindCSS={"bg-[#a156f6] bg-opacity-100"}
 				>
 					<div className="flex flex-col gap-3 text-white font-bold overflow-auto h-80">
@@ -61,6 +74,8 @@ export default function TarjetaShopping({
 							<input
 								name="rating"
 								type="number"
+								min={1}
+								max={5}
 								className="ml-2 rounded-xl text-black p-1 mx-4"
 								value={input.rating}
 								required
@@ -75,8 +90,9 @@ export default function TarjetaShopping({
 									type="text"
 									className="ml-2 rounded-xl text-black p-1 mx-4"
 									cols="30"
-									rows="10"
+									rows="8"
 									value={input.comment}
+									required
 									onChange={(e) => handleChange(e)}
 								></textarea>
 							</div>
@@ -85,11 +101,11 @@ export default function TarjetaShopping({
 									type="submit"
 									className="flex w-fit gap-2 items-center px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out"
 								>
-									{loading ? (
+									{/* {loadingComment ? (
 										<img className="h-4 w-4" src={loadingGif} alt="loading" />
-									) : (
-										<FaCheckCircle className="h-5 w-5" />
-									)}
+									) : ( */}
+									<FaCheckCircle className="h-5 w-5" />
+									{/* )} */}
 									Submit
 								</button>
 							</div>
@@ -132,13 +148,13 @@ export default function TarjetaShopping({
 				<div className="bg-white">
 					<button
 						className="bg-pink-600 hover:scale-105 font-semibold rounded-b-lg text-base text-white "
-						onClick={() => setModal(true)}
+						onClick={setModalCommentTrue}
 					>
 						Product Review
 					</button>
 				</div>
 			)}
-		</dikv>
+		</div>
 	);
 }
 

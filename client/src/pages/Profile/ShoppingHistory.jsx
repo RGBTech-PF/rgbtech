@@ -8,7 +8,6 @@ import TarjetaShopping from "../../components/TarjetaShopping";
 const ShoppingHistory = () => {
 	const [products, setProducts] = useState([]);
 	const { user } = useSelector((state) => state.user);
-	console.log("products", products);
 
 	useEffect(() => {
 		const token = window.localStorage.getItem("token");

@@ -23,9 +23,6 @@ export default function Filters({setPage, page}) {
     }
   )
 
-
-  
-
     const handleSelect = (e) => {
       const {value, name} = e.target
       setState({
@@ -87,7 +84,7 @@ export default function Filters({setPage, page}) {
       </div>
       <div className="flex flex-end ">
         <div className='mr-1'>
-          <input className='border border-black rounded-lg w-32 placeholder:pl-3' type="text" placeholder='Precio minimo' />
+          <input className='border border-black rounded-lg w-32 placeholder:pl-3' onChange={handleSelect} name='price' min={0} type="number" placeholder='Precio minimo' />
         </div>
         <div>
           <RiMoneyDollarCircleLine size={26}/>

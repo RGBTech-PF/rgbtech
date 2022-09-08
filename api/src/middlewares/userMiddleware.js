@@ -110,7 +110,7 @@ module.exports = {
 		await transporter.sendMail({
 			from: "rgbtech@tech.com",
 			to: newUser.products.mail,
-			subject: "Confirmation",
+			subject: "successful order confirmation",
 			html,
 		});
 	},

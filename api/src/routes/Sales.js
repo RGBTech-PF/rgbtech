@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { User, Sale, Product, Brand, Tag, Comment, conn } = require("../db");
 const router = Router();
-const { sendConfirmationBuyEmail } = require("../middlewares/userMiddleware")
+const { sendConfirmationBuyEmail } = require("../middlewares/userMiddleware");
 router.post("/new-sale", async (req, res) => {
 	try {
 		const { userId, products } = req.body;
@@ -9,12 +9,14 @@ router.post("/new-sale", async (req, res) => {
 		products.map(async (product) => {
 			const { productId, name, productPrice, month, year, amount } = product;
 
+			console.log("products", products);
 			const productDetails = await Product.findByPk(productId, {
 				include: {
 					model: Tag,
 					through: { attributes: [] },
 				},
 			});
+			console.log("productDetails", productDetails);
 			const { brandId, tags } = productDetails.dataValues;
 			const tagsId = [];
 			tags.map((t) => tagsId.push(t.dataValues.id));
@@ -30,20 +32,20 @@ router.post("/new-sale", async (req, res) => {
 
 			const user = await User.findAll({
 				where: {
-					id: userId
-				}
-			})
-			
+					id: userId,
+				},
+			});
+
 			const info = {
 				nombre: user[0].dataValues.user,
 				products: {
 					mail: user[0].dataValues.mail,
 					name: name,
 					totalPrice: newSale.dataValues.totalPrice,
-					month : month
-				}
-			}
-			sendConfirmationBuyEmail(info)
+					month: month,
+				},
+			};
+			sendConfirmationBuyEmail(info);
 			await newSale.addTags(tagsId);
 			await newSale.setBrand(brandId);
 			await newSale.setUser(userId);

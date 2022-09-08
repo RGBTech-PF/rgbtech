@@ -8,17 +8,24 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 
 const imagnaryProducts = [
 	logo,
-	"https://th.bing.com/th/id/R.44f2d5d7c7d0b1ab754fda0f41ac5e42?rik=ZV%2bo60ANzXQFEQ&pid=ImgRaw&r=0",
-	"https://storage-asset.msi.com/global/picture/image/feature/AIO/Monitor/Optix-G24C/AIO-Optix_G24C_overview.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662562002/RGBtech/ImageProduct/ps5_gv7pog.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662576325/RGBtech/ImageProduct/img_5_qy9lcv.png",
 	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662555612/RGBtech/ImageProduct/img_1_u2c0bb.png",
-	"https://th.bing.com/th/id/R.76424bc99afbac876aeedea611646ed2?rik=4EIIY8RoGkPEFg&pid=ImgRaw&r=0",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662520667/RGBtech/ImageProduct/img_3_cbleko.png",
 	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662521855/RGBtech/ImageProduct/img_4_im15ur.png",
-	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662520667/RGBtech/ImageProduct/img_3_cbleko.png",
-	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662555612/RGBtech/ImageProduct/img_1_u2c0bb.png",
 	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662520668/RGBtech/ImageProduct/img_2_ktemmd.png",
-	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662520667/RGBtech/ImageProduct/img_3_cbleko.png",
-	"https://th.bing.com/th/id/R.f565036a6316a52feb89bb17fc5c1dae?rik=cls3GeO9zLGo8w&pid=ImgRaw&r=0",
 	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662556899/RGBtech/RGBpoint/Baner_rgbPoint_l2vqpa.png",
+];
+
+const responsiveImgs = [
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662591195/RGBtech/ImageProduct/logo_rsponsive_ma5vis.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662590613/RGBtech/ImageProduct/ps5_responsive_zhxzoj.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662590923/RGBtech/ImageProduct/img_5_resposive_ywzcug.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662589911/RGBtech/ImageProduct/img_1_responsive_pcwdla.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662588114/RGBtech/ImageProduct/img_responsiv_prueba_dojj7n.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662588999/RGBtech/ImageProduct/img_4_responsive_rnoqbp.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662603727/RGBtech/ImageProduct/img_2_responsive_rc5tx4.png",
+	"https://res.cloudinary.com/ddroxn7iv/image/upload/v1662603424/RGBtech/RGBpoint/baner_responsive_fr62yf.png",
 ];
 
 function Carousel() {
@@ -42,54 +49,92 @@ function Carousel() {
 				<div className="l-20">
 					<SwiperSlide className="flex justify-center items-center h-screen">
 						<img
-							className="w-[1400px] h-[500px] mb-8"
+							className="w-auto h-[500px] mb-8 sm:hidden"
 							src={imagnaryProducts[0]}
 						/>
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
-						<img className="w-[1400px] h-[500px]" src={imagnaryProducts[1]} />
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
-						<img className="w-[1400px] h-[500px]" src={imagnaryProducts[2]} />
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
-						<img className="w-[1400px] h-[500px]" src={imagnaryProducts[3]} />
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
-						<img className="w-[1400px] h-[500px]" src={imagnaryProducts[4]} />
+						<img
+							className="hidden w-auto h-[300px] sm:flex"
+							src={responsiveImgs[0]}
+							alt="responsive1"
+						/>
 					</SwiperSlide>
 					<SwiperSlide className="flex justify-center items-center">
 						<img
-							className=" w-[1400px] h-[500px]"
+							className="w-auto h-[500px] sm:hidden"
+							src={imagnaryProducts[1]}
+						/>
+						<img
+							className="hidden w-screen h-[300px] sm:flex"
+							src={responsiveImgs[1]}
+							alt="responsive2"
+						/>
+					</SwiperSlide>
+					<SwiperSlide className="flex justify-center items-center">
+						<img
+							className="w-auto h-[500px] sm:hidden"
+							src={imagnaryProducts[2]}
+						/>
+						<img
+							className="hidden w-screen h-[300px] sm:flex"
+							src={responsiveImgs[2]}
+							alt="responsive3"
+						/>
+					</SwiperSlide>
+					<SwiperSlide className="flex justify-center items-center">
+						<img
+							className="w-auto h-[500px] sm:hidden"
+							src={imagnaryProducts[3]}
+						/>
+						<img
+							className="hidden w-screen h-[300px] sm:flex"
+							src={responsiveImgs[3]}
+							alt="responsive3"
+						/>
+					</SwiperSlide>
+
+					<SwiperSlide className="flex justify-center items-center">
+						<img
+							className="w-auto h-[500px] sm:hidden"
+							src={imagnaryProducts[4]}
+						/>
+						<img
+							className="hidden w-screen h-[300px] sm:flex"
+							src={responsiveImgs[4]}
+							alt="responsive3"
+						/>
+					</SwiperSlide>
+					<SwiperSlide className="flex justify-center items-center sm:hidden">
+						<img
+							className="w-auto h-[500px] sm:hidden"
 							src={imagnaryProducts[5]}
 						/>
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
 						<img
-							className=" w-[1500px] h-[500px]"
+							className="hidden w-screen h-[300px] sm:flex"
+							src={responsiveImgs[5]}
+							alt="responsive3"
+						/>
+					</SwiperSlide>
+					<SwiperSlide className="flex justify-center items-center sm:hidden">
+						<img
+							className="w-auto h-[500px] sm:hidden"
 							src={imagnaryProducts[6]}
 						/>
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
 						<img
-							className=" w-[1400px] h-[500px]"
+							className="hidden w-screen h-[300px] sm:flex"
+							src={responsiveImgs[6]}
+							alt="responsive3"
+						/>
+					</SwiperSlide>
+					<SwiperSlide className="flex justify-center items-center sm:hidden">
+						<img
+							className="w-auto h-[500px] sm:hidden"
 							src={imagnaryProducts[7]}
 						/>
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
-						<img className="w-[1600px] h-[500px]" src={imagnaryProducts[8]} />
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
-						<img className="w-[1200px] h-[500px]" src={imagnaryProducts[9]} />
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
 						<img
-							className=" w-[1200px] h-[500px]"
-							src={imagnaryProducts[10]}
+							className="hidden w-screen h-[300px] sm:flex"
+							src={responsiveImgs[7]}
+							alt="responsive3"
 						/>
-					</SwiperSlide>
-					<SwiperSlide className="flex justify-center items-center">
-						<img className="w-full h-[500px]" src={imagnaryProducts[11]} />
 					</SwiperSlide>
 				</div>
 			</Swiper>

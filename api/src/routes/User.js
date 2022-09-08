@@ -404,7 +404,6 @@ router.put("/confirmation/:id", async (req, res, next) => {
 // 	}
 // });
 
-
 router.get("/getShoppingHistory/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
@@ -421,7 +420,7 @@ router.get("/getShoppingHistory/:id", async (req, res, next) => {
 	}
 });
 
-router.put("/updateLastVisited/:id", async (req, res, next) => {
+router.put("/updateLastVisited/:id", validateToken, async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const { idp } = req.body;

@@ -35,7 +35,11 @@ export default function SearchBar2() {
 				...styles,
 				borderRadius: 5,
 				backgroundColor: isSelected ? "#FF1493" : "white",
-				color: isSelected ? "white" : "black" && isFocused ? "#008080" : "black",
+				color: isSelected
+					? "white"
+					: "black" && isFocused
+					? "#008080"
+					: "black",
 				cursor: "pointer",
 				padding: 10,
 				margin: 3,
@@ -46,15 +50,13 @@ export default function SearchBar2() {
 
 	return (
 		<div>
-			<div className="flex"> 
-				<Select
-					className="flex rounded pl-1 pt-1 pr-1 pb-2 font-bold"
-					placeholder=" Look for it..."
-					styles={colourStyles}
-					options={productsName}
-					onChange={onChange}
-				/>
-			</div>
+			<Select
+				className="flex rounded pl-1 pt-1 pr-1 pb-2 font-bold sm:w-60 mt-3"
+				placeholder=" Look for it..."
+				styles={colourStyles}
+				options={productsName}
+				onChange={onChange}
+			/>
 		</div>
 	);
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
-import Footer from "../components/Footer";
 import Header from "../components/Header/Header";
 import FavoriteCard from "../components/TarjetaFav";
 import { MdFavorite} from 'react-icons/md';
@@ -59,7 +58,6 @@ const Favorites = () => {
 				</div>
 				</div>
 			</div>
-			<Footer/>
 		</div>
 	);
 };
