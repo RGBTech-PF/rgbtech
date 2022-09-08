@@ -78,7 +78,7 @@ module.exports = {
 	sendConfirmationEmail: async (newUser) => {
 		let emailToken = jwt.sign(newUser, process.env.SECRET, { expiresIn: "1d" });
 		emailToken = emailToken.replaceAll(".", "'");
-		let url = `http://127.0.0.1:5173/confirmation/${emailToken}`;
+		let url = `https://rgbtech.vercel.app/confirmation/${emailToken}`;
 		const transporter = nodemailer.createTransport({
 			service: "gmail",
 			auth: {

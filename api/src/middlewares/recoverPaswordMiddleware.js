@@ -2,10 +2,10 @@ const nodemailer = require("nodemailer");
 const { htmlMailRecoverPassword } = require("../Utils/EmailTemplate.js");
 const jwt = require("jsonwebtoken");
 module.exports = {
-  sendConfirmationEmailRecoverPassword: async (newUser) => {
+	sendConfirmationEmailRecoverPassword: async (newUser) => {
 		let emailToken = jwt.sign(newUser, process.env.SECRET, { expiresIn: "1d" });
 		emailToken = emailToken.replaceAll(".", "'");
-		let url = `http://127.0.0.1:5173/recoverPassword/${emailToken}`;
+		let url = `https://rgbtech.vercel.app/recoverPassword/${emailToken}`;
 		const transporter = nodemailer.createTransport({
 			service: "gmail",
 			auth: {
@@ -20,5 +20,5 @@ module.exports = {
 			subject: "Recover password",
 			html,
 		});
-  }
-}
+	},
+};

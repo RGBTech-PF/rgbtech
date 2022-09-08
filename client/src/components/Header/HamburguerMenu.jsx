@@ -25,8 +25,6 @@ function HamburguerMenu() {
 	// "RGB",
 	// "Curveds"
 
-	const url = "http://127.0.0.1:5173/products";
-
 	let tags = [
 		{ name: "All products", tag: "" },
 		{ name: "Monitors", tag: "?tag=Monitor" },
