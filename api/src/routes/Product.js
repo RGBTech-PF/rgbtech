@@ -108,7 +108,7 @@ router.put("/update", async (req, res, next) => {
 				},
 			}
 		);
-		console.log('producto updateado')
+		console.log('producto updateado');
 		res.send("updated product");
 });
 
