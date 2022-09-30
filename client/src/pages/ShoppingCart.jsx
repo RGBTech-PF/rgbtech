@@ -155,16 +155,14 @@ const ShoppingCart = () => {
 		dispatch(setUserPoint(point));
 	};
 
-
-
 	const costShipping = (num) => {
-	let widthCost =	products.filter(el => el.freeShipping === false) 
-		 num =	Object.keys(widthCost).length
-		return num * 2
-	}
+		let widthCost = products.filter((el) => el.freeShipping === false);
+		num = Object.keys(widthCost).length;
+		return num * 2;
+	};
 
 	return (
-		<div>
+		<div className="flex flex-col min-h-screen h-full dark:bg-[#1f2937]">
 			<Header />
 			{!hasJWT() ? (
 				<>
@@ -188,9 +186,9 @@ const ShoppingCart = () => {
 				</>
 			)}
 			{products?.length !== 0 ? (
-				<div className="flex flex-row justify-around dark:bg-gray-600 items-start border-2 dark:border-none m-1">
+				<div className="flex flex-row justify-around dark:bg-[#1f2937] items-start border-2 dark:border-none m-1">
 					<section className="flex flex-row justify-around items-center dark:bg-gray-600">
-						<div className="mt-4 ">
+						<div className="mt-4">
 							{products?.map((p, i) => (
 								<ShoppingCard
 									key={p.id}
@@ -240,20 +238,22 @@ const ShoppingCart = () => {
 							</button>
 
 							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
-							<BsCurrencyDollar/> Total price:
-								<span className="text-pink-700 underline">${Math.round(totalPrice)}</span>
+								<BsCurrencyDollar /> Total price:
+								<span className="text-pink-700 underline">
+									${Math.round(totalPrice)}
+								</span>
 							</h2>
 							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
-							<TbShoppingCartDiscount/> Total with discounts:
-								<span className="text-green-500 underline">${Math.round(finalPrice)}</span>
+								<TbShoppingCartDiscount /> Total with discounts:
+								<span className="text-green-500 underline">
+									${Math.round(finalPrice)}
+								</span>
 							</h2>
 							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
-							<FaShippingFast/> Total width shipping
-							
+								<FaShippingFast /> Total width shipping
 								<span className="text-blue-700 dark:text-blue-500 underline">
 									${Math.round(finalPrice) + costShipping()}
 								</span>
-									
 							</h2>
 						</div>
 					)}

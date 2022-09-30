@@ -1,13 +1,11 @@
 import React from "react";
-import { FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
-import { BsTelephone } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
 	return (
-		<footer className="text-center w-full bg-gray-100 dark:bg-gray-800 text-gray-600">
-			<div className="flex flex-row justify-center items-center gap-4">
-				<div className="ml-32">
+		<footer className="flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-600">
+			<div className="flex flex-row justify-around gap-4 m-4">
+				<div className="">
 					<h6
 						className="
             uppercase
@@ -15,41 +13,38 @@ export default function Footer() {
             mb-4
             flex
             items-center
+						text-center
             justify-center
             md:justify-start
           "
 					>
 						Contacto
 					</h6>
-
-					{/* <p className="mb-4">
-          <a href="#!" className="text-gray-600">Servicioalcliente@rgbtech.com</a>
-        </p> */}
-					<p className="mb-4">
+					<p className="mb-4 text-center">
 						<Link to="/about" className="text-gray-600">
 							About team
 						</Link>
 					</p>
 				</div>
-				<div className="ml-32">
-					<h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+				<div className="flex flex-col justify-center items-center">
+					<h6 className="uppercase text-center font-semibold mb-4 flex justify-center">
 						Ayuda
 					</h6>
-					<p className="mb-4">
+					<p className="mb-4 text-center">
 						<a href="#!" className="text-gray-600">
 							Medios de pago
 						</a>
 					</p>
 				</div>
-				<div className="ml-32">
-					<h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+				<div className="flex flex-col justify-center items-center">
+					<h6 className="uppercase font-semibold mb-4 text-center">
 						Te puede interesar
 					</h6>
-					<p className="mb-4">
+					<p className="text-center mb-4">
 						<a
 							target="_blank"
 							href="https://www.soyhenry.com/"
-							className="text-gray-600"
+							className="text-gray-600 text-center"
 						>
 							Henry Bootcamp
 						</a>

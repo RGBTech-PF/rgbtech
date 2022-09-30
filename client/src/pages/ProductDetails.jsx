@@ -134,7 +134,7 @@ const ProductDetails = () => {
 	};
 
 	return (
-		<div className="text-white">
+		<div className="flex flex-col min-h-screen h-full text-white">
 			<Header />
 			{productDetails && !Object.keys(productDetails).length ? (
 				<Spinner />
@@ -220,37 +220,32 @@ const ProductDetails = () => {
 								</div>
 							</div>
 						</div>
-						<div className="flex flex-col justify-center items-center bg-gradient-to-r from-blue-900 to-pink-900 p-2 mt-2 mx-4 rounded-3xl shadow-gray-700 shadow-md">
-							<div className="flex flex-col justify-center">
-								<div>
-									<h2 className="text-2xl font-bold mb-4">Characteristics:</h2>
-									<ul>
-										<li>
-											{Object.entries(productDetails.specifications[0]).map(
-												(e, i) => (
-													<p key={i}>
-														{e[0].charAt(0).toUpperCase() + e[0].slice(1)}:{" "}
-														{e[1]}
-													</p>
-												)
-											)}
-										</li>
-									</ul>
-								</div>
-								<div>
-									<hr />
-									<h2 className="text-2xl font-bold mb-4">Description:</h2>
-									<p>{productDetails.description}</p>
-								</div>
+						<div className="flex flex-col justify-center items-center bg-gradient-to-r from-blue-900 to-pink-900 p-2 mt-2 mx-4 rounded-3xl shadow-gray-700 shadow-md overflow-auto">
+							<div className="flex flex-col justify-center items-center text-center">
+								<h2 className="text-2xl font-bold mb-4">Characteristics:</h2>
+								<ul>
+									<li>
+										{Object.entries(productDetails.specifications[0]).map(
+											(e, i) => (
+												<p key={i}>
+													{e[0].charAt(0).toUpperCase() + e[0].slice(1)}: {e[1]}
+												</p>
+											)
+										)}
+									</li>
+								</ul>
+								<hr />
+								<h2 className="text-2xl font-bold mb-4">Description:</h2>
+								<p>{productDetails.description}</p>
 							</div>
 
 							<div>
 								{hasJWT() ? (
 									<form
-										className="block p-6 rounded-lg shadow-lg bg-white w-full"
+										className="mt-4 block p-6 rounded-lg shadow-lg bg-white w-full dark:bg-[#6865f1]"
 										onSubmit={postComment}
 									>
-										<h2 className="text-black font-bold mb-4">
+										<h2 className="text-black font-bold mb-4 dark:text-white">
 											Dejanos tu review:
 										</h2>
 										<label className="text-black font-bold">
@@ -270,7 +265,7 @@ const ProductDetails = () => {
 										m-0
 										focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 												type="number"
-												placeholder="Puntuanos en un rating del 1 al 5..."
+												placeholder="Example: 5"
 												min={0}
 												max={5}
 												value={rating}
@@ -300,7 +295,7 @@ const ProductDetails = () => {
 												value={comment}
 												name="description"
 												required
-												placeholder="Ej: Tu opiniÃ³n..."
+												placeholder="Put your review here..."
 												onChange={(e) => setComment(e.target.value)}
 												rows="5"
 												cols="50"
@@ -310,7 +305,9 @@ const ProductDetails = () => {
 											className=" w-full
 									px-6
 									py-2.5
+									hover:cursor-pointer
 									bg-blue-600
+									dark:bg-[#e749a0]
 									text-white
 									font-medium
 									text-xs
@@ -330,11 +327,11 @@ const ProductDetails = () => {
 									</form>
 								) : null}
 
-								<div className="max-w-6xl">
+								<div className="flex justify-center items-center max-w-6xl">
 									{productDetails?.comments.length ? (
 										<CarruselComments comments={productDetails.comments} />
 									) : (
-										<p className="bg-red-400 rounded-md p-1 font-bold">
+										<p className="bg-red-400 rounded-md p-1 font-bold mt-4 text-center w-fit">
 											{" "}
 											Este producto aún no tiene comentarios !
 										</p>

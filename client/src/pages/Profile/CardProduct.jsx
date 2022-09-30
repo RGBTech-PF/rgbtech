@@ -5,16 +5,12 @@ const CardProduct = ({ id, name, img, description, rating, stock }) => {
 	const navigate = useNavigate();
 	return (
 		<div
-			className="flex justify-start p-2 hover:cursor-pointer"
+			className="flex flex-col justify-center items-center p-2 hover:cursor-pointer"
 			onClick={() => navigate(`/productDetails/${id}`)}
 		>
-			<div className="flex flex-col w-screen md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg">
-				<img
-					className="bg-blue-400 w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-					src={img}
-					alt=""
-				/>
-				<div className="p-6 flex flex-col justify-start">
+			<div className="flex w-4/5 rounded-lg bg-white shadow-lg xl:flex-col xl:w-fit">
+				<img className="bg-blue-400 w-96 h-96 object-cover" src={img} alt="" />
+				<div className="p-6 flex flex-col h-96 justify-center">
 					<h5 className="text-gray-900 text-xl font-medium mb-2">{name}</h5>
 					<p className="text-gray-700 text-base mb-4">{description}</p>
 					<div className="flex flex-col justify-start items-start">
