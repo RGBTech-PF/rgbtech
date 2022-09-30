@@ -63,12 +63,12 @@ export default function Tarjeta({ id, img, tags, name, price, lastProduct }) {
 		<div
 			ref={lastProduct || null}
 			key={id}
-			className="flex justify-start w-[1000px] p-2 border-b-4"
+			className=" bg-black flex justify-start sm:w-76 p-2 border-b-4"
 		>
-			<div className="flex flex-col md:flex-row w-[1000px] md:max-w-6xl rounded-lg bg-white shadow-lg">
+			<div className="flex flex-col sm:w-[76] md:flex-row md:w-[1000px]  rounded-lg bg-white shadow-lg">
 				<Link to={`/productDetails/${id}`}>
 					<img
-						className="bg-pink-700 w-20 h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+						className="bg-pink-700  md: w-72 object-cover  rounded-t-lg md:rounded-none md:rounded-l-lg "
 						src={img}
 						alt=""
 					/>

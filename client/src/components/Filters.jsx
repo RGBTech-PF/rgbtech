@@ -61,7 +61,7 @@ export default function Filters({setPage, page}) {
   <div className='ml-4'>
     <h1 className='mb-1 text-xl'>Brands:</h1>
     <div className="form-check ">
-      <select className='h-52 w-44 cursor-pointer' multiple name='brand' onChange={handleSelect}>
+      <select className='pl-5 mt-2 rounded-xl bg-gradient-to-r from-indigo-900 to-gray-500 h-52 w-44 cursor-pointer' multiple name='brand' onChange={handleSelect}>
         <option className='hover:text-blue-400 hover:font-bold' value=''>All brands</option>
           {brands && brands.map((item)=> {
             return <option className='hover:text-blue-400 hover:font-bold' key ={item.id} value={item.id}>{item.name}</option>
@@ -71,7 +71,7 @@ export default function Filters({setPage, page}) {
       <div className='mt-4'>
       <h1 className='mb-1 text-xl'>Tags:</h1>
       <div className="form-check ">
-      <select className='h-52 w-44 cursor-pointer' multiple name='tag' onChange={handleSelect}>
+      <select className='pl-5 mt-2 rounded-xl bg-gradient-to-r from-indigo-900 to-gray-500 h-52 w-44 cursor-pointer' multiple name='tag' onChange={handleSelect}>
         <option className='hover:text-pink-400 hover:font-bold' value=''>All tags</option>
           {tags && tags.map((item)=> {
             return <option className='hover:text-pink-400 hover:font-bold' key ={item.name} value={item.name}>{item.name}</option>
@@ -84,7 +84,7 @@ export default function Filters({setPage, page}) {
       </div>
       <div className="flex flex-end ">
         <div className='mr-1'>
-          <input className='border border-black rounded-lg w-32 placeholder:pl-3' onChange={handleSelect} name='price' min={0} type="number" placeholder='Precio minimo' />
+          <input className=' mt-2  bg-gradient-to-r from-indigo-900 to-gray-500 border border-black rounded-lg w-32 placeholder:pl-3' onChange={handleSelect} name='price' min={0} type="number" placeholder='Precio minimo' />
         </div>
         <div>
           <RiMoneyDollarCircleLine size={26}/>
@@ -93,7 +93,7 @@ export default function Filters({setPage, page}) {
       <div className='mt-4 '>
       <h1 className=' mb-1 text-xl'>Orden productos:</h1>
       <div>
-        <select className='h-24 w-44 cursor-pointer' name="column" multiple onChange={handleSelect}>
+        <select className='pl-5 mt-2 rounded-xl bg-gradient-to-r from-indigo-900 to-gray-500 h-24 w-44 cursor-pointer' name="column" multiple onChange={handleSelect}>
           <option className='hover:text-blue-400 hover:font-bold' value="price&order=ASC">Precio ascendente</option>
           <option className='hover:text-pink-400 hover:font-bold' value="price&order=DESC">Precio descendente</option>
           <option className='hover:text-blue-400 hover:font-bold' value="=rating&order=ASC">Rating ascendente</option>
