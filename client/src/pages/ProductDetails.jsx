@@ -116,28 +116,6 @@ const ProductDetails = () => {
 		dispatch(getProductById(id));
 
 		return () => {
-			// let lastVisited = JSON.parse(window.localStorage.getItem("lastVisited"));
-			// if (lastVisited === undefined || lastVisited === null) {
-			// 	window.localStorage.setItem("lastVisited", JSON.stringify([]));
-			// 	let setLastVisited = window.localStorage.getItem("lastVisited");
-			// 	lastVisited = JSON.parse(setLastVisited);
-			// }
-			// console.log("lastVisited.length", lastVisited.length);
-			// console.log(
-			// 	"Si es TRUE, es porque no existe este producto en el arreglo de lastVisited",
-			// 	!Boolean(lastVisited.find((p) => p.id === id))
-			// );
-			// if (!Boolean(lastVisited.find((p) => p.id === id))) {
-			// 	//TODO: Validación para saber si hay 10 productos en el arreglo... if
-			// 	console.log("productDetails", productDetails);
-			// 	console.log("lastVisited DESPUES DE ENTRAR AL IF", lastVisited);
-			// 	lastVisited.push({ ...productDetails });
-			// 	console.log(
-			// 		"----- lastVisited DESPUES DE HACERLE EL PUSH -----",
-			// 		lastVisited
-			// 	);
-			// 	window.localStorage.setItem("lastVisited", JSON.stringify(lastVisited));
-			// }
 			dispatch(clearDetails());
 		};
 	}, [id]);
@@ -161,9 +139,9 @@ const ProductDetails = () => {
 			{productDetails && !Object.keys(productDetails).length ? (
 				<Spinner />
 			) : (
-				<div className="mx-10">
+				<div>
 					<div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl p-4 m-4">
-						<div className="flex justify-around p-4 mt-2 mx-4 rounded-xl text-3xl">
+						<div className="flex flex-row justify-around p-4 mt-2 mx-4 rounded-xl text-3xl sm:flex-col items-center">
 							<img
 								className="w-[25rem] h-[20rem] mb-4 rounded-3xl "
 								src={<Spinner /> && productDetails.img}
@@ -193,7 +171,7 @@ const ProductDetails = () => {
 										<p>${productDetails.price}</p>
 									)}{" "}
 								</div>
-								<p className="flex gap-2 items-center text-xl drop-shadow-lg shadow-black">
+								<p className="flex gap-2 items-center text-center text-xl drop-shadow-lg shadow-black">
 									<MdOutlineShoppingCart /> Available Stock:{" "}
 									{productDetails.stock}
 								</p>
@@ -242,9 +220,9 @@ const ProductDetails = () => {
 								</div>
 							</div>
 						</div>
-						<div className="bg-gradient-to-r from-blue-900 to-pink-900 p-2 mt-2 mx-4 rounded-3xl flex flex-col justify-center items-center shadow-gray-700 shadow-md">
-							<div className="">
-								<div className="float-left bg-gradient-to-r h-96 from-blue-500 to-pink-400  flex flex-col w-96 justify-center items-center mt-6 rounded-l-2xl	 p-7">
+						<div className="flex flex-col justify-center items-center bg-gradient-to-r from-blue-900 to-pink-900 p-2 mt-2 mx-4 rounded-3xl shadow-gray-700 shadow-md">
+							<div className="flex flex-col justify-center">
+								<div>
 									<h2 className="text-2xl font-bold mb-4">Characteristics:</h2>
 									<ul>
 										<li>
@@ -259,7 +237,7 @@ const ProductDetails = () => {
 										</li>
 									</ul>
 								</div>
-								<div className="bg-gradient-to-r h-96 from-pink-400 to-blue-500  shadow-2xl flex flex-col w-96 justify-center ml-52 items-center mt-6 rounded-r-2xl p-7">
+								<div>
 									<hr />
 									<h2 className="text-2xl font-bold mb-4">Description:</h2>
 									<p>{productDetails.description}</p>
@@ -353,12 +331,14 @@ const ProductDetails = () => {
 								) : null}
 
 								<div className="max-w-6xl">
-									{
-										productDetails?.comments.length
-										? <CarruselComments comments={productDetails.comments} />
-										: <p> Este producto aún no tiene comentarios</p>
-
-									}
+									{productDetails?.comments.length ? (
+										<CarruselComments comments={productDetails.comments} />
+									) : (
+										<p className="bg-red-400 rounded-md p-1 font-bold">
+											{" "}
+											Este producto aún no tiene comentarios !
+										</p>
+									)}
 								</div>
 							</div>
 						</div>
