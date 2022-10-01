@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineHeart, AiOutlineSmallDash } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
+import { BsFillHeartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import jwt from "jwt-decode";
 import {
@@ -160,12 +161,12 @@ function Product({
 								onClick={handleDeleteCartFav}
 								className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3 duration-300"
 							>
-								<AiOutlineHeart color="pink" size={35} />
+								<BsFillHeartFill color="red" size={25} />
 							</button>
 						) : (
 							<button
 								onClick={handleAddCartFav}
-								className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3"
+								className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3 durati"
 							>
 								<AiOutlineHeart size={25} />
 							</button>

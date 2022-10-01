@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "../Product.jsx";
 import {
-	getProductsBestSeller,
 	getProductDiscount,
 	getProductFreeShep,
 } from "../../store/slices/products/thunks.js";
-// import css from "./CategoriesCarousel.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -15,20 +13,10 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import hoverEffect from "../../utils/hoverEffect.module.css";
 
 const CategoriesCarousel = () => {
+	const [active, setActive] = useState("");
 	const { products } = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 	const { productosFilt } = useSelector((state) => state.products);
-	// const [filtrados, setFiltrados] = useState()
-	// const [section, setSection] = useState({
-	// 	activeSection: "null",
-	// });
-
-	// const toggleActive = (i) => {
-	// 	setSection({
-	// 		...section,
-	// 		activeSection: section.objects[i],
-	// 	});
-	// };
 
 	const HandleClickDiscount = () => {
 		dispatch(getProductDiscount());
@@ -37,13 +25,10 @@ const CategoriesCarousel = () => {
 		dispatch(getProductFreeShep());
 	};
 
-	// const toggleActiveStyle = (i) => {
-	// 	if (section.objects[i] === section.activeSection) {
-	// 		return `text-pink-100 text-lg font-medium text-white p-2 rounded-xl hover:cursor-pointer ${css.active}`;
-	// 	} else {
-	// 		return `text-white text-lg font-medium p-2 rounded-xl hover:cursor-pointer ${css.inactive}`;
-	// 	}
-	// };
+	useEffect(() => {
+		HandleClickDiscount();
+		setActive("On Discount");
+	}, []);
 
 	return (
 		<div className="bg-gray-200 dark:bg-gray-600 mb-10">
@@ -51,8 +36,13 @@ const CategoriesCarousel = () => {
 				<ul className="flex flex-row gap-5 mb-4 justify-center items-center text-xl">
 					<li>
 						<button
-							className={`decoration-pink-700 font-bold dark:text-gray-300 ${hoverEffect.linkUnderline} ${hoverEffect.linkUnderlineBlack}`}
-							onClick={() => {
+							className={`decoration-pink-700 font-bold dark:text-gray-300 ${
+								hoverEffect.linkUnderline
+							} ${hoverEffect.linkUnderlineBlack} ${
+								active === "On Discount" && hoverEffect.isActive
+							}`}
+							onClick={(e) => {
+								setActive(e.target.outerText);
 								HandleClickDiscount();
 							}}
 						>
@@ -61,8 +51,13 @@ const CategoriesCarousel = () => {
 					</li>
 					<li>
 						<button
-							className={`border-r-blue-500 decoration-pink-700 font-bold dark:text-gray-300 ${hoverEffect.linkUnderline} ${hoverEffect.linkUnderlineBlack}`}
-							onClick={() => {
+							className={`border-r-blue-500 decoration-pink-700 font-bold dark:text-gray-300 ${
+								hoverEffect.linkUnderline
+							} ${hoverEffect.linkUnderlineBlack} ${
+								active === "Free Shipping" && hoverEffect.isActive
+							}`}
+							onClick={(e) => {
+								setActive(e.target.outerText);
 								HandleClickFreeShep();
 							}}
 						>
@@ -71,8 +66,13 @@ const CategoriesCarousel = () => {
 					</li>
 					<li>
 						<button
-							className={`decoration-pink-700 font-bold dark:text-gray-300 ${hoverEffect.linkUnderline} ${hoverEffect.linkUnderlineBlack}`}
-							onClick={() => {
+							className={`decoration-pink-700 font-bold dark:text-gray-300 ${
+								hoverEffect.linkUnderline
+							} ${hoverEffect.linkUnderlineBlack} ${
+								active === "High Rating" && hoverEffect.isActive
+							}`}
+							onClick={(e) => {
+								setActive(e.target.outerText);
 								HandleClickFreeShep();
 							}}
 						>
