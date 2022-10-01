@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
+import hoverEffect from "../../utils/hoverEffect.module.css";
 
 const CategoriesCarousel = () => {
 	const { products } = useSelector((state) => state.products);
@@ -50,7 +51,7 @@ const CategoriesCarousel = () => {
 				<ul className="flex flex-row gap-5 mb-4 justify-center items-center text-xl">
 					<li>
 						<button
-							className="hover:underline decoration-pink-700 font-bold dark:text-gray-300"
+							className={`decoration-pink-700 font-bold dark:text-gray-300 ${hoverEffect.linkUnderline} ${hoverEffect.linkUnderlineBlack}`}
 							onClick={() => {
 								HandleClickDiscount();
 							}}
@@ -60,7 +61,7 @@ const CategoriesCarousel = () => {
 					</li>
 					<li>
 						<button
-							className="pr-2 border-r-blue-500 hover:underline decoration-pink-700 font-bold dark:text-gray-300"
+							className={`border-r-blue-500 decoration-pink-700 font-bold dark:text-gray-300 ${hoverEffect.linkUnderline} ${hoverEffect.linkUnderlineBlack}`}
 							onClick={() => {
 								HandleClickFreeShep();
 							}}
@@ -70,7 +71,7 @@ const CategoriesCarousel = () => {
 					</li>
 					<li>
 						<button
-							className="hover:underline decoration-pink-700 font-bold dark:text-gray-300 "
+							className={`decoration-pink-700 font-bold dark:text-gray-300 ${hoverEffect.linkUnderline} ${hoverEffect.linkUnderlineBlack}`}
 							onClick={() => {
 								HandleClickFreeShep();
 							}}

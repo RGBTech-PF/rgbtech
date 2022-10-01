@@ -47,7 +47,7 @@ export default function TarjetaShopping({
 	};
 
 	return (
-		<dikv class="lg:flex shadow rounded-lg border border-gray-400">
+		<dikv class="flex rounded-lg border border-gray-400">
 			{modal && (
 				<Modal
 					closeModal={() => setModal(false)}
@@ -97,8 +97,8 @@ export default function TarjetaShopping({
 					</div>
 				</Modal>
 			)}
-			<div class="bg-blue-600 rounded-lg  py-4 block h-full shadow-inner">
-				<div class="text-center h-20 w-20">
+			<div class="bg-blue-600 rounded-sm py-4 block h-full shadow-inner">
+				<div class="text-center h-28 w-20">
 					<div class="text-white font-bold text-4xl">{month}</div>
 					<div class="text-white font-normal text-2xl">{year}</div>
 				</div>

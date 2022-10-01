@@ -49,11 +49,13 @@ const Profile = () => {
 				<ModifyProfile closeModal={() => setModifyProfile(false)} />
 			)}
 			<Header />
-			<div className="flex flex-col min-h-screen h-full">
+			<div className="flex flex-col min-h-screen h-full ">
 				<div className="flex h-min-screen justify-around items-start bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-2xl text-white p-5 sm:flex-col sm:justify-center sm:items-center">
 					<div className="shadow-2xl rounded-3xl p-2 w-80">
-						<div className="flex flex-col justify-center items-center shadow-xl p-3 rounded-3xl drop-shadow-2xl">
-							<h1 className="font-extrabold text-3xl">{"👨‍🚀" + user.user}</h1>
+						<div className="flex flex-col justify-center items-center shadow-xl rounded-3xl drop-shadow-2xl">
+							<h1 className="font-extrabold text-3xl text-center">
+								{"👨‍🚀" + user.user}
+							</h1>
 							<img
 								className="rounded-full my-4 h-32 w-32 shadow-lg"
 								src={
@@ -61,14 +63,14 @@ const Profile = () => {
 								}
 								alt={`profilePhoto-${user.user}`}
 							/>
-							<p className="flex font-extrabold gap-2 text-xl text-white-600">
+							<p className="flex font-extrabold gap-2 text-xl text-white-600 text-center">
 								Profile:
 							</p>
-							<p className="flex items-center gap-1 font-semibold mt-4">
+							<p className="flex items-center gap-1 font-semibold mt-4 text-center">
 								Username: {user.user} <FcApproval />
 							</p>
-							<p className="font-semibold">Email: {user.mail}</p>
-							<p className="flex items-center gap-2 font-semibold">
+							<p className="font-semibold text-center">Email: {user.mail}</p>
+							<p className="flex items-center gap-2 font-semibold text-center">
 								RGBTech Points: <b>{user.RGBpoint}</b>{" "}
 								<BsCoin className="bg-yellow-700 rounded-full" />{" "}
 							</p>
@@ -128,13 +130,11 @@ const Profile = () => {
 							</button>
 						</div>
 					</div>
-					<div className="flex justify-center items-center">
-						{section === "shoppingHistory" ? (
-							<ShoppingHistory />
-						) : (
-							<LastVisited />
-						)}
-					</div>
+					{section === "shoppingHistory" ? (
+						<ShoppingHistory />
+					) : (
+						<LastVisited />
+					)}
 				</div>
 				<ToastContainer
 					position="top-right"

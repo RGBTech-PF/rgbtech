@@ -22,9 +22,8 @@ const Home = () => {
 	}, []);
 
 	return (
-		<>
+		<div className="flex flex-col min-h-screen h-full">
 			<Header />
-			{/* <ModalHome showModal={showModal} setShowModal={setShowModal} /> */}
 			<Carousel />
 			<CategoriesCarousel />
 			<Footer />
@@ -40,7 +39,7 @@ const Home = () => {
 				pauseOnHover
 				false
 			/>
-		</>
+		</div>
 	);
 };
 

@@ -12,7 +12,11 @@ export default function Index() {
 				<HamburguerMenu />
 				<div>
 					<Link to="/">
-						<img className="w-20 ml-20 sm:ml-0" src={logo} alt="logo-rgbtech" />
+						<img
+							className="w-20 ml-20 sm:ml-0 hover:scale-105 duration-150"
+							src={logo}
+							alt="logo-rgbtech"
+						/>
 					</Link>
 				</div>
 			</div>

@@ -68,15 +68,15 @@ const UserSection = () => {
 					/>
 				)}
 
-				<div>
+				<div className="relative">
 					{cart?.length > 0 && (
-						<span className="flex absolute top-2 right-11 bg-teal-500 p-1 items-center rounded-full text-white text-sm h-5">
+						<span className="flex absolute bottom-6 -right-1 bg-teal-500 p-1 items-center rounded-full text-white text-sm h-5">
 							{cart?.length}
 						</span>
 					)}
 					<AiOutlineShoppingCart
 						className={`hover:bg-red-500 ${
-							cart?.length === 0 && "hover:scale-105 ease-in duration-300 mr-1"
+							cart?.length === 0 && "hover:scale-105 ease-in duration-300"
 						}`}
 						onClick={() => {
 							hasJWT() ? navigate("/shoppingCart") : youAreUnloggedFavorites();

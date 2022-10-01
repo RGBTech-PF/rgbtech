@@ -4,7 +4,17 @@ module.exports = {
 	content: ["./index.html", "./src/**/*.{js,jsx}"],
 	darkMode: "class",
 	theme: {
-		extend: {},
+		extend: {
+			keyframes: {
+				fade: {
+					"0%": { opacity: 0 },
+					"100%": { opacity: 1 },
+				},
+			},
+			animation: {
+				fade: "fade 0.3s",
+			},
+		},
 		screens: {
 			"2xl": { max: "1535px" },
 			// => @media (max-width: 1535px) { ... }
@@ -20,6 +30,8 @@ module.exports = {
 
 			sm: { max: "639px" },
 			// => @media (max-width: 639px) { ... }
+
+			vsm: { max: "530px" },
 		},
 	},
 	plugins: [],

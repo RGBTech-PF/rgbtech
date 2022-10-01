@@ -20,7 +20,7 @@ const LastVisited = () => {
 	}, [user]);
 
 	return (
-		<div className="flex flex-col justify-start items-center ml-14 h-screen overflow-auto mt-10">
+		<div className="flex flex-col justify-start items-center h-screen overflow-auto">
 			<h1 className="text-5xl font-extrabold text-white-600 drop-shadow-lg shadow-black text-center mb-6 sm:mt-4">
 				Last visited:
 			</h1>

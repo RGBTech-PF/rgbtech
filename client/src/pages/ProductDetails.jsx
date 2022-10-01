@@ -143,12 +143,12 @@ const ProductDetails = () => {
 					<div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl p-4 m-4">
 						<div className="flex flex-row justify-around p-4 mt-2 mx-4 rounded-xl text-3xl sm:flex-col items-center">
 							<img
-								className="w-[25rem] h-[20rem] mb-4 rounded-3xl "
+								className="w-[25rem] h-[20rem] mb-4 rounded-3xl vsm:h-[16rem]"
 								src={<Spinner /> && productDetails.img}
 								alt={productDetails.name}
 							/>
 							<div className="flex flex-col m-4 gap-4 items-center">
-								<h1 className="text-5xl font-extrabold text-white-600 drop-shadow-lg shadow-black text-center">
+								<h1 className="text-5xl font-extrabold text-white-600 drop-shadow-lg shadow-black text-center vsm:text-2xl">
 									{productDetails.name}
 								</h1>
 

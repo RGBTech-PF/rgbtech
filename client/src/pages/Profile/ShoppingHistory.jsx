@@ -24,23 +24,32 @@ const ShoppingHistory = () => {
 	}, [user]);
 
 	return (
-		<div className="ml-14">
+		<div className="flex flex-col mx-4">
 			<h1 className="text-5xl font-extrabold text-white-600 drop-shadow-lg shadow-black text-center mb-6 sm:mt-4">
 				Shopping history:
 			</h1>
+			{products?.length === 0 && (
+				<div className="flex justify-center items-center">
+					<h1 className="bg-blue-500 rounded-xl p-1 font-semibold text-white">
+						You haven't bought anything yet!
+					</h1>
+				</div>
+			)}
 			{products?.map((p, i) => (
-				<TarjetaShopping
-					id={p.id}
-					user={user.user}
-					profilePhoto={user.profilePhoto}
-					key={i}
-					name={p.name}
-					totalPrice={p.totalPrice}
-					month={p.month}
-					year={p.year}
-					amount={p.amount}
-					commented={p.commented}
-				/>
+				<div className="flex flex-col my-2">
+					<TarjetaShopping
+						id={p.id}
+						user={user.user}
+						profilePhoto={user.profilePhoto}
+						key={i}
+						name={p.name}
+						totalPrice={p.totalPrice}
+						month={p.month}
+						year={p.year}
+						amount={p.amount}
+						commented={p.commented}
+					/>
+				</div>
 			))}
 		</div>
 	);
