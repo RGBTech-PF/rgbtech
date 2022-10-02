@@ -1,58 +1,24 @@
 import React from "react";
 import { BiHome } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo-dibujo-2.png";
 
 function AboutTeam() {
 	return (
-		<div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
-			<div className="flex my-3 text-4xl lg:text-4xl font-bold text-center dark:text-white text-gray-800">
-				<Link to="/">
-					<BiHome className="mr-4" />
-				</Link>
-				RGBTeam
-			</div>
-			<div className="flex flex-col lg:flex-row justify-between gap-8">
-				<div className="w-full lg:w-5/12 flex flex-col justify-center">
-					<h1 className="text-2xl lg:text-3xl font-bold leading-9 dark:text-white text-gray-800 pb-4 rounded-md p-2">
-						About Us
-					</h1>
-					<p className="font-normal text-base leading-6 text-black dark:text-gray-400 p-1 rounded-md">
-						It is a long established fact that a reader will be distracted by
-						the readable content of a page when looking at its layout. The point
-						of using Lorem Ipsum.In the first place we have granted to God, and
-						by this our present charter confirmed for us and our heirs forever
-						that the English Church shall be free, and shall have her rights
-						entire, and her liberties inviolate; and we will that it be thus
-						observed; which is apparent from
-					</p>
-				</div>
-				<div className="w-full lg:w-8/12 shadow-2xl">
-					<img
-						className="w-full h-full"
-						src="https://i.ibb.co/FhgPJt8/Rectangle-116.png"
-						alt="RGBtech Team 02"
-					/>
-				</div>
+		<div className="py-9 px-4">
+			<Link to="/">
+				<BiHome className="mr-8" size={45} color={"white"} />
+			</Link>
+			<div className="flex justify-center my-3 text-4xl lg:text-4xl font-bold text-center dark:text-white text-gray-800">
+				<img src={logo} width={200} alt="this is the logo of the ecommerce" />
 			</div>
 			<div>
-				{/* <div className="container flex justify-center mx-auto pt-16">
-					<div>
-						<p className="text-black pb-6 sm:w-4/6 w-5/6 mx-auto pt-4 font-extrabold text-lg text-center font-normal rounded-md">
-							BUILDING TEAM
-						</p>
-						<h1 className="xl:text-3xl text-3xl text-center text-black font-extrabold rounded-md pb-6 sm:w-4/6 w-5/6 mx-auto p-2 m-2">
-							The Talented People Behind the Scenes of the Organization
-						</h1>
-					</div>
-				</div> */}
-			</div>
-			<div>
-				<div className="p-8 bg-white bg-gray-700 dark:bg-gray-700 rounded-lg shadow-2xl mt-8">
+				<div className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-2xl mt-8">
 					<p className="text-center text-4xl font-bold text-black dark:text-white">
-						Professional team
+						RGB Team
 					</p>
 					<p className="text-center mb-12 text-xl font-normal text-gray-500 dark:text-gray-200">
-						Meat the best team in wolrd!
+						Meet the people behind the project!
 					</p>
 					<div className="flex items-center flex-col md:flex-row justify evenly pt-3 justify-center">
 						<div className="p-4">
@@ -104,7 +70,7 @@ function AboutTeam() {
 							</div>
 						</div>
 					</div>
-					<div className="flex items-center flex-col md:flex-row justify evenly justify-center">
+					<div className="grid grid-cols-3 items-center justify-center lg:grid-cols-2 sm:grid-cols-1 sm:h-screen sm:overflow-scroll">
 						<div className="p-4">
 							<div className="text-center mb-4 opacity-90">
 								<a className="block relative">
@@ -115,7 +81,7 @@ function AboutTeam() {
 									/>
 								</a>
 							</div>
-							<div className="text-center">
+							<div className="flex flex-col items-center text-center">
 								<p className="text-2xl text-black dark:text-white">
 									Luciano Piñol
 								</p>
@@ -163,7 +129,7 @@ function AboutTeam() {
 									/>
 								</a>
 							</div>
-							<div className="text-center">
+							<div className="flex flex-col items-center text-center">
 								<p className="text-2xl text-black dark:text-white">
 									Esteban Pilchuman
 								</p>
@@ -211,10 +177,8 @@ function AboutTeam() {
 									/>
 								</a>
 							</div>
-							<div className="text-center">
-								<p className="text-2xl text-black dark:text-white">
-									Hugo Ceci
-								</p>
+							<div className="flex flex-col items-center text-center">
+								<p className="text-2xl text-black dark:text-white">Hugo Ceci</p>
 								<p className="text-xl text-gray-500 dark:text-gray-200 font-light">
 									Back-end
 								</p>
@@ -249,20 +213,17 @@ function AboutTeam() {
 								</a>
 							</div>
 						</div>
-					</div>
-					<div className="flex items-center flex-col md:flex-row justify evenly pt-3 justify-center">
 						<div className="p-4">
 							<div className="text-center mb-4 opacity-90">
 								<a className="block relative">
 									<img
 										alt="profil"
-										// src="https://ca.slack-edge.com/TPRS7H4PN-U03B7V8GM5L-64691186509b-512"
-										src="https://i.pinimg.com/736x/37/8a/27/378a270e775265622393da8c0527417e.jpg"
+										src="https://avatars.githubusercontent.com/u/99000049?v=4"
 										className="mx-auto object-cover rounded-full h-40 w-40 shadow-2xl"
 									/>
 								</a>
 							</div>
-							<div className="text-center">
+							<div className="flex flex-col items-center text-center">
 								<p className="text-2xl text-black dark:text-white">
 									Andres Rodriguez
 								</p>
@@ -311,7 +272,7 @@ function AboutTeam() {
 									/>
 								</a>
 							</div>
-							<div className="text-center">
+							<div className="flex flex-col items-center text-center">
 								<p className="text-2xl text-black dark:text-white">
 									Jairo Álvarez
 								</p>
@@ -359,7 +320,7 @@ function AboutTeam() {
 									/>
 								</a>
 							</div>
-							<div className="text-center">
+							<div className="flex flex-col items-center text-center">
 								<p className="text-2xl text-black dark:text-white">
 									Facundo Maciel
 								</p>

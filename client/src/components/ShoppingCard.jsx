@@ -1,7 +1,6 @@
 import React from "react";
 import { BsTrash2 } from "react-icons/bs";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import { useEffect } from "react";
 
 const ShoppingCard = ({
 	name,
@@ -11,35 +10,25 @@ const ShoppingCard = ({
 	addUnits,
 	subUnits,
 	delProduct,
-	stock,
 	totalProductPrice,
 	discountPercentage,
 	onDiscount,
-	freeShipping
-	
+	freeShipping,
 }) => {
-	useEffect(() => {
-		console.log(name,
-			img,
-			units,
-			discountPercentage,
-			totalProductPrice,
-			onDiscount,)
-	},[])
 	return (
-		<div className="flex justify-start p-4 border-b-2 ">
-			<div className="flex flex-col md:flex-row md:max-w-4xl rounded-lg bg-white shadow-lg">
+		<div className="flex p-4 rounded-2xl w-4/5 md:flex-col">
+			<div className="flex flex-row rounded-lg md:max-w-4xl bg-white shadow-lg md:flex-col">
 				<img
-					className="bg-pink-700 w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+					className="bg-pink-700 w-72 h-72 object-cover md:w-full"
 					src={img}
 					alt=""
 				/>
-				<div className="p-6 flex flex-col justify-start dark:bg-gray-600">
+				<div className="p-3 flex flex-col justify-center items-start dark:bg-gray-600">
 					<h5 className="text-gray-900 dark:text-black text-xl font-medium mb-2">
 						{name.slice(0, 20)}...
 					</h5>
 					<p className="text-gray-700 dark:text-black text-base mb-4">
-						This is a special product of our RGBtech page for all our customers
+						{description}
 					</p>
 					<div className="flex items-center mt-3 mb-5">
 						{onDiscount ? (
@@ -51,7 +40,7 @@ const ShoppingCard = ({
 									$
 									{Math.round(
 										totalProductPrice -
-											(totalProductPrice * discountPercentage) / 100 
+											(totalProductPrice * discountPercentage) / 100
 									)}
 								</p>
 							</span>

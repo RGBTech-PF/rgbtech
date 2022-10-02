@@ -36,13 +36,14 @@ const Favorites = () => {
 							<h2 className="text-2xl mt-6">Your favorites its empty! 😥</h2>
 						)}
 					</div>
-					<div>
+					<div className="h-screen overflow-scroll">
 						{products?.map((item, i) => {
 							return (
 								<FavoriteCard
 									key={i}
 									id={item.id}
 									name={item.name}
+									description={item.description}
 									img={item.img}
 									price={item.price}
 									onDiscount={item.onDiscount}

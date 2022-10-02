@@ -87,10 +87,10 @@ const createUser = () => {
 
 	return (
 		<div>
-			<div className="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
-				<div className="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
-					<div className="p-4 py-6 text-white bg-blue-300 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
-						<div className="my-3 text-4xl font-bold tracking-wider text-center">
+			<div className="flex justify-center items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
+				<div className="flex flex-col w-3/4 overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md sm:flex-col">
+					<div className="p-4 py-6 text-white bg-blue-300 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly sm:w-screen">
+						<div className="flex flex-col justify-center items-center my-3 text-4xl font-bold tracking-wider text-center">
 							<img src={logo} alt="" />
 							<Link to="/">
 								<Logo />
@@ -100,9 +100,9 @@ const createUser = () => {
 					</div>
 					<div className="absolute left-auto ml-4 mt-3">
 						<Link to="/">
-							<button className=" rounded-full">
+							<button className="rounded-full">
 								<IoHomeSharp
-									size={30}
+									size={40}
 									className="bg-sky-400 rounded-full text-white p-0.5 hover:scale-105 duration-200"
 								/>
 							</button>

@@ -22,6 +22,7 @@ const FavoriteCard = ({
 	onDiscount,
 	discountPercentage,
 	freeShipping,
+	description,
 }) => {
 	const { user } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
@@ -79,24 +80,24 @@ const FavoriteCard = ({
 	};
 
 	return (
-		<div className="flex justify-center p-2">
-			<div className="flex flex-col md:flex-row md:max-w-6xl rounded-lg bg-white dark:bg-gray-500 shadow-lg">
+		<div className="flex p-2 justify-center items-center md:flex-col">
+			<div className="flex flex-row rounded-lg bg-white dark:bg-gray-500 shadow-lg md:flex-col">
 				<Link to={`/productDetails/${id}`}>
-				<img
-					className="bg-red-700 w-20 h-full object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-					src={img}
-					alt=""
-				/>
+					<img
+						className="bg-red-700 w-72 h-full object-cover md:w-full md:h-72 rounded-t-lg md:rounded-none md:rounded-l-lg"
+						src={img}
+						alt=""
+					/>
 				</Link>
-				<div className="p-6 flex flex-col justify-start">
+				<div className="p-6 flex flex-col justify-center">
 					<h5 className="text-gray-900 text-xl font-medium mb-2">
 						{name.slice(0, 45)}...
 					</h5>
 					<p className="text-gray-700 dark:text-black text-base mb-4">
-						This is a special product of our RGBtech page for all our customers
+						{description.substring(0, 110) + "..."}
 					</p>
 					<div className="flex justify-between items-center">
-					{onDiscount ? (
+						{onDiscount ? (
 							<span className="flex text-xl text-gray-900 dark:text-white justify-between">
 								<p className="line-through text-gray-400 mr-1 text-2xl">
 									${price}
@@ -124,7 +125,7 @@ const FavoriteCard = ({
 
 					<div className="pt-4">
 						<button
-							className="px-4 h-8 rounded font-semibold border border-blue-400 hover:scale-95 text-slate-900"
+							className="px-4 h-8 rounded font-semibold border border-blue-400 hover:scale-95 text-slate-900 duration-300"
 							onClick={handleAddCart}
 						>
 							Add to cart
@@ -134,7 +135,7 @@ const FavoriteCard = ({
 							onClick={handleDeleteCartFav}
 							className="ml-12 scale-110 mr-2 px-2.5 py-0.5"
 						>
-							<FaHeartBroken className="text-red-500 hover:cursor-pointer" />
+							<FaHeartBroken className="text-red-500 hover:cursor-pointer hover:scale-105 duration-150" />
 						</button>
 					</div>
 				</div>

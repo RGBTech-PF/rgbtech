@@ -186,9 +186,9 @@ const ShoppingCart = () => {
 				</>
 			)}
 			{products?.length !== 0 ? (
-				<div className="flex flex-row justify-around dark:bg-[#1f2937] items-start border-2 dark:border-none m-1">
-					<section className="flex flex-row justify-around items-center dark:bg-gray-600">
-						<div className="mt-4">
+				<div className="flex flex-row justify-around dark:bg-[#1f2937] items-start border-2 dark:border-none m-1 xl:flex-col xl:justify-center xl:items-center xl:mb-8 h-screen overflow-scroll">
+					<section className="justify-around items-center dark:bg-gray-600">
+						<div className="flex flex-col justify-center items-center mt-4">
 							{products?.map((p, i) => (
 								<ShoppingCard
 									key={p.id}
@@ -211,45 +211,46 @@ const ShoppingCart = () => {
 						</div>
 					</section>
 					{products?.length > 0 && (
-						<div className="flex flex-col justify-center gap-5 mt-4 items-center text-2xl font-bold">
-							<button
-								type="button"
-								className="flex gap-1 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-								onClick={() => {
-									cartCleanedNotification();
-									dispatch(clearCartShop());
-								}}
-							>
-								<BsFillTrashFill /> Clear Cart
-							</button>
-							<button
-								type="button"
-								className="flex gap-2 px-6 py-2.5 bg-pink-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-pink-700 hover:shadow-lg focus:bg-pink-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-800 active:shadow-lg transition duration-150 ease-in-out"
-								onClick={() => {
-									HandleClickBuy();
-								}}
-							>
-								{buying ? (
-									<img className="h-4 w-4" src={loadingBuy} alt="buying" />
-								) : (
-									<FaMoneyCheckAlt />
-								)}{" "}
-								Buy Now!
-							</button>
-
-							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
+						<div className="flex flex-col justify-center gap-5 mt-4 items-center text-2xl font-bold xl:flex-row sm:flex-col">
+							<div className="flex flex-col gap-2">
+								<button
+									type="button"
+									className="flex gap-1 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+									onClick={() => {
+										cartCleanedNotification();
+										dispatch(clearCartShop());
+									}}
+								>
+									<BsFillTrashFill /> Clear Cart
+								</button>
+								<button
+									type="button"
+									className="flex gap-2 px-6 py-2.5 bg-pink-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-pink-700 hover:shadow-lg focus:bg-pink-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-800 active:shadow-lg transition duration-150 ease-in-out"
+									onClick={() => {
+										HandleClickBuy();
+									}}
+								>
+									{buying ? (
+										<img className="h-4 w-4" src={loadingBuy} alt="buying" />
+									) : (
+										<FaMoneyCheckAlt />
+									)}{" "}
+									Buy Now!
+								</button>
+							</div>
+							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-1.5 text-center sm:flex-row">
 								<BsCurrencyDollar /> Total price:
 								<span className="text-pink-700 underline">
 									${Math.round(totalPrice)}
 								</span>
 							</h2>
-							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
+							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-1.5 text-center sm:flex-row">
 								<TbShoppingCartDiscount /> Total with discounts:
 								<span className="text-green-500 underline">
 									${Math.round(finalPrice)}
 								</span>
 							</h2>
-							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-3">
+							<h2 className="flex flex-col justify-center dark:bg-gray-600 items-center bg-slate-100 rounded-lg p-1.5 text-center sm:flex-row">
 								<FaShippingFast /> Total width shipping
 								<span className="text-blue-700 dark:text-blue-500 underline">
 									${Math.round(finalPrice) + costShipping()}

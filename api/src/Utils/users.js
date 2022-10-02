@@ -26,7 +26,8 @@ const users = [
 	{
 		user: "Luciano",
 		mail: "luchemma@gmail.com",
-		password: "contraseña",
+		isAdmin: true,
+		password: "lucianoep2",
 		userVerificate: true,
 	},
 	{

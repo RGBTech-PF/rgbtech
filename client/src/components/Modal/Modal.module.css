@@ -20,7 +20,6 @@
 	max-height: 600px;
 	overflow-y: auto;
 	border-radius: 5px;
-	box-shadow: 2px 4px 10px rgb(0, 0, 0, 0.7);
 }
 
 @media screen and (max-width: 440px) {

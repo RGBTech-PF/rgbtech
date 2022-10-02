@@ -166,7 +166,7 @@ function Product({
 						) : (
 							<button
 								onClick={handleAddCartFav}
-								className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3 durati"
+								className="cursor-pointer hover:scale-110 mr-2 px-2.5 py-0.5 ml-3 duration-300"
 							>
 								<AiOutlineHeart size={25} />
 							</button>
