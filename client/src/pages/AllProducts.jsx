@@ -8,12 +8,6 @@ import {
 	getMarcas,
 } from "../store/slices/products/thunks";
 import Tarjeta from "../components/Tarjeta";
-// import { useEffect } from "react";
-// import { getAllProducts } from "../store/slices/products/thunks";
-// import  useProducts  from "../components/useProducts"
-// import Header from "../components/Header/Header.jsx";
-// import { useLocation } from "react-router-dom";
-// import Filters from "../components/Filters";
 
 export default function AllProducts({ setPage, page }) {
 	const dispatch = useDispatch();
@@ -31,7 +25,7 @@ export default function AllProducts({ setPage, page }) {
 				if (entries[0].isIntersecting) {
 					if (response.pageNumbers > page) {
 						setTimeout(() => {
-							console.log('visible')
+							console.log("visible");
 							setPage(page + 1);
 						}, 1000);
 					}
@@ -52,16 +46,18 @@ export default function AllProducts({ setPage, page }) {
 
 	useEffect(() => {
 		setLoading(true);
-		console.log(response?.nextPage)
-		if(!response?.nextPage) {return
-		setLoading(false)
+		console.log(response?.nextPage);
+		if (!response?.nextPage) {
+			return;
+			setLoading(false);
+		} else {
+			dispatch(getAllProducts(page, response?.nextPage));
+			setLoading(false);
 		}
-		else {dispatch(getAllProducts(page, response?.nextPage));
-		setLoading(false);}
 	}, [page, response]);
 
 	return (
-		<div>
+		<div className="ml-10 flex flex-col h-screen overflow-scroll sm:ml-0 sm:items-center">
 			{products &&
 				products.map((elem, i) => {
 					if (products.length === i + 1) {
